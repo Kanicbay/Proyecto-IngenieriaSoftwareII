@@ -1,0 +1,385 @@
+#btnsalir {
+    position: absolute; /* Posición absoluta */
+    right: 30px; /* 20px desde el borde derecho */
+    top: 30px; /* 20px desde el borde superior */
+    background-color: #38B1B1; /* Color de fondo */
+    border-bottom-color: 2px black;
+    color: rgb(0, 0, 0); /* Color de texto */
+    height: 7%;
+    width: 12%;
+    border-radius: 9px; /* Bordes redondos */
+    cursor: pointer; /* Cursor estilo mano */
+    font-weight: bold;
+}
+#botonSalirtxt{
+    font-size: 30px;
+    translate: 0px -20px;
+}
+
+#logo{
+    position: absolute; /* Posición absoluta */
+    right: 50%; /* 20px desde el borde derecho */
+    top: 60px; /* 20px desde el borde superior */
+    font-weight: bold;
+}
+#logotxt{
+    position: absolute; /* Posición absoluta */
+    color: white;
+    left: 120px; /* 20px desde el borde derecho */
+    bottom: -5px;
+    text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black; /* Bordes negros */  
+}
+#cuadradoInicio {
+    width: 800px; /* Ancho */
+    height: 400px; /* Alto */
+    background-color: rgba(129, 121, 121, 0.764); /* Color de fondo */
+    position: absolute; /* Posición absoluta */
+    top: 50px; /* Arriba */
+    bottom: 0; /* Abajo */
+    left: 0; /* Izquierda */
+    right: 0; /* Derecha */
+    margin: auto; /* Margen automático */
+}
+#tituloCuadroInicio{
+    text-align: center;
+    font-size: 25px;
+}
+#cuadradoCrear {
+    width: 800px; /* Ancho */
+    height: 550px; /* Alto */
+    background-color: rgba(129, 121, 121, 0.764); /* Color de fondo */
+    position: absolute; /* Posición absoluta */
+    top: 100px; /* Arriba */
+    bottom: 0; /* Abajo */
+    left: 0; /* Izquierda */
+    right: 0; /* Derecha */
+    margin: auto; /* Margen automático */
+}
+#tituloCuadroCrear{
+    text-align: center;
+    font-size: 25px;
+}
+#cuadradoCredenciales{
+    width: 800px; /* Ancho */
+    height: 450px; /* Alto */
+    background-color: rgba(129, 121, 121, 0.764); /* Color de fondo */
+    position: absolute; /* Posición absoluta */
+    top: 100px; /* Arriba */
+    bottom: 0; /* Abajo */
+    left: 0; /* Izquierda */
+    right: 0; /* Derecha */
+    margin: auto; /* Margen automático */
+}
+#tituloCuadroCredenciales{
+    text-align: center;
+    font-size: 25px;
+}
+
+
+/*Campos de inicio de sesion*/
+#camposInicio1{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 50px;
+}
+#txaInicio1 {
+    position: absolute; /* Posición absoluta */
+    background-color: rgb(255, 255, 255);
+    top: 100px;
+    left: 100px;
+    font-size: 20px;
+    width: 600px;
+    height: 25px;
+    resize: none;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#camposInicio2{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 130px;
+}
+#txaInicio2 {
+    position: absolute; /* Posición absoluta */
+    background-color: rgb(255, 255, 255);
+    top: 180px;
+    left: 100px;
+    font-size: 20px;
+    width: 600px;
+    height: 25px;
+    resize: none;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#txtInicioFinal{
+    position: absolute; /* Posición absoluta */
+    font-size: 20px;
+    left: 25%;
+    top: 295px;
+}
+#btnIniciar {
+    position: absolute; /* Posición absoluta */
+    right: 35%; /* 20px desde el borde derecho */
+    top: 60%; /* 20px desde el borde superior */
+    background-color: #38B1B1; /* Color de fondo */
+    border-bottom-color: 2px black;
+    color: rgb(0, 0, 0); /* Color de texto */
+    height: 10%;
+    width:30%;
+    border-radius: 9px; /* Bordes redondos */
+    cursor: pointer; /* Cursor estilo mano */
+    font-weight: bold;
+}
+#botonIniciartxt{
+    font-size: 20px;
+    translate: 0px -15px;
+}
+
+/*Enlaces*/
+#ainicioS {
+    color: #354A46;
+    text-decoration: none;
+}
+#ainicioS:hover {
+    color: rgb(4, 0, 255);
+}
+
+/* Campos de Crear de usuario */
+#camposCrear1{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 50px;
+}
+#txaCrear1 {
+    position: absolute; /* Posición absoluta */
+    background-color: rgb(255, 255, 255);
+    top: 100px;
+    left: 100px;
+    font-size: 20px;
+    width: 600px;
+    height: 25px;
+    resize: none;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#camposCrear2{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 125px;
+}
+#txaCrear2 {
+    position: absolute; /* Posición absoluta */
+    background-color: rgb(255, 255, 255);
+    top: 175px;
+    left: 100px;
+    font-size: 20px;
+    width: 600px;
+    height: 25px;
+    resize: none;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#camposCrear3{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 200px;
+}
+#txaCrear3 {
+    position: absolute; /* Posición absoluta */
+    background-color: rgb(255, 255, 255);
+    top: 250px;
+    left: 100px;
+    font-size: 20px;
+    width: 600px;
+    height: 25px;
+    resize: none;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#camposCrear4{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 275px;
+}
+#txaCrear4 {
+    position: absolute; /* Posición absoluta */
+    background-color: rgb(255, 255, 255);
+    top: 325px;
+    left: 100px;
+    font-size: 20px;
+    width: 600px;
+    height: 25px;
+    resize: none;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#camposCrear5{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 350px;
+}
+#btnCrearConjunto{
+    position: absolute; /* Posición absoluta */
+    left: 13%; /* 20px desde el borde izquierdo */
+    top: 75%; /* 20px desde el borde superior */
+}
+/* Ahorros */
+#btnCrear1 {
+    position: absolute; /* Posición absoluta */
+    right: 75%; /* 20px desde el borde izquierdo */
+    top: 72%; /* 20px desde el borde superior */
+    background-color: #38B1B1; /* Color de fondo */
+    border-bottom-color: 2px black;
+    color: rgb(0, 0, 0); /* Color de texto */
+    height: 7%;
+    width: 20%;
+    border-radius: 9px; /* Bordes redondos */
+    cursor: pointer; /* Cursor estilo mano */
+    font-weight: bold;
+    transform: scale(0.5);
+}
+/* Corriente */
+#btnCrear2 {
+    position: absolute; /* Posición absoluta */
+    right: 75%; /* 20px desde el borde derecho */
+    top: 77%; /* 20px desde el borde superior */
+    background-color: #38B1B1; /* Color de fondo */
+    border-bottom-color: 2px black;
+    color: rgb(0, 0, 0); /* Color de texto */
+    height: 7%;
+    width: 20%;
+    border-radius: 9px; /* Bordes redondos */
+    cursor: pointer; /* Cursor estilo mano */
+    font-weight: bold;
+    transform: scale(0.5);
+}
+/* Vinculada */
+#btnCrear3 {
+    position: absolute; /* Posición absoluta */
+    right: 75%; /* 20px desde el borde derecho */
+    top: 82%; /* 20px desde el borde superior */
+    background-color: #38B1B1; /* Color de fondo */
+    border-bottom-color: 2px black;
+    color: rgb(0, 0, 0); /* Color de texto */
+    height: 7%;
+    width: 20%;
+    border-radius: 9px; /* Bordes redondos */
+    cursor: pointer; /* Cursor estilo mano */
+    font-weight: bold;
+    transform: scale(0.5);
+}
+/* Cerar */
+#btnCrear4 {
+    position: absolute; /* Posición absoluta */
+    right: 13%; /* 20px desde el borde derecho */
+    top: 77%; /* 20px desde el borde superior */
+    background-color: #38B1B1; /* Color de fondo */
+    border-bottom-color: 2px black;
+    color: rgb(0, 0, 0); /* Color de texto */
+    height: 7%;
+    width: 40%;
+    border-radius: 9px; /* Bordes redondos */
+    cursor: pointer; /* Cursor estilo mano */
+    font-weight: bold;
+}
+/* Ahorros */
+#botonCreartxt1{
+    position: absolute; /* Posición absoluta */
+    font-size: 20px;
+    translate: 140px 310px;
+}
+/* Corriente */
+#botonCreartxt2{
+    position: absolute; /* Posición absoluta */
+    font-size: 20px;
+    translate: 140px 337px;
+}
+/* Vinculada */               
+#botonCreartxt3{
+    position: absolute; /* Posición absoluta */
+    font-size: 20px;
+    translate: 140px 364px;
+}
+#botonCreartxt{
+    font-size: 20px;
+    translate: 0px -15px;
+}
+
+/* Campos de Credenciales */
+#camposCredenciales1{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 50px;
+}
+#txaCredenciales1 {
+    position: absolute; /* Posición absoluta */
+    background-color: rgb(255, 255, 255);
+    top: 110px;
+    left: 100px;
+    font-size: 20px;
+    width: 600px;
+    height: 25px;
+    resize: none;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#camposCredenciales2{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 150px;
+}
+#txaCredenciales2 {
+    position: absolute; /* Posición absoluta */
+    background-color: rgb(255, 255, 255);
+    top: 210px;
+    left: 100px;
+    font-size: 20px;
+    width: 600px;
+    height: 25px;
+    resize: none;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#camposCredenciales3{
+    position: absolute; /* Posición absoluta */
+    left: 100px; /* Izquierda */
+    top: 250px;
+}
+#txaCredenciales3 {
+    position: absolute; /* Posición absoluta */
+    background-color: rgb(255, 255, 255);
+    top: 310px;
+    left: 100px;
+    font-size: 20px;
+    width: 600px;
+    height: 25px;
+    resize: none;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#btnCredenciales {
+    position: absolute; /* Posición absoluta */
+    right: 35%; /* 20px desde el borde derecho */
+    top: 82%; /* 20px desde el borde superior */
+    background-color: #38B1B1; /* Color de fondo */
+    border-bottom-color: 2px black;
+    color: rgb(0, 0, 0); /* Color de texto */
+    height: 10%;
+    width:30%;
+    border-radius: 9px; /* Bordes redondos */
+    cursor: pointer; /* Cursor estilo mano */
+    font-weight: bold;
+}
+#botonCredencialestxt{
+    font-size: 20px;
+    translate: 0px -15px;
+}
