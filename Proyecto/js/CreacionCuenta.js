@@ -36,7 +36,7 @@ function verificarEmail(email) {
   return re.test(String(email).toLowerCase());
 }
   
-//Funcion para redirigir a otra pagina web
+//Funcion para redirigir a otra pagina
 function redirigir(url) {
   window.location.href=url;
 }
