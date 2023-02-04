@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">-->
+    <link rel="stylesheet" href="build/toastr.min.css">
     <link rel="icon" typpe="favicon/x-icon" href="recursos/img/logo.png">
-    <link rel="stylesheet" type="text/css" href="recursos/bootstrap-5.2.3/dist/css/bootstrap.min.css"> 
+    
+    <!--<link rel="stylesheet" type="text/css" href="recursos/bootstrap-5.2.3/dist/css/bootstrap.min.css">-->
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    
     <title>Iniciar Sesion</title>
 </head>
 <body style="background: url(recursos/img/fondoRegistro.png); background-size: cover;">
@@ -26,21 +30,30 @@
         <div id="camposCredenciales">
             <h2 id="camposCredenciales1">Usuario</h2>
             <div>
-                <textarea id="txaCredenciales1"></textarea>
+                <!--<textarea id="txaCredenciales1"></textarea>-->
+                <input id="txaCredenciales1" type="text" name="Usuario" required>
             </div>
             <h2 id="camposCredenciales2">Contraseña</h2>
             <div>
-                <textarea id="txaCredenciales2"></textarea>
+                <!--<textarea id="txaCredenciales2"></textarea>-->
+                <input id="txaCredenciales2" type="password" name="Contraseña" disabled>
             </div>
-            <h2 id="camposCredenciales3">Número de celular</h2>
+            <h2 id="camposCredenciales3">Confirmar Contraseña</h2>
             <div>
-                <textarea id="txaCredenciales3"></textarea>
+                <!--<textarea id="txaCredenciales3"></textarea>-->
+                <input id="txaCredenciales3" type="password" name="Confirmar" disabled>
             </div>
-            <button id="btnCredenciales"><p id="botonCredencialestxt">Crear usuario</p></button>
+            <button id="btnCredenciales" disabled="true"><p id="botonCredencialestxt">Crear usuario</p></button>
         </div>
     </div>
-    
-    
+    <script
+        src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous">
+    </script>
+    <script src="js/CrearCredenciales.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>-->
+    <script src="build/toastr.min.js"></script>
     
 </body>
 </html>
