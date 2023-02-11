@@ -11,7 +11,8 @@ function validarNombreU(username) {//, usernamesExistentes se agrega cuando exis
     //Verifica que almenos tenga 8 caracteres
     toastr.options={
         "positionClass": "toast-top-center",
-        "preventDuplicates": true
+        "preventDuplicates": true,
+        "timeOut": "4000",
     }
     if (username.length < 8) {
       //alert("El nombre de usuario debe tener al menos 8 caracteres");
@@ -87,7 +88,8 @@ let intervalo = setInterval(() => {
 
     toastr.options={
         "positionClass": "toast-top-center",
-        "preventDuplicates": true
+        "preventDuplicates": true,
+        "timeOut": "4000",
     }
     if (resultado1 === true){
         document.getElementById("txaCredenciales2").disabled = false;
@@ -97,9 +99,7 @@ let intervalo = setInterval(() => {
                 document.getElementById("btnCredenciales").disabled = false;
                 clearInterval(intervalo);
             }else if(resultado2 === true && haMostradoMensaje2){
-                toastr.error("Las contraseñas no coinciden",{
-                    "positionClass": "toast-bottom-right"
-                });
+                toastr.error("Las contraseñas no coinciden");
             }
         }else if(resultado1 === true && haMostradoMensaje1){
             toastr.error("La contraseña no cumple los requisitos");
@@ -116,7 +116,7 @@ let intervalo = setInterval(() => {
     }
 
     if (resultado2 === true && !haMostradoMensaje2) {
-        toastr.success("Contraseña correcto");
+        toastr.success("Contraseña correcta");
         haMostradoMensaje2 = true;
     }
 
