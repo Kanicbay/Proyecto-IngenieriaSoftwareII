@@ -1,6 +1,8 @@
+'use strict'
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-const usuarioSchema = mongoose.Schema({
+var usuarioSchema = Schema({
     usuario: {
         type: String,
         required: true,

@@ -41,12 +41,23 @@ function redirigir(url) {
   window.location.href=url;
 }
 
+
+
 // Función para almacenar los datos del formulario
 function almacenarDatos() {
   const nombres = document.getElementById("txaCrear1").value;
   const apellidos = document.getElementById("txaCrear2").value;
   const cedula = document.getElementById("txaCrear3").value;
   const correo = document.getElementById("txaCrear4").value;
+  var tipoCuenta;
+
+  const radios = document.querySelectorAll('input[type="radio"]');
+
+  for (const radio of radios) {
+    radio.addEventListener('click', function() {
+      tipoCuenta = radio.value;
+    });
+  }
   
   // Verificar si la cédula es válida
   if (verificarNombre(nombres)){

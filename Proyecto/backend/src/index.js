@@ -1,33 +1,20 @@
 'use strict'
-const express = require('express');
 const mongoose = require('mongoose');
-var bodyParser=require('body-parser');
-require("dotenv").config();
-const accountRoutes = require('./routes/cuenta');
-
+const port = 3700;
+mongoose.promise = global.Promise;
 mongoose.set("strictQuery",false);
+var app = require('./app');
 
-const app = express();
-const port = 3000;
-
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
-
-//middlewares
-app.use('/api', accountRoutes)
-app.use(express.json());
-
-//routes
-app.get('/', (req, res) => {
-    res.send('Welcome to my API');
-});
+require("dotenv").config();
 
 //connect to DB
 mongoose
   .connect(process.env.MONGODB_URI)
-  .then(()=>console.log('Conectado a la base de datos de Mongo Atlas'))
-  .catch((err)=>console.log(err));
+  .then(() => {
+    console.log("Conectado a la BD de Mongo Atlas");
+    app.listen(port, () => {
+      console.log("Servidor corriendo en el puerto " + port);
+    });
+  });
 
-app.listen(port, () => {
-    console.log('Servidor corriendo en el puerto', port);
-});
+  
