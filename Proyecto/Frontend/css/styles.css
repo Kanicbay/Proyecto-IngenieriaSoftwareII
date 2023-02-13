@@ -292,19 +292,19 @@
 #botonCreartxt1{
     position: absolute; /* Posición absoluta */
     font-size: 20px;
-    translate: 140px 310px;
+    translate: 140px 326px;
 }
 /* Corriente */
 #botonCreartxt2{
     position: absolute; /* Posición absoluta */
     font-size: 20px;
-    translate: 140px 337px;
+    translate: 140px 355px;
 }
 /* Vinculada */               
 #botonCreartxt3{
     position: absolute; /* Posición absoluta */
     font-size: 20px;
-    translate: 140px 364px;
+    translate: 140px 384px;
 }
 #botonCreartxt{
     font-size: 20px;

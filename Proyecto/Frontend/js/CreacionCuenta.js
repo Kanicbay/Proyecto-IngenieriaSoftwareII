@@ -41,23 +41,14 @@ function redirigir(url) {
   window.location.href=url;
 }
 
-
-
 // Función para almacenar los datos del formulario
 function almacenarDatos() {
   const nombres = document.getElementById("txaCrear1").value;
   const apellidos = document.getElementById("txaCrear2").value;
   const cedula = document.getElementById("txaCrear3").value;
   const correo = document.getElementById("txaCrear4").value;
-  var tipoCuenta;
-
-  const radios = document.querySelectorAll('input[type="radio"]');
-
-  for (const radio of radios) {
-    radio.addEventListener('click', function() {
-      tipoCuenta = radio.value;
-    });
-  }
+  let tipoCuenta;
+  let radio = document.querySelectorAll("input[type=radio][name=gender]");
   
   // Verificar si la cédula es válida
   if (verificarNombre(nombres)){
@@ -68,7 +59,18 @@ function almacenarDatos() {
         console.log("Cédula: " + cedula);
         if (verificarEmail(correo)) {
           console.log("Correo: " + correo);
-          redirigir("crearCredenciales.html");
+          radio.forEach(radioButton => {
+            if (radioButton.checked) {
+              tipoCuenta = radioButton.value;
+            }
+          });
+          if (tipoCuenta) {
+            console.log("Tipo de cuenta: "+ tipoCuenta);
+            alert("Cuenta creada"); //Creacion Completa
+            redirigir("crearCredenciales.html");
+          } else {
+            alert("No selecciona tipo de cuenta");
+          }
         } else{
           alert("Correo inválido");
         }
@@ -82,6 +84,6 @@ function almacenarDatos() {
     alert("Nombre inválido");
   }
 }
-  
+
 // Asociar la función almacenarDatos() al botón "Crear cuenta"
 document.getElementById("btnCrear4").addEventListener("click", almacenarDatos);
