@@ -26,16 +26,19 @@ var controller = {
     createUsuario: async function(req, res){
         var cedula = req.body.cedula;
         var usuario = req.body.usuario;
-        var contrasena = req.body.contrasena;
+        let contrasena = req.body.contrasena;
 
-        console.log({cedula, usuario, contrasena});
-
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(contrasena, salt, (err, hash) => {
-                if (err) throw err;
-                contrasena = hash;
-            });
-        });
+        async function hashPassword(contrasena) {
+            try {
+              const salt = await bcrypt.genSalt(10);
+              const hash = await bcrypt.hash(contrasena, salt);
+              return hash;
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          
+        contrasena = await hashPassword(contrasena);
 
         const cuenta = await cuentaSchema.findOne({ cedula: cedula });
         if (!cuenta) {
@@ -69,7 +72,7 @@ var controller = {
             if(isMatch){
                 return res.status(200).send({usuario: data.usuario, numeroCuenta: data.cuenta.numeroCuenta, nombres: data.cuenta.nombres, apellidos: data.cuenta.apellidos, cedula: data.cuenta.cedula, correo: data.cuenta.correo});
             }else{
-                return res.status(404).send({message: 'Error!'});
+                return res.status(404).send({message: 'Error!!'});
             }
         });
     },
@@ -88,7 +91,6 @@ var controller = {
         var numeroCuentaDestino = req.body.numeroCuentaDestino;
         var monto = req.body.monto;
 
-        console.log({numeroCuentaOrigen, numeroCuentaDestino, monto});
 
         const dataOrigen = await cuentaSchema.findOne({ numeroCuenta: numeroCuentaOrigen });
         if (!dataOrigen) {
@@ -102,8 +104,13 @@ var controller = {
             return res.status(404).json({ message: "Error Saldo insuficiente" });
         }
         else{
-            dataOrigen.saldo = dataOrigen.saldo - monto;
-            dataDestino.saldo = dataDestino.saldo + monto;
+            dataOrigen.saldo = parseFloat(dataOrigen.saldo) - parseFloat(monto);
+            dataDestino.saldo = parseFloat(dataDestino.saldo) + parseFloat(monto);
+            console.log(dataOrigen.saldo);
+            console.log(dataDestino.saldo);
+
+            await dataOrigen.save();
+            await dataDestino.save();
         }        
         return res.status(200).send({message: 'Proceso exitoso'});
     },
