@@ -1,4 +1,5 @@
 'use strict'
+
 /* Función para verificar que ingrese un nombre de usuario tenga al menos 8 caracteres, 
 de los cuales al menos debe tener 3 digitos 
 y sin caracteres especiales*/
@@ -51,11 +52,18 @@ function confirmarContraseña(constraseña, confirmarContraseña) {
     return constraseña === confirmarContraseña;
 }
 
+//Funcion para redirigir a otra pagina web
+function redirigir(url) {
+    window.location.href=url;
+}
+
 // Función para almacenar los datos del formulario
 function almacenarDatos() {
   const nombreU = document.getElementById("txaCredenciales1").value;
   const constraseña = document.getElementById("txaCredenciales2").value;
   const confirmacionContraseña = document.getElementById("txaCredenciales3").value;
+  alert("Usuario Almacenado");
+  redirigir("http://localhost:4200/transferencias");
   /*
   if (validarNombreU(nombreU)){
     console.log("Nombres de usuario: " + nombreU);

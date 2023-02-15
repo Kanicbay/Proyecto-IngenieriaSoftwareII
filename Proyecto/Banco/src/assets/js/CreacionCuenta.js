@@ -67,7 +67,7 @@ function almacenarDatos() {
           if (tipoCuenta) {
             console.log("Tipo de cuenta: "+ tipoCuenta);
             alert("Cuenta creada"); //Creacion Completa
-            redirigir("crearCredenciales.html");
+            redirigir("http://localhost:4200/credenciales");
           } else {
             alert("No selecciona tipo de cuenta");
           }
