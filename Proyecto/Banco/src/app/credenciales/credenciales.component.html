@@ -1,0 +1,34 @@
+<div class="image" style="height: 97.7vh;" [ngStyle]="{'background': 'url(assets/imagenes/fondoRegistro.png)','background-size': 'cover'}">
+    <div class="container">
+        <button id="btnsalir" role="link" onclick="window.location='http://localhost:4200'"><p id="botonSalirtxt">Salir</p></button>
+        <div id="logo">
+            <img src="assets/imagenes/logo.png" alt="">
+            <div id="logotxt">
+                <p> <span style="font-size: 45px;">Banco</span> <br> 
+                    <span style="font-size: 20px;">Big Money </span> </p>
+                
+            </div>
+        </div>
+    </div>
+    <div id="cuadradoCredenciales">
+        <h2 id="tituloCuadroCredenciales">Credenciales</h2>
+        <div id="camposCredenciales">
+            <h2 id="camposCredenciales1">Usuario</h2>
+            <div>
+                <!--<textarea id="txaCredenciales1"></textarea>-->
+                <input id="txaCredenciales1" type="text" name="Usuario" required>
+            </div>
+            <h2 id="camposCredenciales2">Contraseña</h2>
+            <div>
+                <!--<textarea id="txaCredenciales2"></textarea>-->
+                <input id="txaCredenciales2" type="password" name="Contraseña" disabled>
+            </div>
+            <h2 id="camposCredenciales3">Confirmar Contraseña</h2>
+            <div>
+                <!--<textarea id="txaCredenciales3"></textarea>-->
+                <input id="txaCredenciales3" type="password" name="Confirmar" disabled>
+            </div>
+            <button id="btnCredenciales" disabled="true"><p id="botonCredencialestxt">Crear usuario</p></button>
+        </div>
+    </div>    
+</div>

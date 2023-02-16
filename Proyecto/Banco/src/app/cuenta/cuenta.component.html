@@ -1,0 +1,43 @@
+<div class="image" style="height: 100vh;" [ngStyle]="{'background': 'url(assets/imagenes/fondoRegistro.png)','background-size': 'cover'}">
+    <div class="container">
+        <button id="btnsalir" role="link" onclick="window.location='http://localhost:4200'"><p id="botonSalirtxt">Salir</p></button>
+        <div id="logo">
+            <img src="assets/imagenes/logo.png" alt="">
+            <div id="logotxt">
+                <p> <span style="font-size: 45px;">Banco</span> <br> 
+                    <span style="font-size: 20px;">Big Money </span> </p>
+            </div>
+        </div>
+    </div>
+        <div id="cuadradoCrear">
+            <h2 id="tituloCuadroCrear">Crea tu cuenta</h2>
+            <div id="camposCrear">
+                <h3 id="camposCrear1">Nombre</h3>
+                <div>
+                    <textarea id="txaCrear1"></textarea>
+                </div>
+                <h3 id="camposCrear2">Apellido</h3>
+                <div>
+                    <textarea id="txaCrear2"></textarea>
+                </div>
+                <h3 id="camposCrear3">Cédula</h3>
+                <div>
+                    <!--<textarea id="txaCrear3"></textarea>-->
+                    <input id="txaCrear3" type="number" name="Cedula">
+                </div>
+                <h3 id="camposCrear4">Correo electrónico</h3>
+                <div>
+                    <textarea id="txaCrear4"></textarea>
+                </div>
+                <h3 id="camposCrear5">Tipo de cuenta</h3>
+                    <input id="btnCrear1" type="radio" name="gender" value="Corriente"> <label for="btnCrear1" id="botonCreartxt1">Corriente</label>
+                    <input id="btnCrear2" type="radio" name="gender" value="Ahorro"> <label for="btnCrear2" id="botonCreartxt2">Ahorro</label>
+                    <input id="btnCrear3" type="radio" name="gender" value="Vinculada"> <label for="btnCrear3" id="botonCreartxt3">Vinculada</label>
+                <!--<a href="crearCredenciales.html">
+                    <button id="btnCrear4"><p id="botonCreartxt" >Crear Cuenta</p></button>
+                </a>-->
+                <button id="btnCrear4"><p id="botonCreartxt" >Crear Cuenta</p></button>
+                
+            </div>
+        </div>
+</div>
