@@ -1,11 +1,12 @@
 'use strict'
 var cuentaSchema = require('../models/cuenta');
 var usuarioSchema = require('../models/usuario');
+var verificacionSchema = require('../models/verificaciones');
 var bcrypt = require('bcrypt');
 var {v4: uuidv4} = require('uuid');
 
 var controller = {
-    createAccount: function(req, res){
+    createAccount: async function(req, res){
         var numeroCuenta = parseInt(uuidv4(), 16);
         var nombres = req.body.nombres;
         var apellidos = req.body.apellidos;
@@ -13,20 +14,41 @@ var controller = {
         var correo = req.body.correo;
         var tipoCuenta = req.body.tipoCuenta;
         var saldo = req.body.saldo;
+        var cuentaExiste = false;
 
         var cuenta = new cuentaSchema({numeroCuenta, nombres, apellidos, cedula, correo, tipoCuenta, saldo});
+        var verificacion = new verificacionSchema({cedula});
 
-        cuenta.save((err, accountStored) => {
-            if(err) return res.status(500).send({message: 'Error!'});
-            if(!accountStored) return res.status(404).send({message: 'Error!'});
-            return res.status(200).send({"message": "Proceso exitoso"});
-        });
+        const data = await cuentaSchema.findOne({ cedula: cedula });
+        if(data){
+            cuentaExiste = true;
+        }
+
+        if(cuentaExiste){
+            return res.status(400).send({message: 'La cuenta ya existe!'});
+        }else{
+            cuenta.save((err, accountStored) => {
+                if(err) return res.status(500).send({message: 'Error!'});
+                if(!accountStored) return res.status(404).send({message: 'Error!'});
+            });
+            verificacion.save((err, verificacionStored) => {
+                if(err) return res.status(500).send({message: 'Error!'});
+                if(!verificacionStored) return res.status(404).send({message: 'Error!'});
+                return res.status(200).send({message: "Proceso exitoso"});
+            });
+
+        }
     },
     
     createUsuario: async function(req, res){
         var cedula = req.body.cedula;
         var usuario = req.body.usuario;
         let contrasena = req.body.contrasena;
+
+        const user = await usuarioSchema.findOne({ cedula: cedula });
+        if(user){
+            return res.status(400).send({message: 'El usuario ya existe!'});
+        }
 
         async function hashPassword(contrasena) {
             try {
@@ -42,7 +64,7 @@ var controller = {
 
         const cuenta = await cuentaSchema.findOne({ cedula: cedula });
         if (!cuenta) {
-            return res.status(404).json({ message: "Error!" });
+            return res.status(404).json({ message: "No tiene una cuenta asociada" });
         }
         var cuentaId = cuenta._id;
 

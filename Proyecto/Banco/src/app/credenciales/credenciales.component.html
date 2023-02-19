@@ -1,6 +1,6 @@
 <div class="image" style="height: 97.7vh;" [ngStyle]="{'background': 'url(assets/imagenes/fondoRegistro.png)','background-size': 'cover'}">
     <div class="container">
-        <button id="btnsalir" role="link" onclick="window.location='http://localhost:4200'"><p id="botonSalirtxt">Salir</p></button>
+        <button id="btnsalir" role="link" [routerLink]="['/inicio']"><p id="botonSalirtxt">Salir</p></button>
         <div id="logo">
             <img src="assets/imagenes/logo.png" alt="">
             <div id="logotxt">
@@ -12,23 +12,35 @@
     </div>
     <div id="cuadradoCredenciales">
         <h2 id="tituloCuadroCredenciales">Credenciales</h2>
-        <div id="camposCredenciales">
-            <h2 id="camposCredenciales1">Usuario</h2>
-            <div>
-                <!--<textarea id="txaCredenciales1"></textarea>-->
-                <input id="txaCredenciales1" type="text" name="Usuario" required>
-            </div>
-            <h2 id="camposCredenciales2">Contraseña</h2>
-            <div>
-                <!--<textarea id="txaCredenciales2"></textarea>-->
-                <input id="txaCredenciales2" type="password" name="Contraseña" disabled>
-            </div>
-            <h2 id="camposCredenciales3">Confirmar Contraseña</h2>
-            <div>
-                <!--<textarea id="txaCredenciales3"></textarea>-->
-                <input id="txaCredenciales3" type="password" name="Confirmar" disabled>
-            </div>
-            <button id="btnCredenciales" disabled="true"><p id="botonCredencialestxt">Crear usuario</p></button>
-        </div>
+        
+        <form #credencialesForm="ngForm" (ngSubmit)="crearUsuario(credencialesForm)" id="camposCrear">
+            <p>
+                <label for="user" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Usuario</label><br>
+                <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="user" #user="ngModel" [(ngModel)]="usuario.usuario" required pattern="^(?=.*\d.*\d.*\d)[a-zA-Z0-9]{8,}$">
+                <span *ngIf="user.touched && user.invalid">
+                    Usuario Incorrecto
+                  </span>
+            </p>
+            
+            <p>
+                <label for="password" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Contraseña</label><br>
+                <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="password" #password="ngModel" [(ngModel)]="usuario.contrasena" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d@.*])(?!.*\s).{8,}$">
+                <span *ngIf="password.touched && password.invalid">
+                    Contraseña Incorrecta
+                  </span>
+            </p>
+
+            <p>
+                <label for="confirmPassword" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Confirmar Contraseña</label><br>
+                <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="confirmPasswordValue" required >
+                <span *ngIf="(confirmPassword.touched && confirmPassword.invalid) || (confirmPassword.touched && !contrasenaCoincide())" >
+                    Confirmación de Contraseña Incorrecta
+                </span>
+            </p>
+
+            
+            <input style="margin-left: 90px; margin-top: 8px;" type="submit" value="Guardar" [disabled]="!credencialesForm.form.valid || !contrasenaCoincide()">
+          </form>
+
     </div>    
 </div>

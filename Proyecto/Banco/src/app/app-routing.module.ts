@@ -6,7 +6,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { TransferenciaComponent } from './transferencia/transferencia.component';
 
 const routes: Routes = [
-  {path:'inicio',component:CuentaComponent},
+  {path:'inicio',component:InicioComponent},
   {path:'cuenta',component:CuentaComponent},
   {path:'credenciales',component:CredencialesComponent},
   {path:'transferencias',component:TransferenciaComponent},

@@ -1,6 +1,6 @@
-<div class="image" style="height: 100vh;" [ngStyle]="{'background': 'url(assets/imagenes/fondoRegistro.png)','background-size': 'cover'}">
-    <div class="container">
-        <button id="btnsalir" role="link" onclick="window.location='http://localhost:4200'"><p id="botonSalirtxt">Salir</p></button>
+<div class="background" id="background-cuenta" style="height: 100vh;" [ngStyle]="{'background': 'url(assets/imagenes/fondoRegistro.png)','background-size': 'cover'}">
+    <div class="container" id="container-cuenta">
+        <button id="btnsalir" role="link" [routerLink]="['/inicio']"><p id="botonSalirtxt">Salir</p></button>
         <div id="logo">
             <img src="assets/imagenes/logo.png" alt="">
             <div id="logotxt">
@@ -8,36 +8,59 @@
                     <span style="font-size: 20px;">Big Money </span> </p>
             </div>
         </div>
-    </div>
+
         <div id="cuadradoCrear">
             <h2 id="tituloCuadroCrear">Crea tu cuenta</h2>
-            <div id="camposCrear">
-                <h3 id="camposCrear1">Nombre</h3>
-                <div>
-                    <textarea id="txaCrear1"></textarea>
-                </div>
-                <h3 id="camposCrear2">Apellido</h3>
-                <div>
-                    <textarea id="txaCrear2"></textarea>
-                </div>
-                <h3 id="camposCrear3">Cédula</h3>
-                <div>
-                    <!--<textarea id="txaCrear3"></textarea>-->
-                    <input id="txaCrear3" type="number" name="Cedula">
-                </div>
-                <h3 id="camposCrear4">Correo electrónico</h3>
-                <div>
-                    <textarea id="txaCrear4"></textarea>
-                </div>
-                <h3 id="camposCrear5">Tipo de cuenta</h3>
-                    <input id="btnCrear1" type="radio" name="gender" value="Corriente"> <label for="btnCrear1" id="botonCreartxt1">Corriente</label>
-                    <input id="btnCrear2" type="radio" name="gender" value="Ahorro"> <label for="btnCrear2" id="botonCreartxt2">Ahorro</label>
-                    <input id="btnCrear3" type="radio" name="gender" value="Vinculada"> <label for="btnCrear3" id="botonCreartxt3">Vinculada</label>
-                <!--<a href="crearCredenciales.html">
-                    <button id="btnCrear4"><p id="botonCreartxt" >Crear Cuenta</p></button>
-                </a>-->
-                <button id="btnCrear4"><p id="botonCreartxt" >Crear Cuenta</p></button>
+            <form #cuentaForm="ngForm" (ngSubmit)="crearCuenta(cuentaForm)" id="camposCrear">
+                <p>
+                    <label for="nombre" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Nombres</label><br>
+                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="nombre" #nombres="ngModel" [(ngModel)]="cuenta.nombres" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
+                    <span *ngIf="nombres.touched && nombres.invalid">
+                        Nombres incorrectos
+                      </span>
+                </p>
                 
-            </div>
+                <p>
+                  <label for="apellido" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Apellidos</label><br>
+                  <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="apellido" #apellidos="ngModel" [(ngModel)]="cuenta.apellidos" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
+                  <span *ngIf="apellidos.touched && apellidos.invalid">
+                    Apellidos incorrectos
+                  </span>
+                </p>
+                <p>
+                  <label for="cedula" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Cédula</label><br>
+                  <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="cedula" #cedula="ngModel" [(ngModel)]="cuenta.cedula" required pattern="^[0-9]{10}$"
+                  (ngModelChange)="cedula.valid ? cuenta.cedula = $event : null">
+                  <span *ngIf="cedula.touched && cedula.invalid">
+                    Cédula incorrecta
+                  </span>
+                </p>
+                <p>
+                    <label for="correo" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Correo</label><br>
+                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="correo" #correo="ngModel" [(ngModel)]="cuenta.correo" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                    <span *ngIf="correo.touched && correo.invalid">
+                      Correo incorrecto
+                    </span>
+                  </p>
+                <p>
+                  <label for="tipoCuenta" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Tipo de cuenta</label><br>
+                  <select style="margin-left: 90px; margin-top: 8px;" name="tipoCuenta" #tipoCuenta="ngModel" [(ngModel)]="cuenta.tipoCuenta" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Ahorros">Corriente</option>
+                    <option value="Corriente">Ahorros</option>
+                    <option value="Nomina">Vinculada</option>
+                  </select>
+                  <span *ngIf="tipoCuenta.invalid && (tipoCuenta.dirty || tipoCuenta.touched)">
+                    Tipo de cuenta obligatorio
+                  </span>
+                </p>
+                <input style="margin-left: 90px; margin-top: 8px;" type="submit" value="Guardar" [disabled]="!cuentaForm.form.valid">
+            </form>
+              <div *ngIf="cuentaExiste">
+                <p style="margin-left: 90px; margin-top: 8px;" >Los datos ingresados corresponde a una cuenta existente</p>
+              </div>
         </div>
+
+    </div>
+
 </div>
