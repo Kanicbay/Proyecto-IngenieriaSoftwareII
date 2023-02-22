@@ -41,9 +41,11 @@ var controller = {
     },
     
     createUsuario: async function(req, res){
-        var cedula = req.body.cedula;
+        
         var usuario = req.body.usuario;
         let contrasena = req.body.contrasena;
+
+        const codigo = await verificacionSchema.findOne
 
         const user = await usuarioSchema.findOne({ cedula: cedula });
         if(user){
