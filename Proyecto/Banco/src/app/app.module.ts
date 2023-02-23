@@ -8,6 +8,11 @@ import { TransferenciaComponent } from './transferencia/transferencia.component'
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
+import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
+import { PagoTarjetasComponent } from './pago-tarjetas/pago-tarjetas.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { NosotrosComponent } from './nosotros/nosotros.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +21,11 @@ import { FormsModule } from '@angular/forms';
     CredencialesComponent,
     TransferenciaComponent,
     CuentaComponent,
+    MiPerfilComponent,
+    MiCuentaComponent,
+    PagoTarjetasComponent,
+    ContactoComponent,
+    NosotrosComponent,
   ],
   imports: [
     BrowserModule,
