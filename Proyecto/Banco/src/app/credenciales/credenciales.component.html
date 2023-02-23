@@ -24,7 +24,7 @@
             
             <p>
                 <label for="password" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Contraseña</label><br>
-                <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="password" #password="ngModel" [(ngModel)]="usuario.contrasena" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d@.*])(?!.*\s).{8,}$">
+                <input type="password" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="password" #password="ngModel" [(ngModel)]="usuario.contrasena" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d@.*])(?!.*\s).{8,}$">
                 <span *ngIf="password.touched && password.invalid">
                     Contraseña Incorrecta
                   </span>
@@ -32,7 +32,7 @@
 
             <p>
                 <label for="confirmPassword" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Confirmar Contraseña</label><br>
-                <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="confirmPasswordValue" required >
+                <input type="password" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="confirmPasswordValue" required >
                 <span *ngIf="(confirmPassword.touched && confirmPassword.invalid) || (confirmPassword.touched && !contrasenaCoincide())" >
                     Confirmación de Contraseña Incorrecta
                 </span>

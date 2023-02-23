@@ -21,19 +21,19 @@
 <div class="container">
     <div class="row">
         <div id="columOpciones" class="col-3">
-            <a href="#">
+            <a [routerLink]="['/mi-cuenta']">
                 <div class="card">
                     <h3>Mi cuenta</h3>
                 </div>
             </a>
-            <a href="#">
+            <a [routerLink]="['/mi-perfil']">
                 <div class="card">
                     <h3>Mi perfil</h3>
                 </div>
             </a>
-            <a href="#">
+            <a [routerLink]="['/transferencias']">
                 <div class="card">
-                    <h3>Transferencia</h3>
+                    <h3 style="background-color: #4196F1; padding: 10px;">Transferencia</h3>
                 </div>
             </a>
             <a href="#">
@@ -41,7 +41,7 @@
                     <h3>Pagar servicios básicos </h3>
                 </div>
             </a>
-            <a href="#">
+            <a [routerLink]="['/pago-tarjetas']">
                 <div class="card">
                     <h3>Pagar tarjetas</h3>
                 </div>
@@ -60,7 +60,7 @@
                             Saldo disponible
                         </h5>
                         <h5 style="position: absolute; left: 75px; top: 270px;">
-                            $ 200.45
+                            <h3>{{cuenta.saldo}}</h3>
                         </h5>
                         <h5 style="position: absolute; left: 75px; top: 320px;">
                             Ingrese el número de cuenta

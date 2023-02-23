@@ -13,6 +13,7 @@ import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
 import { PagoTarjetasComponent } from './pago-tarjetas/pago-tarjetas.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
     PagoTarjetasComponent,
     ContactoComponent,
     NosotrosComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
