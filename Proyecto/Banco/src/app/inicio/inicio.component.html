@@ -14,10 +14,10 @@
     </div>
     <div id="btnCabecera">
       <ul >
-        <a id="btnContacto" href="#contacto">Contacto</a>
-        <a id="btnServicio" href="#servicio">Servicio</a>
-        <a id="btnNosotros" href="#nosotros">Nosotros</a>
-        <a [routerLink]="['/cuenta']" id="btnBancaVirtual">Banca-Virtual</a>
+        <a id="btnContacto" [routerLink]="['/contacto']">Contacto</a>
+            <a id="btnServicio" [routerLink]="['/servicios']">Servicio</a>
+            <a id="btnNosotros" [routerLink]="['/nosotros']">Nosotros</a>
+            <a id="btnBancaVirtual" [routerLink]="['/cuenta']">Banca-Virtual</a>
       </ul>
     </div>
   </header>

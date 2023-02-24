@@ -29,11 +29,11 @@
                 </div>
             </a>
             <a [routerLink]="['/mi-perfil']">
-                <div class="card">
-                    <h3 style="background-color: #4196F1; padding: 10px;">Mi perfil</h3>
+                <div class="card" style="background-color: #4196F1; padding: 10px;">
+                    <h3>Mi perfil</h3>
                 </div>
             </a>
-            <a [routerLink]="['/transferencias']">
+            <a [routerLink]="['/tipo-transferencia']">
                 <div class="card">
                     <h3>Transferencia</h3>
                 </div>
@@ -50,43 +50,70 @@
             </a>
         </div>
 
-        
-        
-             <div id="bienvenida">
-                
-                <div id="logoUser">
-                    <img src="https://static.vecteezy.com/system/resources/previews/005/005/840/non_2x/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg" alt="" style="height: 150%; width: 150%;">
+        <div id="bienvenida">
+            
+            <div id="logoUser">
+                <img src="https://static.vecteezy.com/system/resources/previews/005/005/840/non_2x/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg" alt="" style="height: 150%; width: 150%;">
+            </div>
+            
+                <h6 style="position: absolute; left: 700px; top: 120px; font-size: 30px;">
+                    Bievenido, NOMBRES APELLIDOS
+                </h6>
+        </div>
+        <div id="cuadroCambioDatos1">
+            <h5 style="position: absolute; left: 40px; top: 20px;">
+                Datos
+            </h5>
+            <div id="contenedorCambios">
+                <div>
+                    <h5 style="position: absolute; left: 75px; top: 100px;">
+                        Nombres y Apellidos
+                    </h5>
+                    <div id="botonesCambios">
+                        <button id="btnCambiarName">Cambiar</button>
+            
+                    </div>                            
                 </div>
                 
-                    <h6 style="position: absolute; left: 700px; top: 120px; font-size: 30px;">
-                        Bievenido, NOMBRES APELLIDOS
-                    </h6>
-                
-                
-
-                
-             </div>
-
-             
-            <div id="cuadroCambioDatos1">
-                <h5 style="position: absolute; left: 40px; top: 20px;">
-                    Datos
-                </h5>
-                <div id="contenedorCambios">
-                    <div>
-                        <h5 style="position: absolute; left: 75px; top: 100px;">
-                            Nombre de Usuario
-                        </h5>
-                        <div id="botonesCambios">
-                            <button id="btnCambiarName">Cambiar</button>
-                        </div>
+                <div>
+                    <h5 style="position: absolute; left: 75px; top: 175px;">
+                        Correo Electrónico
+                    </h5>
+                    <div id="botonesCambios">
+                        <button id="btnCambiarCorreo">Cambiar</button>
+            
+                    </div>                            
+                </div>
+                <div>
+                    <h5 style="position: absolute; left: 75px; top: 250px;">
+                        Número de celular
+                    </h5>
+                    <div id="botonesCambios">
+                        <button id="btnCambiarCelular">Cambiar</button>
+            
+                    </div>                            
+                </div>
+                <div>
+                    <h5 style="position: absolute; left: 75px; top: 325px;">
+                        Usuario
+                    </h5>
+                    <div id="botonesCambios">
+                        <button id="btnCambiarUsuario">Cambiar</button>                           
+                    </div>
+                </div>
+                <div>
+                    <h5 style="position: absolute; left: 75px; top: 400px;">
+                        Contraseña
+                    </h5>
+                    <div id="botonesCambios">
+                        <button id="btnCambiarContrase">Cambiar</button>                           
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-
+</div>
 <div id="piePagT"> 
     <div class="card">
         <h3>Para ti</h3>
@@ -135,7 +162,7 @@
     </div>
     <div id="logoPie">
         <a href="index.html">
-            <img src="recursos/img/logo.png" alt="" style="height: 70%; width: 70%;">
+            <img src="assets/imagenes/logo.png" alt="" style="height: 70%; width: 70%;">
         </a>
         <a href="index.html">
             <div id="logoPietxt">

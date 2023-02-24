@@ -24,7 +24,7 @@
             
             <p>
                 <label for="password" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Contraseña</label><br>
-                <input type="password" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="password" #password="ngModel" [(ngModel)]="usuario.contrasena" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d@.*])(?!.*\s).{8,}$">
+                <input type="password" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="password" #password="ngModel" [(ngModel)]="usuario.contrasena" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@).{8,}$"> 
                 <span *ngIf="password.touched && password.invalid">
                     Contraseña Incorrecta
                   </span>

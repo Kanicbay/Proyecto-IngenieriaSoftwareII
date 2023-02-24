@@ -41,8 +41,13 @@
     margin: auto; /* Margen automático */
 }
 #tituloCuadroInicio{
+    position: relative;
     text-align: center;
-    font-size: 25px;
+    top: 20px;
+    text-shadow: 1px  0px 0px white,
+    0px  1px 0px white,
+   -1px  0px 0px white,
+    0px -1px 0px white;
 }
 #cuadradoCrear {
     width: 800px; /* Ancho */

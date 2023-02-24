@@ -14,7 +14,7 @@
 </div>
 <div id="btnCabecera">
     <ul >
-        <a id="btnSalirTransferencia" [routerLink]="['/inicio']">Salir</a>
+        <a id="btnSalirTransferencia" href="#Salir-Transferenca8">Salir</a>
     </ul>
 </div>
 </header>
@@ -47,38 +47,34 @@
                 </div>
             </a>
         </div>
+
+
         <div class="col-9">
-            <div id="cuadroTransferencia">
+            <div id="cuadroEstadoCuenta">
                 <div id="contenidoTransferencia">
                     <div>
-                        <h5 style="position: absolute; left: 75px; top: 50px;">
-                            Todos mis productos
+                        <h3 style="position: absolute; left: 40%; top: 50px;">
+                            Saldo actual
+                        </h3>
+                        <div id="cuadroSaldo">
+                            <p>$</p>
+                        </div>
+                        <h5 style="position: absolute; left: 75px; top: 220px;">
+                            Cuenta de ahorros Nro.  156498016
                         </h5>
-                        <h5 style="position: absolute; left: 75px; top: 100px;">
-                            Mis Cuentas
+                        <h5 style="position: absolute; left: 75px; top: 270px;">
+                            <b> Ultimos Movimientos</b>
+                
                         </h5>
-                        <a [routerLink]="['/detalle-cuenta']">
-                            <div id="cuentasD">
-                                <p id="textoD">
-                                <span id="texto1D"><b>AHO607</b></span> <br>
-                                Nro. <span id="textoNumD">1054999607</span> 
-                                </p>
-                            </div>
-                        </a>
-                        <p id="signoDineroD1"> <b>$00.00</b> <br><span>Disponible</span> </p> 
-                        
-                        <h5 style="position: absolute; left: 75px; top: 250px;">
-                            Mis tarjetas de crédito
+                        <h5 style="position: absolute; left: 75px; top: 320px;">
+                            Fecha:
                         </h5>
-                        <a [routerLink]="['/transferencias']">
-                            <div id="misTarjetasD">
-                                <p id="textoD">
-                                    <span id="texto2D"><b>Tarjeta</b></span> <br>
-                                    Nro. <span id="textoNumD">4438********8144</span> 
-                                </p>
-                            </div>
-                        </a>
-                        <p id="signoDineroD2"> <b>$00.00</b> <br><span>Cuota total a pagar</span></p>
+                        <div id="cuadroTransaccionHecha">
+                            <p>Transferencia</p>
+                            <p><span id="dinero1">$</span></p>
+                            <p><span id="dinero2">$</span></p>
+                        </div>
+                       
                     </div>
                 </div>
             </div>

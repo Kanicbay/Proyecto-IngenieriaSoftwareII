@@ -14,6 +14,9 @@ import { PagoTarjetasComponent } from './pago-tarjetas/pago-tarjetas.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { LoginComponent } from './login/login.component';
+import { DetalleCuentaComponent } from './detalle-cuenta/detalle-cuenta.component';
+import { TipoTransferenciaComponent } from './tipo-transferencia/tipo-transferencia.component';
+import { ServiciosComponent } from './servicios/servicios.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { LoginComponent } from './login/login.component';
     ContactoComponent,
     NosotrosComponent,
     LoginComponent,
+    DetalleCuentaComponent,
+    TipoTransferenciaComponent,
+    ServiciosComponent,
   ],
   imports: [
     BrowserModule,

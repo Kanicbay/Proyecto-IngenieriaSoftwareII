@@ -49,6 +49,7 @@ export class CuentaComponent implements OnInit {
         }
         //Redirigir a la pagina de credenciales
         //  (IMPORTANTE)  -->  Esperar por implementación de código por correo redigir ahí
+        alert("Cuenta Creada");
         this._router.navigate(['/credenciales']);
       },
       error=>{

@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <link rel="stylesheet" href="css/bootstrap-5.2.3/dist/css/bootstrap.min.css" > 
-  <link rel="icon" typpe="favicon/x-icon" href="recursos/img/logo.png">
-  <link rel="stylesheet" type="text/css" href="css/styles2.css">
-  <script src="css/bootstrap-5.2.3/dist/js/bootstrap.min.js"></script>
-  <title>Document</title>
-</head>
 <body id="paginaFondo">
     <header id="cabecera">
         <div id="logo">
             <a href="index.html">
-                <img src="recursos/img/logo.png" alt="" style="height: 70%; width: 70%;">
+                <img src="assets/imagenes/logo.png" alt="" style="height: 70%; width: 70%;">
             </a>
             <a href="index.html">
                 <div id="logotxt">
@@ -34,18 +22,18 @@
     <div class="container">
         <div class="row">
             <div id="columOpciones" class="col-3">
-                <a href="#">
+                <a [routerLink]="['/mi-cuenta']">
                     <div class="card">
                         <h3>Mi cuenta</h3>
                     </div>
                 </a>
-                <a href="#">
+                <a [routerLink]="['/mi-perfil']">
                     <div class="card">
                         <h3>Mi perfil</h3>
                     </div>
                 </a>
-                <a href="#">
-                    <div class="card">
+                <a [routerLink]="['/tipo-transferencia']">
+                    <div class="card" style="background-color: #4196F1; padding: 10px;">
                         <h3>Transferencia</h3>
                     </div>
                 </a>
@@ -54,7 +42,7 @@
                         <h3>Pagar servicios básicos </h3>
                     </div>
                 </a>
-                <a href="#">
+                <a [routerLink]="['/pago-tarjetas']">
                     <div class="card">
                         <h3>Pagar tarjetas</h3>
                     </div>
@@ -64,30 +52,14 @@
                 <div id="cuadroTransferencia">
                     <div id="contenidoTransferencia">
                         <div>
-                            <h5 style="position: absolute; left: 75px; top: 50px;">
-                                Monto a transferir
-                            </h5>
-                            <p id="signoDinero"> $ </p> 
-                            <div contentEditable="true" id="cuadroMonto">         
-                                <p> </p>
-                            </div>
-                            <h5 style="position: absolute; left: 75px; top: 220px;">
-                                Saldo disponible
-                            </h5>
-                            <h5 style="position: absolute; left: 75px; top: 270px;">
-                                $ 200.45
-                            </h5>
-                            <h5 style="position: absolute; left: 75px; top: 320px;">
-                                Ingrese el número de cuenta
-                            </h5>
-                            <div id="cuadroNumCuenta">
-                                <p>Ej: 2020320130201</p>
-                            </div>
                             <div id="botonesTransferencia">
-                                <button id="btnVerificar">Verificar</button>
-                                <button id="btnTransferir">Transferir</button>
+                                <a [routerLink]="['/transferencias']">
+                                    <button id="btnTransferenciaI">Transferencia <br>Interna</button>
+                                </a>
+                                <a [routerLink]="['/transferencias']">
+                                    <button id="btnTransferenciaE">Transferencia <br>Externa</button>
+                                </a>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -142,7 +114,7 @@
         </div>
         <div id="logoPie">
             <a href="index.html">
-                <img src="recursos/img/logo.png" alt="" style="height: 70%; width: 70%;">
+                <img src="assets/imagenes/logo.png" alt="" style="height: 70%; width: 70%;">
             </a>
             <a href="index.html">
                 <div id="logoPietxt">
@@ -155,4 +127,3 @@
         </div>
     </div>
 </body>
-</html>

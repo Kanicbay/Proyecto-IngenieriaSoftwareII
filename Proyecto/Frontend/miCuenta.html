@@ -8,7 +8,7 @@
   <link rel="icon" typpe="favicon/x-icon" href="recursos/img/logo.png">
   <link rel="stylesheet" type="text/css" href="css/styles2.css">
   <script src="css/bootstrap-5.2.3/dist/js/bootstrap.min.js"></script>
-  <title>Mi cuenta</title>
+  <title>Document</title>
 </head>
 <body id="paginaFondo">
     <header id="cabecera">
@@ -35,8 +35,8 @@
         <div class="row">
             <div id="columOpciones" class="col-3">
                 <a href="#">
-                    <div class="card">
-                        <h3 style="background-color: #4196F1; padding: 10px;">Mi cuenta</h3>
+                    <div class="card" style="background-color: #4196F1;">
+                        <h3>Mi cuenta</h3>
                     </div>
                 </a>
                 <a href="#">
@@ -60,39 +60,40 @@
                     </div>
                 </a>
             </div>
-
-
             <div class="col-9">
-                <div id="cuadroEstadoCuenta">
+                <div id="cuadroTransferencia">
                     <div id="contenidoTransferencia">
                         <div>
-                            <div id="cuadroSaldo">
-                                <p>$</p>
-                            </div>
                             <h5 style="position: absolute; left: 75px; top: 50px;">
-                                Saldo actual
+                                Todos mis productos
                             </h5>
+                            <h5 style="position: absolute; left: 75px; top: 100px;">
+                                Mis Cuentas
+                            </h5>
+                            <a href="detallesCuenta.html">
+                                <div id="cuentasD">
+                                    <p id="textoD">
+                                    <span id="texto1D"><b>AHO363</b></span> <br>
+                                    Nro. <span id="textoNumD">2248562363</span> 
+                                    </p>
+                                </div>
+                            </a>
+                            <p id="signoDineroD1"> <b>$00.00</b> <br><span>Disponible</span> </p> 
                             
-                            <h5 style="position: absolute; left: 75px; top: 220px;">
-                                Cuenta de ahorros Nmr. eje: 156498016
+                            <h5 style="position: absolute; left: 75px; top: 250px;">
+                                Mis tarjetas de crédito
                             </h5>
-                            <h5 style="position: absolute; left: 75px; top: 270px;">
-                                <b> Ultimas transacciones</b>
-                    
-                            </h5>
-                            <h5 style="position: absolute; left: 75px; top: 320px;">
-                                Cuadro de fecha
-                            </h5>
-                            <div id="cuadroTransaccionHecha">
-                                <p>Ej: 2020320130201</p>
-                            </div>
-                           
+                            <a href="">
+                                <div id="misTarjetasD">
+                                    <p id="textoD">
+                                        <span id="texto2D"><b>Tarjeta</b></span> <br>
+                                        Nro. <span id="textoNumD">2320********9454</span> 
+                                    </p>
+                                </div>
+                            </a>
+                            <p id="signoDineroD2"> <b>$00.00</b> <br><span>Cuota total a pagar</span></p>
                         </div>
                     </div>
-                </div>
-                <div id="botonesTransferencia">
-                    <button id="btnEstadoCuenta">Estado de cuenta</button>
-        
                 </div>
             </div>
         </div>

@@ -73,5 +73,6 @@ export class CredencialesComponent {
       return false;
     }
   }
-
+  
+  //Cuando hagas el router mandale aca this._router.navigate(['/mi-cuenta']);
 }

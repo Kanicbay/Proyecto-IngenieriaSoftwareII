@@ -1,0 +1,31 @@
+<div class="background" id="background-cuenta" style="height: 100vh;" [ngStyle]="{'background': 'url(assets/imagenes/fondoRegistro.png)','background-size': 'cover'}">
+    <div class="container">
+        <a [routerLink]="['/inicio']">
+            <button id="btnsalir"><p id="botonSalirtxt">Salir</p></button>
+        </a>
+        <div id="logo">
+            <img src="assets/imagenes/logo.png" alt="">
+            <div id="logotxt">
+                <p> <span style="font-size: 45px;">Banco</span> <br> 
+                    <span style="font-size: 20px;">Big Money </span> </p>
+            </div>
+        </div>
+    </div>
+    <div id="cuadradoInicio">
+        <h3 id="tituloCuadroInicio">Ingresa a tu banca web</h3>
+        <div id="camposInicio">
+            <h2 id="camposInicio1">Usuario</h2>
+            <div>
+                <textarea id="txaInicio1"></textarea>
+            </div>
+            <h2 id="camposInicio2">Contraseña</h2>
+            <div>
+                <textarea id="txaInicio2"></textarea>
+            </div>
+            <button id="btnIniciar"><p id="botonIniciartxt">Iniciar sesión</p></button>
+        </div>
+        <div id="txtInicioFinal">
+            <p>No tienes una cuenta con nosotros?. <a id="ainicioS" [routerLink]="['/credenciales']">Crea una ahora</a></p>
+        </div>
+    </div>
+</div>

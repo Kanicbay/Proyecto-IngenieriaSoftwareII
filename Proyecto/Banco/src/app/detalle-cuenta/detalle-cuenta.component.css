@@ -174,7 +174,6 @@
     padding-right: 15px;
     border-radius: 9px;
     cursor: pointer;
-    font-size: 30px;
 }
 #columOpciones{
     background-color: #D9D9D9 ;
@@ -538,8 +537,8 @@ a{
 }
 #cuadroEstadoCuenta{
     position: absolute;
-    top: 135px;
-    left: 450px;
+    top: 100px;
+    left: 370px;
     background-color: #D9D9D9; 
     width: 950px; 
     height: 550px; 
