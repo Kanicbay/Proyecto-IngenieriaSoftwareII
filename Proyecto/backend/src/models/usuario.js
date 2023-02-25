@@ -12,9 +12,9 @@ var usuarioSchema = Schema({
         type: String,
         required: true
     },
-    cuenta: {
+    cliente: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cuenta'
+        ref: 'Clientes',
     }
 });
 
