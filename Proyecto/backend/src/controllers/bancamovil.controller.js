@@ -1,7 +1,7 @@
 'use strict'
 var usuarioSchema = require('../models/usuario');
 var verificacionSchema = require('../models/verificaciones');
-//var jwt = require('../services/jwt');
+var jwt = require('../services/generateToken');
 var clienteSchema = require('../models/cliente');
 var cuentaCorrienteSchema = require('../models/cuentaCorriente');
 var cuentaAhorrosSchema = require('../models/cuentaAhorros');
@@ -11,6 +11,7 @@ var bcrypt = require('bcrypt');
 var {v4: uuidv4} = require('uuid');
 
 var controller = {
+    //Crear una cuenta
     createAccount: async function(req, res){
         var numeroCuenta = parseInt(uuidv4(), 16);
         var nombres = req.body.nombres;
@@ -140,6 +141,11 @@ var controller = {
         const cedula = req.body.cedula;
         const uuidv4 = require('uuid').v4;
         const codigoVerificacion = uuidv4().slice(0, 6);
+/*        const codigoExiste = await verificacionSchema({cedula: cedula});
+        console.log(codigoExiste);
+        if(codigoExiste){
+            return res.status(200).send({message: "Proceso exitoso", codigo: codigoExiste.codigo_verificacion});
+        }*/
         const codigo = new verificacionSchema({cedula: cedula, codigo: codigoVerificacion});
         await codigo.save((err, codigoStored) => {
             if(err) return res.status(500).send({message: 'Error!'});
@@ -158,20 +164,34 @@ var controller = {
         }
     },
     
+    //Crear usuario
     createUsuario: async function(req, res){
-        var cedula = req.body.cedula;
+        //Obtener codigo de verificacion de parametros y datos del usuario
+        var { idCodigo } = req.params;
         var usuario = req.body.usuario;
         let contrasena = req.body.contrasena;
 
-        //Codigo para verificar la creacion de un usuario
-        const codigo = await verificacionSchema.findOne
+        console.log("Parametros ", idCodigo);
+        console.log("Codigo de verificacion id: ", (idCodigo));
 
+        //Verificar si el codigo ingresado existe o por algun problema ya caduco
+        const verificacion = await verificacionSchema.findById((idCodigo));
+        console.log("Codigo de verificacion: ", (verificacion));
+        if(!verificacion){
+            return res.status(404).json({ message: "El codigo de verifcacion caduco" });
+        }
         //Verificar si el usuario ya existe
+        var cedula = verificacion.cedula;
         const user = await usuarioSchema.findOne({ cedula: cedula });
         if(user){
-            return res.status(400).send({message: 'El usuario ya existe!'});
+            return res.status(409).send({message: 'El usuario ya existe'});
         }
-
+        //Verificar si la cedula tiene un cliente asociado
+        const cliente = await clienteSchema.findOne({ cedula: cedula });
+        if (!cliente) {
+            return res.status(404).json({ message: "No tiene una cuenta asociada al número de cédula" });
+        }
+        var clienteId = cliente._id;
         //Funcion para convertir la contraseña en hash
         async function hashPassword(contrasena) {
             try {
@@ -184,42 +204,42 @@ var controller = {
           }
         //Convertir la contraseña en hash
         contrasena = await hashPassword(contrasena);
-        
-        const cliente = await clienteSchema.findOne({ cedula: cedula });
-        if (!cliente) {
-            return res.status(404).json({ message: "No tiene una cuenta asociada al número de cédula" });
-        }
-        var clienteId = cliente._id;
-
+        //Crear el esquema del usuario
         var data = new usuarioSchema({
             usuario: usuario,
             contrasena: contrasena,
             cliente: clienteId,
         });
-
+        //Eliminar el codigo de verificacion
+        await verificacionSchema.findByIdAndDelete(verificacion._id);
+        //Guardar el usuario
         data.save((err, usuarioStored) => {
             if(err) return res.status(500).send({message: 'Error!'});
             if(!usuarioStored) return res.status(404).send({message: 'Error!'});
-            return res.status(200).send({"message": "Proceso Exitoso"});
+            return res.status(200).send({message: "Proceso Exitoso"});
         });
+        
     },
 
     loginUser: async function(req, res){
         var usuario = req.body.usuario;
         var contrasena = req.body.contrasena;
 
-        const data = await usuarioSchema.findOne({ usuario: usuario }, 'usuario contrasena').populate('cuenta', 'numeroCuenta nombres apellidos cedula correo');
-        if (!data) {
+        const user = await usuarioSchema.findOne({ usuario: usuario });
+        if (!user) {
             return res.status(404).json({ message: "Error!" });
         }
-        bcrypt.compare(contrasena, data.contrasena, (err, isMatch) => {
+        bcrypt.compare(contrasena, user.contrasena, (err, isMatch) => {
             if(err) throw err;
-            if(isMatch){
-                return res.status(200).send({usuario: data.usuario, numeroCuenta: data.cuenta.numeroCuenta, nombres: data.cuenta.nombres, apellidos: data.cuenta.apellidos, cedula: data.cuenta.cedula, correo: data.cuenta.correo});
-            }else{
+            if(!isMatch){
                 return res.status(404).send({message: 'Error!!'});
             }
         });
+        console.log(user._id);
+        //Crear token de sesion
+        const tokenSession = await jwt.tokenSign(user);
+
+        return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
     },
 
     findAccount : async function(req, res){

@@ -11,6 +11,7 @@ var verificacionSchema = Schema({
     },
     codigo_verificacion: {
         type: String,
+        unique: true,
         default : crypto.randomBytes(5).toString('hex').toUpperCase().substring(0, 6)
     },
     tiempoExpiracion: {

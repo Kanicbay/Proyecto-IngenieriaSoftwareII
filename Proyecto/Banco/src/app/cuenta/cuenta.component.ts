@@ -57,21 +57,15 @@ export class CuentaComponent implements OnInit {
       }
       this.idCodigo = codigoCreado.codigo._id;
       console.log(this.idCodigo);
-      this._cuentaService.crearCuenta(this.cuenta).subscribe(
+      await this._cuentaService.crearCuenta(this.cuenta).subscribe(
         response=>{
-          if(response.cuenta){
-            this._cargarService.peticionRequest(Global.url+"createAccount/"+response.cuenta._id,[],[],'foto')
-            .then((result:any)=>{
-              this.status='success';
-              this.idCreado=result.cuenta._id;
-            });
+          console.log("Response",response);
+          if(response.message == 'Proceso exitoso'){            
+            alert("Cuenta Creada");
+            this._router.navigate(['/credenciales', this.idCodigo]);
           }else{
             this.status='failed';
           }
-          //Redirigir a la pagina de credenciales
-          //  (IMPORTANTE)  -->  Esperar por implementación de código por correo redigir ahí
-          alert("Cuenta Creada");
-          this._router.navigate(['/credenciales', this.idCodigo]);
         },
         error=>{
           if(error.status==409){

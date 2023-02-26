@@ -43,23 +43,21 @@ export class CredencialesComponent {
   crearUsuario(form:NgForm){
     this.idCodigo = this._activatedRouter.snapshot.paramMap.get('idCodigo') || '';
     console.log(this.idCodigo);
-    this._usuarioService.crearUsuario(this.usuario).subscribe(
+    this._usuarioService.crearUsuario(this.usuario, this.idCodigo).subscribe(
       response=>{
-        if(response.usuario){
-          this._cargarService.peticionRequest(Global.url+"createUser/"+response.user._id,[],[],'foto')
-          .then((result:any)=>{
-            this.status='success';
-            this.idCreado=result.usuario._id;
-          });
+        if(response.message=='Proceso Exitoso'){          
+          this.status='success';
+          form.reset();
+          //Redirigir a la pagina de banca virtual
+          this._router.navigate(['/login']);
         }else{
           this.status='failed';
         }
-        //Redirigir a la pagina de banca virtual
-        //this._router.navigate(['/credenciales']);
-        form.reset();
+
+        
       },
       error=>{
-        if(error.status==400){
+        if(error.status==409){
           this.status='El nombre de usuario ya existe';
           this.usuarioExiste=true;
           form.reset();

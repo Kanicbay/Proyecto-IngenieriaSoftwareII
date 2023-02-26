@@ -12,7 +12,7 @@ router.post("/createCode", bancamovilRouter.createCodigo);
 // Verify a verification code
 router.get("/verifyCode/:code", bancamovilRouter.verificarCodigo);
 // Create a new User
-router.post("/createUser", bancamovilRouter.createUsuario);
+router.post("/createUser/:idCodigo", bancamovilRouter.createUsuario);
 // Login a User
 router.get("/login", bancamovilRouter.loginUser);
 // Find an account

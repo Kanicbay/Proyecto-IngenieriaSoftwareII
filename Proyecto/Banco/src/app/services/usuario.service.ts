@@ -14,10 +14,11 @@ export class UsuarioService{
     }
     //crear cuenta
     //http://localhost:3700/createAccount
-    crearUsuario(usuario:Usuario):Observable<any>{
+    crearUsuario(usuario:Usuario, idCodigo: String):Observable<any>{
         let params=JSON.stringify(usuario);
         let headers=new HttpHeaders().set('Content-Type','application/json');
-        return this._http.post(this.url+'createUser',params,{headers:headers});
+        console.log(this.url+'createUser/'+idCodigo);
+        return this._http.post(this.url+'createUser/'+idCodigo,params,{headers:headers});
     }
 }
 
