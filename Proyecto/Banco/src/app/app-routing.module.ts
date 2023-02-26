@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:'servicios',component:ServiciosComponent},
   {path:'cuenta',component:CuentaComponent},
   {path:'login',component:LoginComponent},
-  {path:'credenciales',component:CredencialesComponent},
+  {path:'credenciales/:idCodigo',component:CredencialesComponent},
   {path:'transferencias',component:TransferenciaComponent},
   {path:'tipo-transferencia',component:TipoTransferenciaComponent},
   {path:'pago-tarjetas',component:PagoTarjetasComponent},

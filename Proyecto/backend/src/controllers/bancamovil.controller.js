@@ -18,6 +18,7 @@ var controller = {
         var cedula = req.body.cedula;
         var correo = req.body.correo;
         var tipoCuenta = req.body.tipoCuenta;
+        console.log("Entre al proceso de crear cuenta!");
 
         //Verificar si el cliente ya existe en la base de datos
         const clienteExiste = await clienteSchema.findOne({ cedula: cedula });
@@ -122,8 +123,43 @@ var controller = {
             }
         }
     },
+
+    //Verificar que existe el cliente
+    async verificarCliente(req, res){
+        const { cedula } = req.params;
+        const user = await usuarioSchema.findOne({ cedula: cedula });
+        if(user){
+            return res.status(200).send({message: 'El cliente existe'});
+        }else{
+            return res.status(409).send({message: 'El cliente no existe'});
+        }
+    },
+
+    //Crear codigo de verificacion
+    async createCodigo(req, res){
+        const cedula = req.body.cedula;
+        const uuidv4 = require('uuid').v4;
+        const codigoVerificacion = uuidv4().slice(0, 6);
+        const codigo = new verificacionSchema({cedula: cedula, codigo: codigoVerificacion});
+        await codigo.save((err, codigoStored) => {
+            if(err) return res.status(500).send({message: 'Error!'});
+            if(!codigoStored) return res.status(404).send({message: 'Error!'});
+            return res.status(200).send({message: "Proceso exitoso", codigo: codigoStored});
+        });
+    },
+        
+    async verificarCodigo(req, res){
+        const { code } = req.params;
+        const verificacion = await verificacionSchema.findOne({ codigo_verificacion: code });
+        if(verificacion){
+            return res.status(200).send({message: 'El codigo existe'});
+        }else{
+            return res.status(409).send({message: 'El codigo no existe'});
+        }
+    },
     
     createUsuario: async function(req, res){
+        var cedula = req.body.cedula;
         var usuario = req.body.usuario;
         let contrasena = req.body.contrasena;
 
@@ -135,7 +171,7 @@ var controller = {
         if(user){
             return res.status(400).send({message: 'El usuario ya existe!'});
         }
-        
+
         //Funcion para convertir la contraseña en hash
         async function hashPassword(contrasena) {
             try {
@@ -149,16 +185,16 @@ var controller = {
         //Convertir la contraseña en hash
         contrasena = await hashPassword(contrasena);
         
-        const cuenta = await cuentaSchema.findOne({ cedula: cedula });
-        if (!cuenta) {
-            return res.status(404).json({ message: "No tiene una cuenta asociada" });
+        const cliente = await clienteSchema.findOne({ cedula: cedula });
+        if (!cliente) {
+            return res.status(404).json({ message: "No tiene una cuenta asociada al número de cédula" });
         }
-        var cuentaId = cuenta._id;
+        var clienteId = cliente._id;
 
         var data = new usuarioSchema({
             usuario: usuario,
             contrasena: contrasena,
-            cuenta: cuentaId,
+            cliente: clienteId,
         });
 
         data.save((err, usuarioStored) => {

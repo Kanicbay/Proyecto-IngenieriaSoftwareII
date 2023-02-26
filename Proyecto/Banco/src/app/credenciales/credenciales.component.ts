@@ -3,7 +3,7 @@ import { CargarService } from '../services/cargar.service';
 import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/usuario';
 import { Global } from '../services/global';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { timer } from 'rxjs';
 import { NgForm } from '@angular/forms';
 
@@ -20,11 +20,13 @@ export class CredencialesComponent {
   public idCreado:string;
   public usuarioExiste:boolean;
   public confirmPasswordValue:string;
+  public idCodigo:string;
   
   constructor(
     private _usuarioService:UsuarioService,
     private _cargarService:CargarService,
     private _router:Router,
+    private _activatedRouter:ActivatedRoute
   ) { 
     this.url=Global.url;
     this.usuario=new Usuario('','','');
@@ -32,12 +34,15 @@ export class CredencialesComponent {
     this.idCreado='';
     this.usuarioExiste=false;
     this.confirmPasswordValue='';
+    this.idCodigo='';
   }
 
   ngOnInit(): void {
   }
 
   crearUsuario(form:NgForm){
+    this.idCodigo = this._activatedRouter.snapshot.paramMap.get('idCodigo') || '';
+    console.log(this.idCodigo);
     this._usuarioService.crearUsuario(this.usuario).subscribe(
       response=>{
         if(response.usuario){
