@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CuentaService } from '../services/cuenta.service';
 import { CargarService } from '../services/cargar.service';
 import { Cuenta } from '../models/cuenta';
+import { CookieService} from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mi-cuenta',
   templateUrl: './mi-cuenta.component.html',
   styleUrls: ['./mi-cuenta.component.css'],
-  providers:[CuentaService, CargarService]
+  providers:[CuentaService, CargarService, CookieService]
 })
 export class MiCuentaComponent implements OnInit {
   public cuentas:Cuenta[];
@@ -17,6 +19,8 @@ export class MiCuentaComponent implements OnInit {
 
   constructor(
     private _cuentaService:CuentaService,
+    private _cookieService: CookieService,
+    private _router:Router
   ) { 
     this.cuentas=[];
     this.cuentaCorriente=new Cuenta('','','','','','','', 0);
@@ -29,7 +33,7 @@ export class MiCuentaComponent implements OnInit {
   }
 
   async obtenerCuentas(){
-    await this._cuentaService.obtenerCuentas().subscribe(
+    await this._cuentaService.obtenerCuenta().subscribe(
       response=>{
         this.cuentas=response.cuentas;
         this.cuentaCorriente=this.cuentas[0];
@@ -38,7 +42,12 @@ export class MiCuentaComponent implements OnInit {
         console.log(this.cuentas);
       },
       error=>{
-        console.log(error);
+        console.log("Este es el error",error);
+        if(error.error.auth == false){
+          alert("La sesión caducó");
+          this._cookieService.delete('token');
+          this._router.navigate(['/login',]);
+        }
       }
     );
   }

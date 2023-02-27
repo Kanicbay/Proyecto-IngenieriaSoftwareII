@@ -257,35 +257,47 @@ var controller = {
         //return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
     },
 
-    findAccount : async function(req, res){
-        var authHeader = req.headers['authorization'];
-        var token = authHeader && authHeader.split(' ')[1];
-        if(token == null) return res.status(401).send({ auth: false, message: 'No token provided.' });
-        var decodedClientToken;
-        jwt.verify(token, process.env.JWT_SECRET, function(err, decodedToken) {
-            try {
-              if (err) {
-                return res.status(403).send({message: 'Error!'});
-              } else {
-                decodedClientToken = decodedToken;
-              }
-            } catch (error) {
-              return res.status(500).send({message: 'Error!'});
+    findAccount: async function (req, res) {
+        try {
+          const authHeader = req.headers['authorization'];
+          const token = authHeader && authHeader.split(' ')[1];
+          if (!token) {
+            return res.status(401).send({ auth: false, message: 'No token provided.' });
+          }
+          const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+          console.log(decodedToken.exp);
+          if (!decodedToken) {
+            return res.status(403).send({ message: 'Error!' });
+          }
+          // verificar fecha de expiración del token
+          const now = Math.floor(Date.now() / 1000);
+          if (decodedToken.exp < now) {
+            return res.status(401).send({ auth: false, message: 'Token expired.' });
+          }
+      
+          const numeroCliente = decodedToken.cliente;
+          const cliente = await clienteSchema.findById(numeroCliente);
+          if (!cliente) {
+            return res.status(404).json({ message: 'Error!' });
+          }
+          const cuentas = await Promise.all([
+            cuentaAhorrosSchema.findById(cliente.cuentaAhorros),
+            cuentaCorrienteSchema.findById(cliente.cuentaCorriente),
+            cuentaVinculadaSchema.findById(cliente.cuentaVinculada),
+          ]);
+          if (!cuentas[0] && !cuentas[1] && !cuentas[2]) {
+            return res.status(404).json({ message: 'Error!' });
+          }
+          return res.status(200).send({ message: 'Proceso exitoso', cuentas: cuentas });
+        } catch (error) {
+            if(error.name === 'TokenExpiredError'){
+                return res.status(410).send({ auth: false, message: 'Token expired.' });
             }
-        });
-
-        var numeroCliente = decodedClientToken.cliente; 
-        const cliente = await clienteSchema.findById(numeroCliente);
-        if (!cliente) {
-            return res.status(404).json({ message: "Error!" });
-        }        var cuentas = [];
-        cuentas[0] = await cuentaAhorrosSchema.findById(cliente.cuentaAhorros);
-        cuentas[1] = await cuentaCorrienteSchema.findById(cliente.cuentaCorriente);
-        cuentas[2] = await cuentaVinculadaSchema.findById(cliente.cuentaVinculada);
-        if (!cuentas[0] && !cuentas[1] && !cuentas[2]) {
-            return res.status(404).json({ message: "Error!" });
+            if(error.name === 'JsonWebTokenError'){
+                return res.status(403).send({ message: 'Error!' });
+            }
+            return res.status(500).send({ message: 'Error!' });
         }
-        return res.status(200).send({message: 'Proceso exitoso', cuentas: cuentas});
     },
 
     transferirDinero : async function(req, res){
