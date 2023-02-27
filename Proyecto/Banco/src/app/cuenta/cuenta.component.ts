@@ -119,4 +119,5 @@ export class CuentaComponent implements OnInit {
       return false;
     }
   }
+
 }

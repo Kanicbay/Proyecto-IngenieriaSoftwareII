@@ -14,9 +14,9 @@ router.get("/verifyCode/:code", bancamovilRouter.verificarCodigo);
 // Create a new User
 router.post("/createUser/:idCodigo", bancamovilRouter.createUsuario);
 // Login a User
-router.get("/login", bancamovilRouter.loginUser);
+router.post("/login", bancamovilRouter.loginUser);
 // Find an account
-router.get("/findAccount", bancamovilRouter.findAccount);
+router.post("/findAccounts", bancamovilRouter.findAccount);
 // Transfer money
 router.post("/transfer", bancamovilRouter.transferirDinero);
 

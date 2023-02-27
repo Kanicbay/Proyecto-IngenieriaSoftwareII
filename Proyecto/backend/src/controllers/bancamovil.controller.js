@@ -1,14 +1,16 @@
 'use strict'
 var usuarioSchema = require('../models/usuario');
 var verificacionSchema = require('../models/verificaciones');
-var jwt = require('../services/generateToken');
+var { tokenSign, verifyToken } = require('../services/generateToken');
 var clienteSchema = require('../models/cliente');
 var cuentaCorrienteSchema = require('../models/cuentaCorriente');
 var cuentaAhorrosSchema = require('../models/cuentaAhorros');
 var cuentaVinculadaSchema = require('../models/cuentaVinculada');
 var transferenciaSchema = require('../models/transferencia');
+var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var {v4: uuidv4} = require('uuid');
+require('dotenv').config();
 
 var controller = {
     //Crear una cuenta
@@ -235,20 +237,55 @@ var controller = {
                 return res.status(404).send({message: 'Error!!'});
             }
         });
-        console.log(user._id);
+        console.log(user.cliente);
         //Crear token de sesion
-        const tokenSession = await jwt.tokenSign(user);
+        //const tokenSession = await tokenSign(user);
+        await jwt.sign({cliente: user.cliente}, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, tokenSession) => {
+            if(err){
+                console.log(err);
+                res.status(500).send({message: 'Error!'});
+            } else{
+                console.log("Este es el token: ", tokenSession);
+                console.log("Este es el tipo de token: ", typeof tokenSession);
+                return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
+            }
+        });
 
-        return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
+        
+        //console.log("Este es el token: ", tokenSession);
+        //console.log("Este es el tipo de token: ", typeof tokenSession);
+        //return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
     },
 
     findAccount : async function(req, res){
-        var numeroCuenta = req.body.cuenta;
-        const data = await cuentaSchema.findOne({ numeroCuenta: numeroCuenta });
-        if (!data) {
+        var authHeader = req.headers['authorization'];
+        var token = authHeader && authHeader.split(' ')[1];
+        if(token == null) return res.status(401).send({ auth: false, message: 'No token provided.' });
+        var decodedClientToken;
+        jwt.verify(token, process.env.JWT_SECRET, function(err, decodedToken) {
+            try {
+              if (err) {
+                return res.status(403).send({message: 'Error!'});
+              } else {
+                decodedClientToken = decodedToken;
+              }
+            } catch (error) {
+              return res.status(500).send({message: 'Error!'});
+            }
+        });
+
+        var numeroCliente = decodedClientToken.cliente; 
+        const cliente = await clienteSchema.findById(numeroCliente);
+        if (!cliente) {
+            return res.status(404).json({ message: "Error!" });
+        }        var cuentas = [];
+        cuentas[0] = await cuentaAhorrosSchema.findById(cliente.cuentaAhorros);
+        cuentas[1] = await cuentaCorrienteSchema.findById(cliente.cuentaCorriente);
+        cuentas[2] = await cuentaVinculadaSchema.findById(cliente.cuentaVinculada);
+        if (!cuentas[0] && !cuentas[1] && !cuentas[2]) {
             return res.status(404).json({ message: "Error!" });
         }
-        return res.status(200).send({message: 'Proceso exitoso'});
+        return res.status(200).send({message: 'Proceso exitoso', cuentas: cuentas});
     },
 
     transferirDinero : async function(req, res){

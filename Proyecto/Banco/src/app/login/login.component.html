@@ -14,15 +14,27 @@
     <div id="cuadradoInicio">
         <h3 id="tituloCuadroInicio">Ingresa a tu banca web</h3>
         <div id="camposInicio">
-            <h2 id="camposInicio1">Usuario</h2>
-            <div>
-                <textarea id="txaInicio1"></textarea>
-            </div>
-            <h2 id="camposInicio2">Contraseña</h2>
-            <div>
-                <textarea id="txaInicio2"></textarea>
-            </div>
-            <button id="btnIniciar"><p id="botonIniciartxt">Iniciar sesión</p></button>
+
+            <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" id="camposCrear">
+                <p>
+                    <label for="usuario" style="font-weight: 500; font-size: 30px; padding-left: 99px; padding-top: 43px;">Usuario</label><br>
+                    <input type="text" style="margin-left: 99px; width: 500px;" name="usuario" #usuarios="ngModel" [(ngModel)]="usuario.usuario" >
+                    <span *ngIf="usuarios.touched && usuarios.invalid">
+                        Usuario es requerido
+                      </span>
+                </p>
+
+                <p>
+                    <label for="contrasena" style="font-weight: 500; font-size: 30px; padding-left: 99px;">Contraseña</label><br>
+                    <input type="text" style="margin-left: 99px; width: 500px;" name="contrasena" #password="ngModel" [(ngModel)]="usuario.contrasena" >
+                    <span *ngIf="password.touched && password.invalid">
+                        Usuario es requerido
+                      </span>
+                </p>
+                <input id="btnIniciar" style="margin-left: 90px; margin-top: 8px; font-size: 24px; " type="submit" value="Iniciar sesión" [disabled]="!loginForm.form.valid">
+            </form>
+
+
         </div>
         <div id="txtInicioFinal">
             <p>No tienes una cuenta con nosotros?. <a id="ainicioS" [routerLink]="['/credenciales']">Crea una ahora</a></p>

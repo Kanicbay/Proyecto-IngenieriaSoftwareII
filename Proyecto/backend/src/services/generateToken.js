@@ -1,9 +1,12 @@
 const jwt = require('jsonwebtoken');
+require ('dotenv').config();
+
 
 const tokenSign = async (user) => {
+    console.log("Este el id de cliente: ",user.cliente._id);
     return jwt.sign(
         {
-            _id: user._id,
+            _id: user.cliente,
         },
         process.env.JWT_SECRET,
         {
@@ -13,5 +16,16 @@ const tokenSign = async (user) => {
 }
 
 const verifyToken = async (token) => {
-    return jwt.verify(token, process.env.JWT_SECRET)
+    try{
+        return await jwt.verify(token, process.env.JWT_SECRET);
+    }
+    catch(err){
+        return null;
+    }
 }
+
+module.exports = {
+    tokenSign,
+    verifyToken
+}
+
