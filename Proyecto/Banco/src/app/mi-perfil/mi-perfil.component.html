@@ -57,7 +57,7 @@
             </div>
             
                 <h6 style="position: absolute; left: 700px; top: 120px; font-size: 30px;">
-                    Bievenido, NOMBRES APELLIDOS
+                    Bievenido, {{cuenta.nombres}} {{cuenta.apellidos}}
                 </h6>
         </div>
         <div id="cuadroCambioDatos1">
@@ -65,50 +65,75 @@
                 Datos
             </h5>
             <div id="contenedorCambios">
-                <div>
-                    <h5 style="position: absolute; left: 75px; top: 100px;">
-                        Nombres y Apellidos
-                    </h5>
-                    <div id="botonesCambios">
-                        <button id="btnCambiarName">Cambiar</button>
-            
-                    </div>                            
-                </div>
-                
-                <div>
-                    <h5 style="position: absolute; left: 75px; top: 175px;">
-                        Correo Electrónico
-                    </h5>
-                    <div id="botonesCambios">
-                        <button id="btnCambiarCorreo">Cambiar</button>
-            
-                    </div>                            
-                </div>
-                <div>
-                    <h5 style="position: absolute; left: 75px; top: 250px;">
-                        Número de celular
-                    </h5>
-                    <div id="botonesCambios">
-                        <button id="btnCambiarCelular">Cambiar</button>
-            
-                    </div>                            
-                </div>
-                <div>
-                    <h5 style="position: absolute; left: 75px; top: 325px;">
-                        Usuario
-                    </h5>
-                    <div id="botonesCambios">
-                        <button id="btnCambiarUsuario">Cambiar</button>                           
+                <form *ngIf="CambioModo()">
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 100px;">
+                            Nombres y Apellidos: {{cuenta.nombres}} {{cuenta.apellidos}}
+                        </h5>                          
                     </div>
-                </div>
-                <div>
-                    <h5 style="position: absolute; left: 75px; top: 400px;">
-                        Contraseña
-                    </h5>
-                    <div id="botonesCambios">
-                        <button id="btnCambiarContrase">Cambiar</button>                           
+                    
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 175px;">
+                            Cedula: {{cuenta.cedula}}
+                        </h5>                          
                     </div>
-                </div>
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 250px;">
+                            Correo Electrónico: {{cuenta.correo}}
+                        </h5>                         
+                    </div>
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 325px;">
+                            Usuario: {{usuario.usuario}}
+                        </h5>
+    
+                    </div>
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 400px;">
+                            Contraseña: {{usuario.contrasena}}
+                        </h5>
+                        <div id="botonesCambios">
+                            <button id="btnEditar" (click)="CambioModos(false)">Editar Datos</button>
+                            
+                        </div>
+                    </div>
+                </form>
+                <form *ngIf="!CambioModo()" #MiPerfilForm="ngForm" (ngSubmit)="Editar(MiPerfilForm)">
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 100px;">
+                            Nombres y Apellidos:
+                        </h5>       
+                        <input type="text" name="nombre" pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" #nombre="ngModel" [(ngModel)]="cuenta.nombres" style="position: absolute; left: 30%; top: 95px;" required>                   
+                    </div>
+                    
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 175px;">
+                            Cedula: {{cuenta.cedula}}
+                        </h5>                         
+                    </div>
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 250px;">
+                            Correo Electrónico:
+                        </h5>      
+                        <input type="email" name="correo" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #correo="ngModel" [(ngModel)]="cuenta.correo" style="position: absolute; left: 30%; top: 245px;" required>                   
+                    </div>
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 325px;">
+                            Usuario:
+                        </h5>
+                        <input type="text" name="user" pattern="^(?=.*\d.*\d.*\d)[a-zA-Z0-9]{8,}$" #user="ngModel" [(ngModel)]="usuario.usuario" style="position: absolute; left: 30%; top: 320px;" required>
+                    </div>
+                    <div>
+                        <h5 style="position: absolute; left: 75px; top: 400px;">
+                            Contraseña:
+                        </h5>
+                        <input type="password" name="password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@).{8,}$" #password="ngModel" [(ngModel)]="usuario.contrasena" style="position: absolute; left: 30%; top: 395px;" required>
+                        <div id="botonesCambios">
+                            <button id="btnEditar" (click)="CambioModos(true)">Confirmar</button>
+                       
+                        </div>
+                    </div>
+                </form>
             </div>
 
         </div>

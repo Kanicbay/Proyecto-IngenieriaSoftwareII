@@ -677,4 +677,18 @@ a{
     height: 40px; 
     border-radius: 15px;
 }
-
+#btnEditar{
+    position:absolute;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    left: 75%;
+    top: 10px;
+    background-color: #95F141;
+    text-align: center;
+    line-height: 0;
+    cursor: pointer;
+    font-size: 25px;
+    width: 185px; 
+    height: 40px; 
+    border-radius: 15px;
+}
