@@ -70,28 +70,25 @@ export class MiPerfilComponent implements OnInit {
 
   async editarDatos(form:NgForm){
     console.log("Entre a editar datos");
-    if(this.actualizarDatos){
-      await this._miPerfilService.actualizarDatos(this.usuario,this.cliente).subscribe(
-        response=>{
-          if(response.usuario || response.cliente){
-            this.usuario=response.usuario;
-            this.cliente=response.cliente;
-            alert("Datos Actualizados");
-            this.actualizarDatos=false;
-        }else{
-          alert("Error al actualizar los datos");
+
+    await this._miPerfilService.actualizarDatos(this.usuarioActualizado,this.clienteActualizado).subscribe(
+      response=>{
+        if(response.usuario || response.cliente){
+          alert("Datos Actualizados");
+          this.actualizarDatos=false;
+      }else{
+        alert("Error al actualizar los datos");
+      }
+      },
+      error=>{
+        console.log("Este es el error",error);
+        if(error.error.auth == false){
+          alert("La sesión caducó");
+          this._cookieService.delete('token');
+          this._router.navigate(['/login',]);
         }
-        },
-        error=>{
-          console.log("Este es el error",error);
-          if(error.error.auth == false){
-            alert("La sesión caducó");
-            this._cookieService.delete('token');
-            this._router.navigate(['/login',]);
-          }
-        }
-      );
-    }
+      }
+    );
   }
 
   async obtenerCuentas(){

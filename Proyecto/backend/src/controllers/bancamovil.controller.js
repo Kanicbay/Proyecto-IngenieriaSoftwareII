@@ -265,7 +265,6 @@ var controller = {
             return res.status(401).send({ auth: false, message: 'No token provided.' });
           }
           const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-          console.log(decodedToken.exp);
           if (!decodedToken) {
             return res.status(403).send({ message: 'Error!' });
           }
@@ -273,8 +272,7 @@ var controller = {
           const now = Math.floor(Date.now() / 1000);
           if (decodedToken.exp < now) {
             return res.status(401).send({ auth: false, message: 'Token expired.' });
-          }
-      
+          }      
           const numeroCliente = decodedToken.cliente;
           const cliente = await clienteSchema.findById(numeroCliente);
           if (!cliente) {
