@@ -16,7 +16,9 @@ router.post("/createUser/:idCodigo", bancamovilRouter.createUsuario);
 // Login a User
 router.post("/login", bancamovilRouter.loginUser);
 // Find an account
-router.post("/findAccounts", bancamovilRouter.findAccount);
+router.post("/findData", bancamovilRouter.findData);
+// Update data
+router.post("/updateData", bancamovilRouter.updateData);
 // Transfer money
 router.post("/transfer", bancamovilRouter.transferirDinero);
 

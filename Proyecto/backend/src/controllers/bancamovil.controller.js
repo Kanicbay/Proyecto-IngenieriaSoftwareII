@@ -257,7 +257,7 @@ var controller = {
         //return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
     },
 
-    findAccount: async function (req, res) {
+    findData: async function (req, res) {
         try {
           const authHeader = req.headers['authorization'];
           const token = authHeader && authHeader.split(' ')[1];
@@ -288,7 +288,92 @@ var controller = {
           if (!cuentas[0] && !cuentas[1] && !cuentas[2]) {
             return res.status(404).json({ message: 'Error!' });
           }
-          return res.status(200).send({ message: 'Proceso exitoso', cuentas: cuentas, cliente: cliente });
+          const user = await usuarioSchema.findOne({ cliente: numeroCliente  });
+          if (!user) {
+            return res.status(404).json({ message: 'Error!' });
+          }
+          return res.status(200).send({ message: 'Proceso exitoso', cuentas: cuentas, cliente: cliente, usuario: user.usuario });
+        } catch (error) {
+            if(error.name === 'TokenExpiredError'){
+                return res.status(410).send({ auth: false, message: 'Token expired.' });
+            }
+            if(error.name === 'JsonWebTokenError'){
+                return res.status(403).send({ message: 'Error!' });
+            }
+            return res.status(500).send({ message: 'Error!' });
+        }
+    },
+
+    updateData: async function (req, res) {
+        try {
+            //Obtener el token de headers
+            console.log(req.body);
+            const authHeader = req.headers['authorization'];
+            const token = authHeader && authHeader.split(' ')[1];
+            //Verificar si el token fue dado
+            if (!token) {
+                return res.status(401).send({ auth: false, message: 'No token provided.' });
+            }
+            const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+            if (!decodedToken) {
+                return res.status(403).send({ message: 'Error!' });    //El token no es valido
+            }
+            // verificar fecha de expiración del token
+            const now = Math.floor(Date.now() / 1000);
+            if (decodedToken.exp < now) {
+                return res.status(401).send({ auth: false, message: 'Token expired.' }); //El token expiro
+            }
+            //Encontrar el cliente
+            const numeroCliente = decodedToken.cliente;
+            const cliente = await clienteSchema.findById(numeroCliente);
+            if (!cliente) {
+                return res.status(404).json({ message: 'Error!' });
+            }
+            //Actualizar los datos del cliente si es necesario
+            var actualizarCliente = false;
+            var clienteActualizado = req.body.cliente;  //Usuario del frontend
+            switch(clienteActualizado){
+                case clienteActualizado.nombres != null:
+                    cliente.set("nombres", clienteActualizado.nombres);
+                    actualizarCliente = true;
+                    break;
+                case clienteActualizado.apellidos != null:
+                    cliente.set("apellidos", clienteActualizado.apellidos);
+                    actualizarCliente = true;
+                    break;
+                case clienteActualizado.correo != null:
+                    cliente.set("correo", clienteActualizado.correo);
+                    actualizarCliente = true;
+                    break;
+            }
+            if(actualizarCliente){
+                clienteNuevo = await cliente.save();
+                if(!clienteNuevo){
+                    return res.status(404).json({ message: 'Error!' });
+                }
+            }
+
+            //Actualizar los datos del usuario si es necesario
+            const usuario = await usuarioSchema.findOne({ cliente: numeroCliente  });
+            var actualizarUsuario = false;
+            var usuarioActualizado = req.body.usuario;  //Usuario del frontend
+            switch(usuarioActualizado){
+                case usuarioActualizado.usuario != null:
+                    cliente.set("usuario", usuarioActualizado.usuario);
+                    actualizarUsuario = true;
+                    break;
+                case usuarioActualizado.contrasena != null:
+                    cliente.set("contrasena", usuarioActualizado.contrasena);
+                    actualizarUsuario = true;
+                    break;
+            }
+            if(actualizarUsuario){
+                usuarioNuevo = await usuario.save();
+                if(!usuarioNuevo){
+                    return res.status(404).json({ message: 'Error!' });
+                }
+            }
+            return res.status(200).send({ message: 'Proceso exitoso'});
         } catch (error) {
             if(error.name === 'TokenExpiredError'){
                 return res.status(410).send({ auth: false, message: 'Token expired.' });

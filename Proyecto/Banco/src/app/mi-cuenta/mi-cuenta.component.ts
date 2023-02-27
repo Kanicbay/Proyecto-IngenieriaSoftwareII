@@ -36,7 +36,7 @@ export class MiCuentaComponent implements OnInit {
   }
 
   async obtenerCuentas(){
-    await this._cuentaService.obtenerCuenta().subscribe(
+    await this._cuentaService.obtenerDatos().subscribe(
       response=>{
         this.cuentas=response.cuentas;
         this.cuentaCorriente=this.cuentas[0];

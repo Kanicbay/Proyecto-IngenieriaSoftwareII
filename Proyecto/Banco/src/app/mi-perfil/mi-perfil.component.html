@@ -57,7 +57,7 @@
             </div>
             
                 <h6 style="position: absolute; left: 700px; top: 120px; font-size: 30px;">
-                    Bievenido, {{cuenta.nombres}} {{cuenta.apellidos}}
+                    Bievenido, {{cliente.nombres}} {{cliente.apellidos}}
                 </h6>
         </div>
         <div id="cuadroCambioDatos1">
@@ -65,48 +65,41 @@
                 Datos
             </h5>
             <div id="contenedorCambios">
-                <form *ngIf="CambioModo()">
+                <form  #ldatosForm="ngForm" *ngIf="status">
                     <div>
                         <h5 style="position: absolute; left: 75px; top: 100px;">
-                            Nombres y Apellidos: {{cuenta.nombres}} {{cuenta.apellidos}}
+                            Nombres y Apellidos: {{cliente.nombres}} {{cliente.apellidos}}
                         </h5>                          
                     </div>
                     
                     <div>
                         <h5 style="position: absolute; left: 75px; top: 175px;">
-                            Cedula: {{cuenta.cedula}}
+                            Cedula: {{cliente.cedula}}
                         </h5>                          
                     </div>
                     <div>
                         <h5 style="position: absolute; left: 75px; top: 250px;">
-                            Correo Electrónico: {{cuenta.correo}}
+                            Correo Electrónico: {{cliente.correo}}
                         </h5>                         
                     </div>
                     <div>
                         <h5 style="position: absolute; left: 75px; top: 325px;">
-                            Usuario: {{usuario.usuario}}
+                            Usuario: {{usuario}}
                         </h5>
     
                     </div>
                     <div>
-                        <h5 style="position: absolute; left: 75px; top: 400px;">
-                            Contraseña: {{usuario.contrasena}}
-                        </h5>
                         <div id="botonesCambios">
-                            <button id="btnEditar" (click)="CambioModos(false)">Editar Datos</button>
-                            
+                            <input id="btnEditar" type="submit" value="Editar Datos" (click)="status=false">
                         </div>
                     </div>
                 </form>
-                <form *ngIf="!CambioModo()" #MiPerfilForm="ngForm" (ngSubmit)="Editar(MiPerfilForm)">
+                
+                <form *ngIf="!status" #MiPerfilForm="ngForm" (ngSubmit)="editarDatos(MiPerfilForm)">
                     <div style="position: absolute; left: 75px; top: 100px;">
                         <h5>
-                            Nombres y Apellidos:
+                            Nombres y Apellidos: {{cliente.nombres}} {{cliente.apellidos}}
                         </h5>       
-                        <input type="text" name="nombre" pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" #nombre="ngModel" [(ngModel)]="cuenta.nombres" style="position: absolute; left: 201px; top: 0px" required>                   
-                        <span *ngIf="nombre.touched && nombre.invalid">
-                            Nombre requerido
-                        </span>
                     </div>
                     <div style="position: absolute; left: 75px; top: 175px;">
                         <h5>
@@ -141,7 +134,7 @@
                         </span>
                     </div>
                     <div id="botonesCambios">
-                        <input id="btnEditar" type="submit" value="Confirmar" (click)="CambioModos(true)" [disabled]="!MiPerfilForm.form.valid" >
+                        <input id="btnEditar" type="submit" value="Confirmar" (click)="status=true">
                     </div>
                 </form>
             </div>
