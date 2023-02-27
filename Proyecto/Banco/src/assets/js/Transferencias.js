@@ -1,4 +1,4 @@
-let saldo = 100;//sacar de la base de datos
+let saldo = 10;//sacar de la base de datos
 let $Fmonto = document.getElementById("cuadroMonto");
 let $FnumeroC = document.getElementById("cuadroNumCuenta");
 let timeout;

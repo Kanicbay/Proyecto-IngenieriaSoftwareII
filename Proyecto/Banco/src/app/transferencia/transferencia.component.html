@@ -55,7 +55,9 @@
                             Monto a transferir
                         </h5>
                         <p id="signoDinero"> $ </p> 
-                        <input placeholder="0" type="number" id="cuadroMonto">
+
+                            <input placeholder="0" type="number" id="cuadroMonto" (keydown)="MontoEvent($event)">
+         
                         <h5 style="position: absolute; left: 75px; top: 220px;">
                             Saldo disponible
                         </h5>
@@ -66,10 +68,13 @@
                             Ingrese el número de cuenta
                         </h5>
                         <p id="ejemplo">Ej:</p>
-                        <input placeholder="2548625793" type="number" id="cuadroNumCuenta" disabled>
+                        <input *ngIf="status==false" placeholder="2548625793" type="number" id="cuadroNumCuenta"  disabled> 
+                        <input *ngIf="status==true" placeholder="2548625793" type="number" id="cuadroNumCuenta" (keydown)="CuentaEvent($event)"> 
                         <div id="botonesTransferencia">
-                            <button id="btnVerificar" disabled="true">Verificar</button>
-                            <button id="btnTransferir" disabled="true">Transferir</button>
+                            <button *ngIf="status2==true" id="btnVerificar" (click)="verificarCuenta">Verificar</button>
+                            <button *ngIf="status2==false" id="btnVerificar" disabled="true">Verificar</button>
+                            <button *ngIf="status3==true" id="btnTransferir">Transferir</button>
+                            <button *ngIf="status3==false" id="btnTransferir" disabled="true">Transferir</button>
                         </div>
                         
                     </div>

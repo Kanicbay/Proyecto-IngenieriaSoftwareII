@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CargarScriptsService } from '../cargar-scripts.service';
@@ -18,12 +19,15 @@ import { TransferenciaService } from '../services/transferencia.service';
   providers:[TransferenciaService, CargarService, CuentaService, CookieService]
 })
 export class TransferenciaComponent implements OnInit {
+  @ViewChild("cuadroNumCuenta") myInputElement!: ElementRef<HTMLInputElement>;
   public transferencia:Transferencia;
   public cuenta:Cuenta;
   public url:string;
   public idCreado:string;
   public usuario:Usuario;
   public status:boolean;
+  public status2:boolean;
+  public status3:boolean;
   public cliente:Cliente;
   public cuentas:Cuenta[];
   public cuentaCorriente:Cuenta;
@@ -32,20 +36,24 @@ export class TransferenciaComponent implements OnInit {
   public usuarioActualizado:Usuario;
   public actualizarDatos:boolean;
   public clienteActualizado:Cliente;
+  timeout: any;
   constructor(
     private _transferenciaService:TransferenciaService,
     private _router:Router,
     private _cuentaService:CuentaService,
     private _cookieService: CookieService,
+    private _CargaScritps:CargarScriptsService
     ){
     this.url=Global.url;
     this.transferencia=new Transferencia('','','',0);
-    this.cuenta=new Cuenta('','','','','','','', 1); //Debe ser el de la base de datos este this.cuenta, estoy creando uno nuevo y no ocupando de la base 
+    this.cuenta=new Cuenta('','','','','','','', 0); //Debe ser el de la base de datos este this.cuenta, estoy creando uno nuevo y no ocupando de la base 
     this.idCreado='';
     this.cuenta=new Cuenta('','','','','','','', 0);
     this.usuario=new Usuario('','','');
     this.usuarioActualizado=new Usuario('','','');
-    this.status=true;//cambia a true
+    this.status=false;//cambia a true
+    this.status2=false;
+    this.status3=false;
     this.cliente=new Cliente('','','','','','','','');
     this.clienteActualizado=new Cliente('','','','','','','','');
     this.cuentas=[];
@@ -81,6 +89,70 @@ export class TransferenciaComponent implements OnInit {
       }
     );
   }
+
+  MontoEvent(event: any){
+    if(this.timeout != null){
+      clearTimeout(this.timeout);
+    }
+    this.timeout = setTimeout(() => {
+      this.transferencia.monto=event.target.value;
+      const MAX_MONTO = 5000;
+      if (this.transferencia.monto <= MAX_MONTO && this.transferencia.monto!=0 && this.transferencia.monto <= this.cuentaCorriente.saldo) {
+        console.log(event.target.value);
+            //document.getElementById("cuadroNumCuenta")!.disable = false;
+            //this.myInputElement.nativeElement.disabled = false;
+        this.status = true;
+        clearTimeout(this.timeout);
+      } else { 
+            //document.getElementById("cuadroNumCuenta")!.hidden = true; 
+            //this.myInputElement.nativeElement.disabled = true; 
+        if (this.transferencia.monto >= MAX_MONTO && this.transferencia.monto <= this.cuentaCorriente.saldo && this.transferencia.monto!=0)
+          console.log("El monto máximo por transacción diaria es de 5000 dólares");
+        if (this.transferencia.monto >= this.cuentaCorriente.saldo)
+          console.log("No dispone los fondos suficientes en su cuenta");
+        if (this.transferencia.monto==0)
+          console.log("No se ha ingresado ningun valor"); 
+        this.status = false;   
+        }
+    },100);     
+  } 
+
+  CuentaEvent(event: any){
+    if(this.timeout != null){
+      clearTimeout(this.timeout);
+    }
+    this.timeout = setTimeout(() => {
+      this.transferencia.numeroCuentaDestino = event.target.value;
+      if (this.transferencia.numeroCuentaDestino.length >= 8 && this.transferencia.numeroCuentaDestino.length <= 10 && this.transferencia.numeroCuentaDestino != this.cuentaCorriente.numeroCuenta) {
+        this.status2 = true;
+        console.log(event.target.value);
+        clearTimeout(this.timeout);
+      }else{
+        console.log("El numero de cuenta debe estar entre 8 a 10 numeros");
+        this.status2 = false;
+      }
+    },100);  
+  }
   
+  verificarCuenta(){
+    this._transferenciaService.obtenerCuenta(this.transferencia.numeroCuentaDestino).subscribe(
+      response=>{
+        this.cuenta=response.cuenta;
+        if(this.cuenta.numeroCuenta == this.transferencia.numeroCuentaDestino){
+          this.status3=true;
+        }else{
+          this.status3=false;
+        }
+      },
+      error=>{
+        console.log("Este es el error",error);
+        if(error.error.auth == false){
+          alert("La sesión caducó");
+          this._cookieService.delete('token');
+          this._router.navigate(['/login',]);
+        }
+      }
+    );
+  }
 
 }
