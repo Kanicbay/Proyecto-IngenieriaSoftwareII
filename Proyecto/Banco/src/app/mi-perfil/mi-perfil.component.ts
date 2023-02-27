@@ -36,7 +36,7 @@ export class MiPerfilComponent implements OnInit {
     private _router:Router
 
   ){
-    this.cuenta=new Cuenta('','113790542','Daniel','Lazo','0123456789','dj@epn.com','', 0);
+    this.cuenta=new Cuenta('','','','','','','', 0);
     this.usuario=new Usuario('','','');
     this.usuarioActualizado=new Usuario('','','');
     this.status=true;//cambia a true

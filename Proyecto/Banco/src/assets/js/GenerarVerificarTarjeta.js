@@ -1,4 +1,4 @@
-function generarTarjetaVisaAletoria() {
+/*function generarTarjetaVisaAletoria() {
   const bin = '4'; // BIN de Visa
   const longitud = 16; // Longitud de la tarjeta de crédito
   
@@ -34,7 +34,7 @@ function generarTarjetaVisaAletoria() {
   console.log("Numero de tarjeta: " +numeroTarjeta);
   console.log("Numero de tarjeta: " +numero);
   return numeroTarjeta;
-}
+}*/
 //let saldo = generarTarjetaVisaAletoria();
 function generarTarjetaVisaNumeroCuenta(numCuenta) {
   const bin = '4'; // BIN de Visa
@@ -85,7 +85,7 @@ function generarTarjetaVisaNumeroCuenta(numCuenta) {
   console.log("Numero de tarjeta: " +numeroTarjeta);
   return numeroTarjeta;
 }
-let numeroC = "1054999607";
+let numeroC = "1527081317";
 let saldo = generarTarjetaVisaNumeroCuenta(numeroC);
 function luhn(value) {
   // Accept only digits, dashes or spaces
