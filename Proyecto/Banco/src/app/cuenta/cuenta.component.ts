@@ -43,8 +43,11 @@ export class CuentaComponent implements OnInit {
   }
 
   async crearCuenta(form:NgForm){
+    console.log("Esta es la cuenta: ", this.cuenta.tipoCuenta);
     try {
+      console.log("Entre1");
       const codigoCreado = await this._cuentaService.crearCodigoVerificacion(this.cuenta.cedula).toPromise();
+      console.log("Entre2");
       const codigoVerificacion = await this.obtenerCodigoVerificacion();
       if(!codigoVerificacion){
         alert("Debes ingresar el código de verificación para continuar con el proceso");

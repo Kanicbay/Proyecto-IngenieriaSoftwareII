@@ -46,9 +46,9 @@
                   <label for="tipoCuenta" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Tipo de cuenta</label><br>
                   <select style="margin-left: 90px; margin-top: 8px;" name="tipoCuenta" #tipoCuenta="ngModel" [(ngModel)]="cuenta.tipoCuenta" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="Ahorros">Corriente</option>
-                    <option value="Corriente">Ahorros</option>
-                    <option value="Nomina">Vinculada</option>
+                    <option value="Ahorros">Ahorros</option>
+                    <option value="Corriente">Corriente</option>
+                    <option value="Vinculada">Vinculada</option>
                   </select>
                   <span *ngIf="tipoCuenta.invalid && (tipoCuenta.dirty || tipoCuenta.touched)">
                     Tipo de cuenta obligatorio
