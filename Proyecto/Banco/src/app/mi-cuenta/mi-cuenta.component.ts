@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CuentaService } from '../services/cuenta.service';
 import { CargarService } from '../services/cargar.service';
 import { Cuenta } from '../models/cuenta';
+import { Cliente } from '../models/cliente';
 import { CookieService} from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
   providers:[CuentaService, CargarService, CookieService]
 })
 export class MiCuentaComponent implements OnInit {
+  public cliente:Cliente;
   public cuentas:Cuenta[];
   public cuentaCorriente:Cuenta;
   public cuentaAhorro:Cuenta;
@@ -22,6 +24,7 @@ export class MiCuentaComponent implements OnInit {
     private _cookieService: CookieService,
     private _router:Router
   ) { 
+    this.cliente=new Cliente('','','','','','','','');
     this.cuentas=[];
     this.cuentaCorriente=new Cuenta('','','','','','','', 0);
     this.cuentaAhorro=new Cuenta('','','','','','','', 0);
@@ -39,7 +42,9 @@ export class MiCuentaComponent implements OnInit {
         this.cuentaCorriente=this.cuentas[0];
         this.cuentaAhorro=this.cuentas[1];
         this.cuentaVinculada=this.cuentas[2];
-        console.log(this.cuentas);
+        this.cliente=response.cliente;
+
+        console.log(this.cuentas, this.cliente);
       },
       error=>{
         console.log("Este es el error",error);

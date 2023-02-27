@@ -288,7 +288,7 @@ var controller = {
           if (!cuentas[0] && !cuentas[1] && !cuentas[2]) {
             return res.status(404).json({ message: 'Error!' });
           }
-          return res.status(200).send({ message: 'Proceso exitoso', cuentas: cuentas });
+          return res.status(200).send({ message: 'Proceso exitoso', cuentas: cuentas, cliente: cliente });
         } catch (error) {
             if(error.name === 'TokenExpiredError'){
                 return res.status(410).send({ auth: false, message: 'Token expired.' });
