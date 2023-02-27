@@ -15,11 +15,10 @@ export class TransferenciaService{
     }
     //crear cuenta
     //http://localhost:3700/createAccount
-
-    obtenerSaldo(cuenta:Cuenta):Observable<any>{
-        let params=JSON.stringify(cuenta);
+    obtenerCuenta(numeroCuenta:string):Observable<any>{
+        let params=JSON.stringify(numeroCuenta);
         let headers=new HttpHeaders().set('Content-Type','application/json');
-        return this._http.get(this.url+'findAccount',{headers:headers});
+        return this._http.get(this.url+'findAccount', {headers:headers});
     }
 
 }
