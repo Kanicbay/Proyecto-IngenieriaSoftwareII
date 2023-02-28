@@ -37,7 +37,7 @@
                 </p>
                 <p>
                     <label for="correo" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Correo</label><br>
-                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': correo.touched && correo.invalid ? '2px solid red' : ''}" name="correo" #correo="ngModel" [(ngModel)]="cuenta.correo" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': correo.touched && correo.invalid ? '2px solid red' : ''}" name="correo" #correo="ngModel" [(ngModel)]="cuenta.correo" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" (change)="cambioCorreo = true">
                     <span *ngIf="correo.touched && correo.invalid">
                       Correo incorrecto
                     </span>

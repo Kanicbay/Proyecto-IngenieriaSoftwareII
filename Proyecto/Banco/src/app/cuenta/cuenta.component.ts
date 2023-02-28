@@ -23,6 +23,8 @@ export class CuentaComponent implements OnInit {
   public codigoVerificacion:string;
   public isVerified:boolean;
   public idCodigo:string;
+  public mostrarCodigo:boolean;
+  public cambioCorreo:boolean;
   
   constructor(
     private _cuentaService:CuentaService,
@@ -39,6 +41,8 @@ export class CuentaComponent implements OnInit {
     this.codigoVerificacion='';
     this.isVerified=false;
     this.idCodigo='';
+    this.mostrarCodigo=true;
+    this.cambioCorreo=false;
   }
 
 
@@ -57,13 +61,12 @@ export class CuentaComponent implements OnInit {
   }
 
   async crearCuenta(form:NgForm){
-    console.log("Esta es la cuenta: ", this.cuenta.tipoCuenta);
     try {
-      console.log("Entre1");
-      const codigoCreado = await this._cuentaService.crearCodigoVerificacion(this.cuenta.cedula).toPromise();
-      console.log(codigoCreado.codigo.codigo_verificacion);
-      this.envioCorreo(this.cuenta.correo, codigoCreado.codigo.codigo_verificacion);
-      console.log("Entre2");
+      var codigoCreado;
+      if(this.mostrarCodigo){
+        codigoCreado = await this._cuentaService.crearCodigoVerificacion(this.cuenta.cedula).toPromise();
+        this.envioCorreo(this.cuenta.correo, codigoCreado.codigo.codigo_verificacion);
+      }
       const codigoVerificacion = await this.obtenerCodigoVerificacion();
       if(!codigoVerificacion){
         alert("Debes ingresar el código de verificación para continuar con el proceso");
@@ -75,7 +78,6 @@ export class CuentaComponent implements OnInit {
         return;
       }
       this.idCodigo = codigoCreado.codigo._id;
-      console.log(this.idCodigo);
       await this._cuentaService.crearCuenta(this.cuenta).subscribe(
         response=>{
           console.log("Response",response);
@@ -106,6 +108,10 @@ export class CuentaComponent implements OnInit {
     let codigoVerificacion = '';
     while(!codigoVerificacion){
       codigoVerificacion = prompt("Ingrese el código de verificación") || '';
+      if (codigoVerificacion === '' || codigoVerificacion === null) {
+        this.mostrarCodigo = false;
+        break;
+      }
     }
     return codigoVerificacion;
   }

@@ -169,6 +169,7 @@ var controller = {
         if(verificacion){
             return res.status(200).send({message: 'El codigo existe'});
         }else{
+        
             return res.status(409).send({message: 'El codigo no existe'});
         }
     },
@@ -241,22 +242,14 @@ var controller = {
             }
         });
         //Crear token de sesion
-        //const tokenSession = await tokenSign(user);
         await jwt.sign({cliente: user.cliente}, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, tokenSession) => {
             if(err){
                 console.log(err);
                 res.status(500).send({message: 'Error!'});
             } else{
-                console.log("Este es el token: ", tokenSession);
-                console.log("Este es el tipo de token: ", typeof tokenSession);
                 return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
             }
         });
-
-        
-        //console.log("Este es el token: ", tokenSession);
-        //console.log("Este es el tipo de token: ", typeof tokenSession);
-        //return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
     },
 
     findData: async function (req, res) {
@@ -389,7 +382,6 @@ var controller = {
         var numeroCuentaDestino = req.body.numeroCuentaDestino;
         var monto = req.body.monto;
         var tipoCuenta = req.body.tipoCuentaOrigen;
-        console.log(numeroCuentaOrigen, numeroCuentaDestino, monto);
 
         const clienteExisteAhorros = await cuentaAhorrosSchema.findOne({numeroCuenta: numeroCuentaDestino});
         if(clienteExisteAhorros){

@@ -14,7 +14,7 @@
 </div>
 <div id="btnCabecera">
     <ul >
-        <a id="btnSalirTransferencia" href="#Salir-Transferenca8">Salir</a>
+        <a id="btnSalirTransferencia" [routerLink]="['/inicio']">Salir</a>
     </ul>
 </div>
 </header>
@@ -103,7 +103,7 @@
                     </div>
                     <div style="position: absolute; left: 75px; top: 175px;">
                         <h5>
-                            Cedula: {{cuenta.cedula}}
+                            Cedula: {{cliente.cedula}}
                         </h5>                         
                     </div>
                     <div style="position: absolute; left: 75px; top: 250px;">

@@ -13,6 +13,7 @@ import { PagoTarjetasComponent } from './pago-tarjetas/pago-tarjetas.component';
 import { ServiciosComponent } from './servicios/servicios.component';
 import { TipoTransferenciaComponent } from './tipo-transferencia/tipo-transferencia.component';
 import { TransferenciaComponent } from './transferencia/transferencia.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {path:'inicio',component:InicioComponent},
@@ -22,12 +23,12 @@ const routes: Routes = [
   {path:'cuenta',component:CuentaComponent},
   {path:'login',component:LoginComponent},
   {path:'credenciales/:idCodigo',component:CredencialesComponent},
-  {path:'transferencias',component:TransferenciaComponent},
-  {path:'tipo-transferencia',component:TipoTransferenciaComponent},
-  {path:'pago-tarjetas',component:PagoTarjetasComponent},
-  {path:'mi-cuenta',component:MiCuentaComponent},
-  {path:'detalle-cuenta',component:DetalleCuentaComponent},
-  {path:'mi-perfil',component:MiPerfilComponent},
+  {path:'transferencias',component:TransferenciaComponent, canActivate:[AuthGuard]},
+  {path:'tipo-transferencia',component:TipoTransferenciaComponent, canActivate:[AuthGuard]},
+  {path:'pago-tarjetas',component:PagoTarjetasComponent, canActivate:[AuthGuard]},
+  {path:'mi-cuenta',component:MiCuentaComponent, canActivate:[AuthGuard]},
+  {path:'detalle-cuenta',component:DetalleCuentaComponent, canActivate:[AuthGuard]},
+  {path:'mi-perfil',component:MiPerfilComponent, canActivate:[AuthGuard]},
   {path:'**',component:InicioComponent},
 ];
 
