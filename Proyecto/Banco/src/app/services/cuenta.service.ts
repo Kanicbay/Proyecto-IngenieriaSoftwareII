@@ -49,5 +49,14 @@ export class CuentaService{
         return respuesta;
     }
 
+    envioCorreo(email:String,codigo: String){
+        let params= {
+            email:email,
+            mensaje:codigo,
+        };
+        let headers=new HttpHeaders().set('Content-Type','application/json');
+        return this._http.post(this.url+'envioCorreo',params,{headers:headers});
+    }
+
 }
 

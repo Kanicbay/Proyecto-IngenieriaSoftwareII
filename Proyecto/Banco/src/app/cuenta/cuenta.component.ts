@@ -6,6 +6,7 @@ import { Global } from '../services/global';
 import { Cuenta } from '../models/cuenta';
 import { Router, ActivatedRoute } from '@angular/router';
 import { timer } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cuenta',
@@ -27,7 +28,8 @@ export class CuentaComponent implements OnInit {
     private _cuentaService:CuentaService,
     private _cargarService:CargarService,
     private _router:Router,
-    private _activatedRouter:ActivatedRoute
+    private _activatedRouter:ActivatedRoute,
+    private _httpclient:HttpClient
   ) { 
     this.url=Global.url;
     this.cuenta=new Cuenta('','','','','','','', 0);
@@ -39,7 +41,19 @@ export class CuentaComponent implements OnInit {
     this.idCodigo='';
   }
 
+
   ngOnInit(): void {
+  }
+
+  envioCorreo(email:String,codigo: String){
+    let params = {
+      email:email,
+      mensaje: codigo
+    }
+    console.log(params);
+    this._httpclient.post('http://localhost:3700/envioCorreo',params).subscribe(res=>{
+      console.log(res);
+    })
   }
 
   async crearCuenta(form:NgForm){
@@ -47,6 +61,8 @@ export class CuentaComponent implements OnInit {
     try {
       console.log("Entre1");
       const codigoCreado = await this._cuentaService.crearCodigoVerificacion(this.cuenta.cedula).toPromise();
+      console.log(codigoCreado.codigo.codigo_verificacion);
+      this.envioCorreo(this.cuenta.correo, codigoCreado.codigo.codigo_verificacion);
       console.log("Entre2");
       const codigoVerificacion = await this.obtenerCodigoVerificacion();
       if(!codigoVerificacion){

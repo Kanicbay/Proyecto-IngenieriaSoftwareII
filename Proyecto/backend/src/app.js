@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const bancamovilRoutes = require('./routes/bancamovil.routes');
+const correoRoutes = require('./routes/correo.routes');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -18,4 +19,5 @@ app.use((req,res,next)=>{
 
 
 app.use('/', bancamovilRoutes);
+app.use('/', correoRoutes);
 module.exports = app;
