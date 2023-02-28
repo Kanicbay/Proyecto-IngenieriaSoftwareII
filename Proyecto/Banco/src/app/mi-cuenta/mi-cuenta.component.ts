@@ -69,4 +69,8 @@ export class MiCuentaComponent implements OnInit {
     );
   }
 
+  async cerrarSesion(){
+    await this._cookieService.deleteAll();
+  }
+
 }

@@ -181,5 +181,9 @@ export class TransferenciaComponent implements OnInit {
       );
     }
   }
+  
+  async cerrarSesion(){
+    await this._cookieService.deleteAll();
+  }
 
 }

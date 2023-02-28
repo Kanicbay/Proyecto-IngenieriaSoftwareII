@@ -53,29 +53,15 @@ export class MiPerfilComponent implements OnInit {
     this.obtenerCuentas();
   }
 
-  CambioModos(variable:boolean){
-    this.status = variable;
-    console.log(this.status);
-    return this.status;
-  }
-
-  CambioModo(form:NgForm){
-    if(this.status==true){
-      this.editarDatos(form);
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  async editarDatos(form:NgForm){
+  async editarDatosMiperfil(form:NgForm){
     console.log("Entre a editar datos");
-
+    console.log(this.usuario,this.cliente);
     await this._miPerfilService.actualizarDatos(this.usuarioActualizado,this.clienteActualizado).subscribe(
       response=>{
         if(response.usuario || response.cliente){
           alert("Datos Actualizados");
           this.actualizarDatos=false;
+          this.status=true;
       }else{
         alert("Error al actualizar los datos");
       }
@@ -112,6 +98,10 @@ export class MiPerfilComponent implements OnInit {
         }
       }
     );
+  }
+  
+  async cerrarSesion(){
+    await this._cookieService.deleteAll();
   }
 
 }
