@@ -235,20 +235,14 @@ var controller = {
         if (!user) {
             return res.status(404).json({ message: "Error!" });
         }
-        bcrypt.compare(contrasena, user.contrasena, (err, isMatch) => {
+        bcrypt.compare(contrasena, user.contrasena, async (err, isMatch) => {
             if(err) throw err;
             if(!isMatch){
-                return res.status(404).send({message: 'Error!!'});
+                return res.status(404).send({message: 'Error!'});
             }
-        });
-        //Crear token de sesion
-        await jwt.sign({cliente: user.cliente}, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, tokenSession) => {
-            if(err){
-                console.log(err);
-                res.status(500).send({message: 'Error!'});
-            } else{
-                return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
-            }
+            //Crear token de sesion
+            const tokenSession = await jwt.sign({cliente: user.cliente}, process.env.JWT_SECRET, {expiresIn: '1h'});
+            return res.status(200).send({message: 'Proceso exitoso', token: tokenSession});
         });
     },
 
@@ -302,6 +296,7 @@ var controller = {
             //Obtener el token de headers
             const authHeader = req.headers['authorization'];
             const token = authHeader && authHeader.split(' ')[1];
+
             //Verificar si el token fue dado
             if (!token) {
                 return res.status(401).send({ auth: false, message: 'No token provided.' });
@@ -322,6 +317,7 @@ var controller = {
                 return res.status(404).json({ message: 'Error!' });
             }
             //Actualizar los datos del cliente si es necesario
+            
             var actualizarCliente = false;
             var clienteActualizado = req.body.cliente;  //Usuario del frontend
             switch(clienteActualizado){

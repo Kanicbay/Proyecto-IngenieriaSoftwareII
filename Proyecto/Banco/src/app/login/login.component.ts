@@ -55,6 +55,9 @@ export class LoginComponent {
       },
       error=>{
         console.log(<any>error);
+        if(error.error.message=='Error!'){
+          alert('Usuario o contraseña incorrectos');
+        }
       }
     );
   }
