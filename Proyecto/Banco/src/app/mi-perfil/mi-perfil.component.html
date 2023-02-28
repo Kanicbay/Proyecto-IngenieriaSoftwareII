@@ -14,7 +14,7 @@
 </div>
 <div id="btnCabecera">
     <ul >
-        <a id="btnSalirTransferencia" [routerLink]="['/inicio']">Salir</a>
+        <a id="btnSalirTransferencia" [routerLink]="['/inicio']" (click)="cerrarSesion()" >Salir</a>
     </ul>
 </div>
 </header>
@@ -65,7 +65,7 @@
                 Datos
             </h5>
             <div id="contenedorCambios">
-                <form  #ldatosForm="ngForm" *ngIf="status">
+                <form  #ldatosForm="ngForm" *ngIf="status==true">
                     <div>
                         <h5 style="position: absolute; left: 75px; top: 100px;">
                             Nombres y Apellidos: {{cliente.nombres}} {{cliente.apellidos}}
@@ -95,7 +95,7 @@
                     </div>
                 </form>
                 
-                <form *ngIf="!status" #MiPerfilForm="ngForm" (ngSubmit)="editarDatos(MiPerfilForm)">
+                <form *ngIf="status==false" #miperfilEditar="ngForm" (ngSubmit)="editarDatosMiperfil(miperfilEditar)">
                     <div style="position: absolute; left: 75px; top: 100px;">
                         <h5>
                             Nombres y Apellidos: {{cliente.nombres}} {{cliente.apellidos}}
@@ -108,18 +108,18 @@
                     </div>
                     <div style="position: absolute; left: 75px; top: 250px;">
                         <h5>
-                            Correo Electrónico:
+                            Correo Electrónico: {{cliente.correo}}}
                         </h5>      
-                        <input type="email" name="correo" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #correo="ngModel" [(ngModel)]="clienteActualizado.correo" style="position: absolute; left: 180px; top: 0px" required>                   
+                        <!--<input type="email" name="correo" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #correo="ngModel" [(ngModel)]="clienteActualizado.correo" style="position: absolute; left: 180px; top: 0px" required>                   
                         <span *ngIf="correo.touched && correo.invalid">
                             Correo requerido
-                        </span>
+                        </span>-->
                     </div>
                     <div style="position: absolute; left: 75px; top: 325px;">
                         <h5>
                             Usuario:
                         </h5>
-                        <input type="text" name="user" pattern="^(?=.*\d.*\d.*\d)[a-zA-Z0-9]{8,}$" #user="ngModel" [(ngModel)]="usuarioActualizado.usuario" style="position: absolute; left: 81px; top: 0px" required>
+                        <input type="text" name="user" pattern="^(?=.*\d.*\d.*\d)[a-zA-Z0-9]{8,}$" #user="ngModel" [(ngModel)]="usuario" style="position: absolute; left: 81px; top: 0px" required>
                         <span *ngIf="user.touched && user.invalid">
                             Usuario requerido
                         </span>
@@ -128,13 +128,13 @@
                         <h5>
                             Contraseña:
                         </h5>
-                        <input type="password" name="password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@).{8,}$" #password="ngModel" [(ngModel)]="usuarioActualizado.contrasena" style="position: absolute; left: 115px; top: 0px" required>
+                        <input type="password" name="password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@).{8,}$" #password="ngModel" [(ngModel)]="usuario.contrasena" style="position: absolute; left: 115px; top: 0px">
                         <span *ngIf="password.touched && password.invalid">
                             Contraseña requerida
                         </span>
                     </div>
                     <div id="botonesCambios">
-                        <input id="btnEditar" type="submit" value="Confirmar" (click)="status=true">
+                        <input id="btnEditar" type="submit" value="Confirmar" [disabled]="!miperfilEditar.form.valid">
                     </div>
                 </form>
             </div>
@@ -143,15 +143,6 @@
     </div>
 </div>
 <div id="piePagT"> 
-    <div class="card">
-        <h3>Para ti</h3>
-        <br>
-        <p>
-            Cuentas
-            Tarjetas de crédito
-            Prestamos
-        </p>
-    </div>
     <div class="card">
         <h3>Para ti</h3>
         <br>
