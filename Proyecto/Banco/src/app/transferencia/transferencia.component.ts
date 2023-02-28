@@ -36,6 +36,7 @@ export class TransferenciaComponent implements OnInit {
   public usuarioActualizado:Usuario;
   public actualizarDatos:boolean;
   public clienteActualizado:Cliente;
+  public clienteExiste:boolean;
   timeout: any;
   constructor(
     private _transferenciaService:TransferenciaService,
@@ -61,6 +62,7 @@ export class TransferenciaComponent implements OnInit {
     this.cuentaAhorro=new Cuenta('','','','','','','', 0);
     this.cuentaVinculada=new Cuenta('','','','','','','', 0);
     this.actualizarDatos=false;
+    this.clienteExiste=false;
   }
 
   ngOnInit(): void {
@@ -134,18 +136,19 @@ export class TransferenciaComponent implements OnInit {
     },100);  
   }
   
-  verificarCuenta(){
-    this._transferenciaService.obtenerCuenta(this.transferencia.numeroCuentaDestino).subscribe(
+  async verificarCuenta(){
+    await this._transferenciaService.verificarCuenta(this.transferencia.numeroCuentaDestino).subscribe(
       response=>{
-        this.cuenta=response.cuenta;
-        if(this.cuenta.numeroCuenta == this.transferencia.numeroCuentaDestino){
+        console.log(response);
+        if(response.message = 'Proceso exitoso'){
+          this.clienteExiste=true;
           this.status3=true;
-        }else{
-          this.status3=false;
         }
       },
       error=>{
         console.log("Este es el error",error);
+        this.clienteExiste=false;
+        this.status3=false;
         if(error.error.auth == false){
           alert("La sesión caducó");
           this._cookieService.delete('token');

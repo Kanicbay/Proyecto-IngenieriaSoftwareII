@@ -3,7 +3,6 @@ require ('dotenv').config();
 
 
 const tokenSign = async (user) => {
-    console.log("Este el id de cliente: ",user.cliente._id);
     return jwt.sign(
         {
             _id: user.cliente,
