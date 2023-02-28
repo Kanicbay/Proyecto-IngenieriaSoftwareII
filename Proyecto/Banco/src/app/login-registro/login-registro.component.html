@@ -1,0 +1,21 @@
+<div class="background" id="background-cuenta" style="height: 100vh;" [ngStyle]="{'background': 'url(assets/imagenes/fondoRegistro.png)','background-size': 'cover'}">
+    <div class="container">
+        <a [routerLink]="['/inicio']">
+            <button id="btnsalir"><p id="botonSalirtxt" [routerLink]="['/inicio']">Salir</p></button>
+        </a>
+        <div id="logo">
+            <img src="assets/imagenes/logo.png" alt="">
+            <div id="logotxt">
+                <p> <span style="font-size: 45px;">Banco</span> <br> 
+                    <span style="font-size: 20px;">Big Money </span> </p>
+            </div>
+        </div>
+    </div>
+    <div id="cuadradoOpciones">
+    
+        <div id="camposOpciones">
+            <a [routerLink]="['/cuenta']"><button id="btnResgistrarO"><p id="ResgistrarOtxt">Crear Cuenta</p></button></a>
+            <a [routerLink]="['/login']"><button id="btnIniciarO"><p id="IniciarOtxt">Iniciar sesión</p></button></a>
+        </div>
+    </div>
+</div>

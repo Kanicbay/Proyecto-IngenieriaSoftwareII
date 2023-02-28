@@ -1,1 +1,121 @@
-<p>nosotros works!</p>
+<header id="cabecera">
+    <div id="logo">
+        <a href="index.html">
+            <img src="assets/imagenes/logo.png" alt="" style="height: 70%; width: 70%;">
+        </a>
+        <a href="index.html">
+            <div id="logotxt">
+            <p> 
+                <span style="font-size: 38px;">Banco</span>                
+                <span style="font-size: 15px;">Big Money </span> 
+            </p>         
+        </div>
+        </a>     
+    </div>
+    <div id="btnCabecera">
+        <ul >
+            <a id="btnContacto" [routerLink]="['/contacto']">Contacto</a>
+            <a id="btnServicio" [routerLink]="['/servicios']">Servicio</a>
+            <a id="btnNosotros" [routerLink]="['/nosotros']">Nosotros</a>
+            <a id="btnBancaVirtual" [routerLink]="['/loginRegistro']">Banca-Virtual</a>
+        </ul>
+    </div>
+    </header>
+    
+    <div class="container">
+        <div class="row">
+            <img src="assets/imagenes/fondoPagina.png" alt="">   
+        </div>        
+    </div>
+    <div id="Contenido">
+        <div id="infoNosotros">
+            <h1>Nosotros</h1>
+            <br>
+            <p style="text-align: justify; font-size: 20px;">
+                ¡Bienvenidos a nuestra banca virtual! Somos un equipo comprometido en brindarles a nuestros 
+                clientes la mejor experiencia bancaria en línea. Con nuestra banca virtual, 
+                pueden realizar transacciones seguras y fáciles desde cualquier lugar y en cualquier momento. 
+                Nos enfocamos en ofrecer servicios innovadores y personalizados para cumplir con sus 
+                necesidades financieras. ¡Únanse a nosotros y descubran todo lo que nuestra banca virtual 
+                tiene para ofrecer!
+            </p>
+            <hr>
+            <br>
+            <img id="imgNosotros1" src="assets/imagenes/nosotros.png" alt="" >
+        </div>
+        <div id="misionN">
+            <h1>Misión:</h1> 
+            <br>
+            <p style="text-align: justify; font-size: 20px;"> Nuestra misión es ofrecer a nuestros clientes una experiencia bancaria fácil, rápida y segura. 
+            Trabajamos constantemente para brindar soluciones innovadoras y adaptadas a las necesidades de 
+            cada uno de nuestros usuarios. Además, nos enfocamos en fomentar el ahorro y la educación 
+            financiera, para ayudar a nuestros clientes a alcanzar sus metas.
+            </p>
+            <br>
+        </div>
+        <div id="visionN">
+            <h1>Visión:</h1>
+            <br>
+            <p style="text-align: justify; font-size: 20px;"> Nuestra visión es convertirnos en la banca virtual líder en el mercado, reconocida por nuestra 
+            excelencia en el servicio al cliente y nuestras soluciones financieras innovadoras. Nos esforzamos 
+            por ser una empresa sostenible, comprometida con el desarrollo económico y social del entorno en 
+            el que operamos.
+            </p>
+        </div>
+    </div>
+    <div id="piePag">
+        <div class="card">
+        <h3>Para ti</h3>
+        <br>
+        <p>
+            Cuentas
+            Tarjetas de crédito
+            Prestamos
+        </p>
+        </div>
+        <div class="card">
+        <h3>Para ti</h3>
+        <br>
+        <p>
+            Cuentas
+            Tarjetas de crédito
+            Prestamos
+        </p>
+        </div>
+        <div class="card">
+        <h3>Para ti</h3>
+        <br>
+        <p>
+            Cuentas
+            Tarjetas de crédito
+            Prestamos
+        </p>
+        </div>
+        <div class="card">
+        <h3>Para ti</h3>
+        <br>
+        <p>
+            Cuentas
+            Tarjetas de crédito
+            Prestamos
+        </p>
+        </div>
+        <div id="logoPie">
+        <a href="index.html">
+            <img src="assets/imagenes/logo.png" alt="" style="height: 70%; width: 70%;">
+        </a>
+        <a href="index.html">
+            <div id="logoPietxt">
+            <p> 
+                <span style="font-size: 38px;">Banco</span>                
+                <span style="font-size: 15px;">Big Money </span> 
+            </p>         
+            </div>
+        </a>     
+        </div>
+    </div>
+    <div>
+        <a [routerLink]="['/nosotros']" id="irArriba"><button class="circle-button" (click)="scrollToTopBtnr()">
+            <i class="arrow"><img src="assets/imagenes/btnRegreso.png" width="80%" height="70%" alt=""></i>
+        </button></a>
+    </div>

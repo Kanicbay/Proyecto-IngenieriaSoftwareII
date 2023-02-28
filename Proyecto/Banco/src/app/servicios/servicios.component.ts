@@ -7,7 +7,11 @@ import { CargarScriptsService } from '../cargar-scripts.service';
   styleUrls: ['./servicios.component.css']
 })
 export class ServiciosComponent {
-  constructor(private _CargaScritps:CargarScriptsService){
-    _CargaScritps.Cargar(["IrArriba"]);
+  scrollToTopBtnr() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 }

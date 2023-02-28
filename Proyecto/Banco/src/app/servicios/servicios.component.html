@@ -17,7 +17,7 @@
             <a id="btnContacto" [routerLink]="['/contacto']">Contacto</a>
             <a id="btnServicio" [routerLink]="['/servicios']">Servicio</a>
             <a id="btnNosotros" [routerLink]="['/nosotros']">Nosotros</a>
-            <a id="btnBancaVirtual" [routerLink]="['/cuenta']">Banca-Virtual</a>
+            <a id="btnBancaVirtual" [routerLink]="['/loginRegistro']">Banca-Virtual</a>
         </ul>
     </div>
     </header>
@@ -56,15 +56,15 @@
                 <br>
                 Abrir cuenta familiar
             </h5>
-            <a href="familiar.html"><button id="btnLeerS1">Leer Mas</button></a>
+            <a [routerLink]="['/loginRegistro']"><button id="btnLeerS1">Crear Cuenta</button></a>
         </div>
         <div id="cuadroBasicoS">
             <img src="assets/imagenes/servicios2.png" style="width: 90%; height: 50%;" alt="">
             <h5>
                 <br>
-                Paga servicios básicos
+                Pagos de tarjetas
             </h5>
-            <a href="seriviciosBasicos.html"><button id="btnLeerS2">Leer Mas</button></a>
+            <a [routerLink]="['/loginRegistro']"><button id="btnLeerS2">Crear Cuenta</button></a>
         </div>
         <div id="cuadroTransferenciaS">
             <img src="assets/imagenes/servicios3.png" style="width: 90%; height: 50%;" alt="">
@@ -72,7 +72,7 @@
                 <br>
                 Realiza transferencias
             </h5>
-            <a href="infoTransferencia.html"><button id="btnLeerS3">Leer Mas</button></a>
+            <a [routerLink]="['/loginRegistro']"><button id="btnLeerS3">Crear Cuenta</button></a>
         </div>
     </div>
     <div id="piePag">
@@ -127,7 +127,7 @@
         </div>
     </div>
     <div>
-        <a href="http://localhost:4200/servicios" id="irArriba"><button class="circle-button">
+        <a [routerLink]="['/servicios']" id="irArriba"><button class="circle-button" (click)="scrollToTopBtnr()">
             <i class="arrow"><img src="assets/imagenes/btnRegreso.png" width="80%" height="70%" alt=""></i>
-          </button></a>
+        </button></a>
     </div>

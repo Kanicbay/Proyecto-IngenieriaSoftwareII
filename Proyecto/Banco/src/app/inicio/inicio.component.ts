@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CargarScriptsService } from '../cargar-scripts.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,7 +6,11 @@ import { CargarScriptsService } from '../cargar-scripts.service';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent {
-  constructor(private _CargaScritps:CargarScriptsService){
-    _CargaScritps.Cargar(["IrArriba"]);
+  scrollToTopBtnr() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 }
