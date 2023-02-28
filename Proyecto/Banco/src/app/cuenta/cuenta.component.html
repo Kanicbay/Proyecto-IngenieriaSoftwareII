@@ -14,7 +14,7 @@
             <form #cuentaForm="ngForm" (ngSubmit)="crearCuenta(cuentaForm)" id="camposCrear">
                 <p>
                     <label for="nombre" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Nombres</label><br>
-                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="nombre" #nombres="ngModel" [(ngModel)]="cuenta.nombres" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
+                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': nombres.touched && nombres.invalid ? '2px solid red' : ''}" name="nombre" #nombres="ngModel" [(ngModel)]="cuenta.nombres" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
                     <span *ngIf="nombres.touched && nombres.invalid">
                         Nombres incorrectos
                       </span>
@@ -22,14 +22,14 @@
                 
                 <p>
                   <label for="apellido" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Apellidos</label><br>
-                  <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="apellido" #apellidos="ngModel" [(ngModel)]="cuenta.apellidos" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
+                  <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': apellidos.touched && apellidos.invalid ? '2px solid red' : ''}" name="apellido" #apellidos="ngModel" [(ngModel)]="cuenta.apellidos" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
                   <span *ngIf="apellidos.touched && apellidos.invalid">
                     Apellidos incorrectos
                   </span>
                 </p>
                 <p>
                   <label for="cedula" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Cédula</label><br>
-                  <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="cedula" #cedula="ngModel" [(ngModel)]="cuenta.cedula" required pattern="^[0-9]{10}$"
+                  <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': cedula.touched && cedula.invalid ? '2px solid red' : ''}" name="cedula" #cedula="ngModel" [(ngModel)]="cuenta.cedula" required pattern="^[0-9]{10}$"
                   (ngModelChange)="cedula.valid ? cuenta.cedula = $event : null">
                   <span *ngIf="cedula.touched && cedula.invalid">
                     Cédula incorrecta
@@ -37,14 +37,14 @@
                 </p>
                 <p>
                     <label for="correo" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Correo</label><br>
-                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="correo" #correo="ngModel" [(ngModel)]="cuenta.correo" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': correo.touched && correo.invalid ? '2px solid red' : ''}" name="correo" #correo="ngModel" [(ngModel)]="cuenta.correo" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
                     <span *ngIf="correo.touched && correo.invalid">
                       Correo incorrecto
                     </span>
                   </p>
                 <p>
                   <label for="tipoCuenta" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Tipo de cuenta</label><br>
-                  <select style="margin-left: 90px; margin-top: 8px;" name="tipoCuenta" #tipoCuenta="ngModel" [(ngModel)]="cuenta.tipoCuenta" required>
+                  <select style="margin-left: 90px; margin-top: 8px;" [ngStyle]="{'border': tipoCuenta.invalid && (tipoCuenta.dirty || tipoCuenta.touched) ? '2px solid red' : ''}" name="tipoCuenta" #tipoCuenta="ngModel" [(ngModel)]="cuenta.tipoCuenta" required>
                     <option value="">Selecciona una opción</option>
                     <option value="Ahorros">Ahorros</option>
                     <option value="Corriente">Corriente</option>

@@ -26,9 +26,9 @@
 
                 <p>
                     <label for="contrasena" style="font-weight: 500; font-size: 30px; padding-left: 99px;">Contraseña</label><br>
-                    <input type="text" style="margin-left: 99px; width: 500px;" name="contrasena" #password="ngModel" [(ngModel)]="usuario.contrasena" >
+                    <input type="password" style="margin-left: 99px; width: 500px;" name="contrasena" #password="ngModel" [(ngModel)]="usuario.contrasena" >
                     <span *ngIf="password.touched && password.invalid">
-                        Usuario es requerido
+                        Contraseña requerida
                       </span>
                 </p>
                 <input id="btnIniciar" style="margin-left: 90px; margin-top: 8px; font-size: 24px; " type="submit" value="Iniciar sesión" [disabled]="!loginForm.form.valid">

@@ -226,7 +226,6 @@ a{
     background-color: #ffffff; 
     width: 900px; 
     height: 510px; 
-
 }
 #cuadroMonto{
     position: absolute;
@@ -324,39 +323,76 @@ a{
     border-radius: 15px;
 }
 
-#cuentasD{
-    position: absolute;
+#cuentasA{
+    position: relative;
     background-color: #D9D9D9; 
-    top: 150px;
+    top: 90px;
     left: 90px;
     width: 650px; 
     height: 65px; 
 }
-#textoD{
+#textoA{
     padding: 10px;
 }
-#signoDineroD1{
-    position:absolute;
+#textoT{
+    padding: 10px;
+}
+#cuentasC{
+    position: relative;
+    background-color: #D9D9D9; 
+    top: 40px;
+    left: 90px;
+    width: 650px; 
+    height: 65px; 
+}
+#textoC{
+    padding: 10px;
+}
+#cuentasV{
+    position: relative;
+    background-color: #D9D9D9; 
+    top: 75px;
+    left: 90px;
+    width: 650px; 
+    height: 65px; 
+}
+#textoV{
+    padding: 10px;
+}
+
+#signoDineroA1{
+    position:relative;
     left: 620px;
-    top: 150px;
+    top: 27px;
+    font-size: 20px;
+}
+#signoDineroC1{
+    position:relative;
+    left: 620px;
+    top: -25px;
+    font-size: 20px;
+}
+#signoDineroV1{
+    position:relative;
+    left: 620px;
+    top: 9px;
     font-size: 20px;
 }
 
 #misTarjetasD{
-    position: absolute;
+    position: relative;
     background-color: #D9D9D9; 
     top: 300px;
     left: 90px;
     width: 650px; 
     height: 65px; 
 }
-#signoDineroD2{
+#signoDineroA2{
     text-align: right;
-    position:absolute;
-    left: 520px;
-    top: 300px;
+    position:relative;
+    left: -180px;
+    top: 236px;
     font-size: 20px;
-    
 }
 #comboBoxP {
     position: absolute;

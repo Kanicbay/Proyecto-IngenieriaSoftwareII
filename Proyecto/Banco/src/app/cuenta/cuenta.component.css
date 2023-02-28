@@ -391,3 +391,13 @@
     font-size: 20px;
     translate: 0px -15px;
 }
+input:hover{
+    border: 2px solid #38B1B1;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+select:hover{
+    border: 2px solid #38B1B1;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
