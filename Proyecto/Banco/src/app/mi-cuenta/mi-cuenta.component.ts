@@ -18,6 +18,9 @@ export class MiCuentaComponent implements OnInit {
   public cuentaCorriente:Cuenta;
   public cuentaAhorro:Cuenta;
   public cuentaVinculada:Cuenta;
+  public tipoCuentaA:boolean;
+  public tipoCuentaC:boolean;
+  public tipoCuentaV:boolean;
 
   constructor(
     private _cuentaService:CuentaService,
@@ -29,6 +32,9 @@ export class MiCuentaComponent implements OnInit {
     this.cuentaCorriente=new Cuenta('','','','','','','', 0);
     this.cuentaAhorro=new Cuenta('','','','','','','', 0);
     this.cuentaVinculada=new Cuenta('','','','','','','', 0);
+    this.tipoCuentaA=false;
+    this.tipoCuentaC=false;
+    this.tipoCuentaV=false;
   }
 
   ngOnInit(): void {
@@ -40,8 +46,14 @@ export class MiCuentaComponent implements OnInit {
       response=>{
         this.cuentas=response.cuentas;
         this.cuentaCorriente=this.cuentas[0];
+        if(this.cuentas[0]!=null)
+          this.tipoCuentaA = true;
         this.cuentaAhorro=this.cuentas[1];
+        if(this.cuentas[1]!=null)
+          this.tipoCuentaC = true;
         this.cuentaVinculada=this.cuentas[2];
+        if(this.cuentas[2]!=null)
+          this.tipoCuentaV = true;
         this.cliente=response.cliente;
 
         console.log(this.cuentas, this.cliente);

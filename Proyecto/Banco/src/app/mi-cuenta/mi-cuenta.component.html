@@ -51,34 +51,55 @@
             <div id="cuadroTransferencia">
                 <div id="contenidoTransferencia">
                     <div>
-                        <h5 style="position: absolute; left: 75px; top: 50px;">
+                        <h5 style="position: relative; left: 50px; top: 30px;">
                             Todos mis productos
                         </h5>
-                        <h5 style="position: absolute; left: 75px; top: 100px;">
+                        <h5 style="position: relative; left: 50px; top: 50px;">
                             Mis Cuentas
                         </h5>
-                        <a [routerLink]="['/detalle-cuenta']">
-                            <div id="cuentasD">
-                                <p id="textoD">
-                                <span id="texto1D"><b>AHO{{cuentas[0].numeroCuenta.substring(cuentas[0].numeroCuenta.length - 3)}}</b></span> <br>
-                                Nro. <span id="textoNumD">{{cuentas[0].numeroCuenta}}</span> 
-                                </p>
-                            </div>
-                        </a>
-                        <p id="signoDineroD1"> <b>${{cuentas[0].saldo}}</b> <br><span>Disponible</span> </p> 
-                        
-                        <h5 style="position: absolute; left: 75px; top: 250px;">
+                        <div style="position: relative; left: -37px; top: -30px;">
+                            <a *ngIf="tipoCuentaA == true" [routerLink]="['/detalle-cuenta']">
+                                <div id="cuentasA">
+                                    <p id="textoA">
+                                    <span id="texto1A"><b>AHO{{cuentas[0].numeroCuenta.substring(cuentas[0].numeroCuenta.length - 3)}}</b></span> <br>
+                                    Nro. <span id="textoNumA">{{cuentas[0].numeroCuenta}}</span> 
+                                    </p>
+                                </div>
+                            </a>
+                            <p *ngIf="tipoCuentaA == true" id="signoDineroA1"> <b>${{cuentas[0].saldo}}</b> <br><span>Disponible</span> </p> 
+                            <a *ngIf="tipoCuentaC == true" [routerLink]="['/detalle-cuenta']" [ngStyle]="{'top': tipoCuentaA == false ? '90px' : ''}">
+                                <div id="cuentasC" [ngStyle]="{'top': tipoCuentaA == false ? '90px' : ''}">
+                                    <p id="textoC">
+                                    <span id="texto1C"><b>CORR{{cuentas[1].numeroCuenta.substring(cuentas[1].numeroCuenta.length - 3)}}</b></span> <br>
+                                    Nro. <span id="textoNumC">{{cuentas[1].numeroCuenta}}</span> 
+                                    </p>
+                                </div>
+                            </a>
+                            <p *ngIf="tipoCuentaC == true" id="signoDineroC1" [ngStyle]="{'top': tipoCuentaA == false ? '27px' : ''}"> <b>${{cuentas[1].saldo}}</b> <br><span>Disponible</span> </p> 
+                            <a *ngIf="tipoCuentaV == true" [routerLink]="['/detalle-cuenta']">
+                                <div id="cuentasV">
+                                    <p id="textoV">
+                                    <span id="texto1V"><b>VIN{{cuentas[2].numeroCuenta.substring(cuentas[2].numeroCuenta.length - 3)}}</b></span> <br>
+                                    Nro. <span id="textoNumV">{{cuentas[2].numeroCuenta}}</span> 
+                                    </p>
+                                </div>
+                            </a>
+                            <p *ngIf="tipoCuentaV == true" id="signoDineroV1"> <b>${{cuentas[2].saldo}}</b> <br><span>Disponible</span> </p> 
+                        </div>
+                        <h5 style="position: relative; left: 50px; top: auto;">
                             Mis tarjetas de crédito
                         </h5>
-                        <a [routerLink]="['/transferencias']">
-                            <div id="misTarjetasD">
-                                <p id="textoD">
-                                    <span id="texto2D"><b>Tarjeta</b></span> <br>
-                                    Nro. <span id="textoNumD">4438********8144</span> 
-                                </p>
-                            </div>
-                        </a>
-                        <p id="signoDineroD2"> <b>$00.00</b> <br><span>Cuota total a pagar</span></p>
+                        <div style="position: relative; left: -37px; top: -290px;">
+                            <a [routerLink]="['/transferencias']">
+                                <div id="misTarjetasD">
+                                    <p id="textoA">
+                                        <span id="texto2D"><b>Tarjeta</b></span> <br>
+                                        Nro. <span id="textoNumD">4438********8144</span> 
+                                    </p>
+                                </div>
+                            </a>
+                            <p id="signoDineroA2"> <b>$00.00</b> <br><span>Cuota total a pagar</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,15 +107,6 @@
     </div>
 </div>
 <div id="piePagT"> 
-    <div class="card">
-        <h3>Para ti</h3>
-        <br>
-        <p>
-            Cuentas
-            Tarjetas de crédito
-            Prestamos
-        </p>
-    </div>
     <div class="card">
         <h3>Para ti</h3>
         <br>

@@ -401,3 +401,23 @@
     font-size: 25px;
     translate: 0px -4px;
 }
+#cuadroUsuario{
+    margin-left: 90px; 
+    margin-top: 8px; 
+    width: 500px;
+}
+#cuadroContraseña{
+    margin-left: 90px; 
+    margin-top: 8px; 
+    width: 500px;
+}
+#cuadroConfirmarContraseña{
+    margin-left: 90px; 
+    margin-top: 8px; 
+    width: 500px;
+}
+input:hover{
+    border: 2px solid #38B1B1;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}

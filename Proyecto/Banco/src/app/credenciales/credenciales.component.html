@@ -16,25 +16,37 @@
         <form #credencialesForm="ngForm" (ngSubmit)="crearUsuario(credencialesForm)" id="camposCrear">
             <p>
                 <label for="user" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Usuario</label><br>
-                <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="user" #user="ngModel" [(ngModel)]="usuario.usuario" required pattern="^(?=.*\d.*\d.*\d)[a-zA-Z0-9]{8,}$">
+                <abbr title="El usuario necesita cumplir con: 
+                tener al menos 8 caracteres,
+                tener al menos 3 numeros,
+                y no tener caracteres especiales.
+                ">
+                    <input id="cuadroUsuario" type="text" [ngStyle]="{'border': user.touched && user.invalid ? '2px solid red' : ''}" name="user" #user="ngModel" [(ngModel)]="usuario.usuario" required pattern="^(?=.*\d.*\d.*\d)[a-zA-Z0-9]{8,}$">     
+                </abbr>
                 <span *ngIf="user.touched && user.invalid">
                     Usuario Incorrecto
-                  </span>
+                </span>
             </p>
             
             <p>
                 <label for="password" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Contraseña</label><br>
-                <input type="password" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="password" #password="ngModel" [(ngModel)]="usuario.contrasena" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@).{8,}$"> 
+                <abbr title="La contraseña necesita cumplir con: 
+                tener al menos 8 caracteres,
+                tener al menos 1 letra mayúscula,
+                tener al menos 1 número,
+                y el carácter @.">
+                    <input id="cuadroContraseña" type="password" [ngStyle]="{'border': password.touched && password.invalid ? '2px solid red' : ''}" name="password" #password="ngModel" [(ngModel)]="usuario.contrasena" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@).{8,}$"> 
+                </abbr>
                 <span *ngIf="password.touched && password.invalid">
                     Contraseña Incorrecta
-                  </span>
+                </span>
             </p>
 
             <p>
                 <label for="confirmPassword" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Confirmar Contraseña</label><br>
-                <input type="password" style="margin-left: 90px; margin-top: 8px; width: 500px;" name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="confirmPasswordValue" required >
-                <span *ngIf="(confirmPassword.touched && confirmPassword.invalid) || (confirmPassword.touched && !contrasenaCoincide())" >
-                    Confirmación de Contraseña Incorrecta
+                <input id="cuadroConfirmarContraseña" type="password" [ngStyle]="{'border': (confirmPassword.touched && confirmPassword.invalid) || (confirmPassword.touched && !contrasenaCoincide()) ? '2px solid red' : ''}" name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="confirmPasswordValue" required >
+                <span *ngIf="(confirmPassword.touched && confirmPassword.invalid) || (confirmPassword.touched && !contrasenaCoincide())" style="font-size: 15px;">
+                    Las contraseñas no coinciden
                 </span>
             </p>
 

@@ -20,6 +20,11 @@ export class TransferenciaService{
         let headers=new HttpHeaders().set('Content-Type','application/json');
         return this._http.get(this.url+'findAccount', {headers:headers});
     }
+    transferir(cuenta:Cuenta):Observable<any>{
+        let params=JSON.stringify(cuenta);
+        let headers=new HttpHeaders().set('Content-Type','application/json');
+        return this._http.post(this.url+'transfer',params,{headers:headers});
+    }   
 
 }
 
