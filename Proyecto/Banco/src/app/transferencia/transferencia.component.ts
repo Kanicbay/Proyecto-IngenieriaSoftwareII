@@ -167,6 +167,7 @@ export class TransferenciaComponent implements OnInit {
         response=>{
           if(response.message = 'Proceso exitoso'){
             alert("Transferencia exitosa");
+            window.location.reload();
           }
         },
         error=>{
