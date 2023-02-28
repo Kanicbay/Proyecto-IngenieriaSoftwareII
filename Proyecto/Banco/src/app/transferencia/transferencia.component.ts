@@ -11,6 +11,8 @@ import { CargarService } from '../services/cargar.service';
 import { CuentaService } from '../services/cuenta.service';
 import { Global } from '../services/global';
 import { TransferenciaService } from '../services/transferencia.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-transferencia',
@@ -38,13 +40,15 @@ export class TransferenciaComponent implements OnInit {
   public clienteActualizado:Cliente;
   public clienteExiste:boolean;
   public clienteIngreso:boolean;
+  public tipoCuenta:number;
   timeout: any;
   constructor(
     private _transferenciaService:TransferenciaService,
     private _router:Router,
     private _cuentaService:CuentaService,
     private _cookieService: CookieService,
-    private _CargaScritps:CargarScriptsService
+    private _CargaScritps:CargarScriptsService,
+    private _Activeroute: ActivatedRoute
     ){
     this.url=Global.url;
     this.transferencia=new Transferencia('','','',0);
@@ -65,10 +69,14 @@ export class TransferenciaComponent implements OnInit {
     this.actualizarDatos=false;
     this.clienteExiste=false;
     this.clienteIngreso=false;
+    this.tipoCuenta=0;
   }
 
   ngOnInit(): void {
     this.obtenerCuentas();
+    this._Activeroute.queryParams.subscribe(params => {
+      this.tipoCuenta = params['tipoCuenta'];
+    });
   }
 
   async obtenerCuentas(){
@@ -82,6 +90,7 @@ export class TransferenciaComponent implements OnInit {
         this.usuario=response.usuario;
 
         console.log(this.cuentas, this.cliente);
+        console.log(this.cuentas[this.tipoCuenta-1].saldo);
       },
       error=>{
         console.log("Este es el error",error);
@@ -100,8 +109,8 @@ export class TransferenciaComponent implements OnInit {
     }
     this.timeout = setTimeout(() => {
       this.transferencia.monto=event.target.value;
-      const MAX_MONTO = 5000;
-      if (this.transferencia.monto <= MAX_MONTO && this.transferencia.monto!=0 && this.transferencia.monto <= this.cuentaCorriente.saldo) {
+      const MAX_MONTO = 1200;
+      if (this.transferencia.monto <= MAX_MONTO && this.transferencia.monto!=0 && this.transferencia.monto <= this.cuentas[this.tipoCuenta-1].saldo) {
         console.log(event.target.value);
             //document.getElementById("cuadroNumCuenta")!.disable = false;
             //this.myInputElement.nativeElement.disabled = false;
@@ -110,7 +119,7 @@ export class TransferenciaComponent implements OnInit {
       } else { 
             //document.getElementById("cuadroNumCuenta")!.hidden = true; 
             //this.myInputElement.nativeElement.disabled = true; 
-        if (this.transferencia.monto >= MAX_MONTO && this.transferencia.monto <= this.cuentaCorriente.saldo && this.transferencia.monto!=0)
+        if (this.transferencia.monto >= MAX_MONTO && this.transferencia.monto <= this.cuentas[this.tipoCuenta-1].saldo && this.transferencia.monto!=0)
           console.log("El monto máximo por transacción diaria es de 5000 dólares");
         if (this.transferencia.monto >= this.cuentaCorriente.saldo)
           console.log("No dispone los fondos suficientes en su cuenta");
@@ -128,7 +137,7 @@ export class TransferenciaComponent implements OnInit {
     this.clienteIngreso=true;
     this.timeout = setTimeout(() => {
       this.transferencia.numeroCuentaDestino = event.target.value;
-      if (this.transferencia.numeroCuentaDestino.length >= 8 && this.transferencia.numeroCuentaDestino.length <= 10 && this.transferencia.numeroCuentaDestino != this.cuentaCorriente.numeroCuenta) {
+      if (this.transferencia.numeroCuentaDestino.length >= 8 && this.transferencia.numeroCuentaDestino.length <= 10 && this.transferencia.numeroCuentaDestino != this.cuentas[this.tipoCuenta-1].numeroCuenta) {
         this.status2 = true;
         console.log(event.target.value);
         clearTimeout(this.timeout);
@@ -163,7 +172,10 @@ export class TransferenciaComponent implements OnInit {
   
   transferirDinero(){
     if(this.clienteExiste){
-      this._transferenciaService.transferir(this.cuentas[0].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, "Ahorros").subscribe(
+      console.log(this.tipoCuenta);
+      switch(this.tipoCuenta-1) {
+        case 0:
+        this._transferenciaService.transferir(this.cuentas[this.tipoCuenta-1].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, "Ahorros").subscribe(
         response=>{
           if(response.message = 'Proceso exitoso'){
             alert("Transferencia exitosa");
@@ -179,6 +191,47 @@ export class TransferenciaComponent implements OnInit {
           }
         }
       );
+      break;
+      case 1:
+        this._transferenciaService.transferir(this.cuentas[this.tipoCuenta-1].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, "Corriente").subscribe(  
+          response=>{
+            if(response.message = 'Proceso exitoso'){
+              alert("Transferencia exitosa");
+              window.location.reload();
+            }
+          },
+          error=>{
+            console.log("Este es el error",error);
+            if(error.error.auth == false){
+              alert("La sesión caducó");
+              this._cookieService.delete('token');
+              this._router.navigate(['/login',]);
+            }
+          }
+        );
+        break;
+        case 2:
+          this._transferenciaService.transferir(this.cuentas[this.tipoCuenta-1].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, "Vinculada").subscribe(
+            response=>{
+              if(response.message = 'Proceso exitoso'){
+                alert("Transferencia exitosa");
+                window.location.reload();
+              }
+            },
+            error=>{
+              console.log("Este es el error",error);
+              if(error.error.auth == false){
+                alert("La sesión caducó");
+                this._cookieService.delete('token');
+                this._router.navigate(['/login',]);
+              }
+            }
+          );
+          break;
+        default:
+          console.log("No se ha seleccionado ninguna cuenta");
+          break;
+      }
     }
   }
   

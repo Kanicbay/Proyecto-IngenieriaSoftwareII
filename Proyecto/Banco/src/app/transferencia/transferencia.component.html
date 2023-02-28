@@ -47,41 +47,122 @@
                 </div>
             </a>
         </div>
-        <div class="col-9">
-            <div id="cuadroTransferencia">
-                <div id="contenidoTransferencia">
-                    <div>
-                        <h5 style="position: absolute; left: 75px; top: 50px;">
-                            Monto a transferir
-                        </h5>
-                        <p id="signoDinero"> $ </p> 
-
-                            <input placeholder="0" type="number" id="cuadroMonto" (keydown)="MontoEvent($event)">
-         
-                        <h5 style="position: absolute; left: 75px; top: 220px;">
-                            Saldo disponible
-                        </h5>
-                        <h5 style="position: absolute; left: 75px; top: 270px;">
-                            <h3>${{cuentas[0].saldo}}</h3>
-                        </h5>
-                        <h5 style="position: absolute; left: 75px; top: 320px;">
-                            Ingrese el número de cuenta
-                        </h5>
-                        <p id="ejemplo">Ej:</p>
-                        <input *ngIf="status==false" placeholder="2548625793" type="text" id="cuadroNumCuenta"  disabled> 
-                        <input *ngIf="status==true" placeholder="2548625793" type="text" id="cuadroNumCuenta" (keydown)="CuentaEvent($event)"> 
-                        <div id="botonesTransferencia">
-                            <button *ngIf="status2==true" id="btnVerificar" (click)="verificarCuenta()">Verificar</button> 
-                            <span *ngIf="clienteExiste==true" style="position: absolute; top: 375px; left: 660px; font-size: 20px;">El cliente existe</span>
-                            
-                            <button *ngIf="status2==false" id="btnVerificar" disabled="true">Verificar</button>
-                            <button *ngIf="clienteExiste==true" id="btnTransferir" (click)="transferirDinero()">Transferir</button>
-                            <button *ngIf="status3==false" id="btnTransferir" disabled="true">Transferir</button>
+        <div [ngSwitch]="tipoCuenta">
+            <div *ngSwitchCase="'1'">
+                <div class="col-9">
+                    <div id="cuadroTransferencia">
+                        <div id="contenidoTransferencia">
+                            <div>
+                                <h5 style="position: absolute; left: 75px; top: 50px;">
+                                    Monto a transferir
+                                </h5>
+                                <p id="signoDinero"> $ </p> 
+        
+                                    <input placeholder="0" type="number" id="cuadroMonto" (keydown)="MontoEvent($event)">
+                 
+                                <h5 style="position: absolute; left: 75px; top: 220px;">
+                                    Saldo disponible
+                                </h5>
+                                <h5 style="position: absolute; left: 75px; top: 270px;">
+                                    <h3>${{cuentas[0].saldo}}</h3>
+                                </h5>
+                                <h5 style="position: absolute; left: 75px; top: 320px;">
+                                    Ingrese el número de cuenta
+                                </h5>
+                                <p id="ejemplo">Ej:</p>
+                                <input *ngIf="status==false" placeholder="2548625793" type="text" id="cuadroNumCuenta"  disabled> 
+                                <input *ngIf="status==true" placeholder="2548625793" type="text" id="cuadroNumCuenta" (keydown)="CuentaEvent($event)"> 
+                                <div id="botonesTransferencia">
+                                    <button *ngIf="status2==true" id="btnVerificar" (click)="verificarCuenta()">Verificar</button> 
+                                    <span *ngIf="clienteExiste==true" style="position: absolute; top: 375px; left: 660px; font-size: 20px;">El cliente existe</span>
+                                    
+                                    <button *ngIf="status2==false" id="btnVerificar" disabled="true">Verificar</button>
+                                    <button *ngIf="clienteExiste==true" id="btnTransferir" (click)="transferirDinero()">Transferir</button>
+                                    <button *ngIf="status3==false" id="btnTransferir" disabled="true">Transferir</button>
+                                </div>
+                                
+                            </div>
                         </div>
-                        
                     </div>
-                </div>
+                </div>        
             </div>
+            <div *ngSwitchCase="'2'">
+                <div class="col-9">
+                    <div id="cuadroTransferencia">
+                        <div id="contenidoTransferencia">
+                            <div>
+                                <h5 style="position: absolute; left: 75px; top: 50px;">
+                                    Monto a transferir
+                                </h5>
+                                <p id="signoDinero"> $ </p> 
+        
+                                    <input placeholder="0" type="number" id="cuadroMonto" (keydown)="MontoEvent($event)">
+                 
+                                <h5 style="position: absolute; left: 75px; top: 220px;">
+                                    Saldo disponible
+                                </h5>
+                                <h5 style="position: absolute; left: 75px; top: 270px;">
+                                    <h3>${{cuentas[1].saldo}}</h3>
+                                </h5>
+                                <h5 style="position: absolute; left: 75px; top: 320px;">
+                                    Ingrese el número de cuenta
+                                </h5>
+                                <p id="ejemplo">Ej:</p>
+                                <input *ngIf="status==false" placeholder="2548625793" type="text" id="cuadroNumCuenta"  disabled> 
+                                <input *ngIf="status==true" placeholder="2548625793" type="text" id="cuadroNumCuenta" (keydown)="CuentaEvent($event)"> 
+                                <div id="botonesTransferencia">
+                                    <button *ngIf="status2==true" id="btnVerificar" (click)="verificarCuenta()">Verificar</button> 
+                                    <span *ngIf="clienteExiste==true" style="position: absolute; top: 375px; left: 660px; font-size: 20px;">El cliente existe</span>
+                                    
+                                    <button *ngIf="status2==false" id="btnVerificar" disabled="true">Verificar</button>
+                                    <button *ngIf="clienteExiste==true" id="btnTransferir" (click)="transferirDinero()">Transferir</button>
+                                    <button *ngIf="status3==false" id="btnTransferir" disabled="true">Transferir</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+            </div>
+            <div *ngSwitchCase="'3'">
+                <div class="col-9">
+                    <div id="cuadroTransferencia">
+                        <div id="contenidoTransferencia">
+                            <div>
+                                <h5 style="position: absolute; left: 75px; top: 50px;">
+                                    Monto a transferir
+                                </h5>
+                                <p id="signoDinero"> $ </p> 
+        
+                                    <input placeholder="0" type="number" id="cuadroMonto" (keydown)="MontoEvent($event)">
+                 
+                                <h5 style="position: absolute; left: 75px; top: 220px;">
+                                    Saldo disponible
+                                </h5>
+                                <h5 style="position: absolute; left: 75px; top: 270px;">
+                                    <h3>${{cuentas[2].saldo}}</h3>
+                                </h5>
+                                <h5 style="position: absolute; left: 75px; top: 320px;">
+                                    Ingrese el número de cuenta
+                                </h5>
+                                <p id="ejemplo">Ej:</p>
+                                <input *ngIf="status==false" placeholder="2548625793" type="text" id="cuadroNumCuenta"  disabled> 
+                                <input *ngIf="status==true" placeholder="2548625793" type="text" id="cuadroNumCuenta" (keydown)="CuentaEvent($event)"> 
+                                <div id="botonesTransferencia">
+                                    <button *ngIf="status2==true" id="btnVerificar" (click)="verificarCuenta()">Verificar</button> 
+                                    <span *ngIf="clienteExiste==true" style="position: absolute; top: 375px; left: 660px; font-size: 20px;">El cliente existe</span>
+                                    
+                                    <button *ngIf="status2==false" id="btnVerificar" disabled="true">Verificar</button>
+                                    <button *ngIf="clienteExiste==true" id="btnTransferir" (click)="transferirDinero()">Transferir</button>
+                                    <button *ngIf="status3==false" id="btnTransferir" disabled="true">Transferir</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+            </div>
+            <div *ngSwitchDefault>No se ha seleccionado ninguna opción</div>
         </div>
     </div>
 </div>

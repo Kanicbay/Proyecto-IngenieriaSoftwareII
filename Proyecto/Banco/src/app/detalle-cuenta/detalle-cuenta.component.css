@@ -215,7 +215,7 @@ a{
     top: 100px;
     left: 370px;
     background-color: #D9D9D9; 
-    width: 950px; 
+    width: 920px; 
     height: 550px; 
     display: flex; 
     justify-content: center; 
@@ -223,9 +223,8 @@ a{
 }
 #contenidoTransferencia{
     background-color: #ffffff; 
-    width: 900px; 
+    width: 870px; 
     height: 510px; 
-
 }
 #cuadroMonto{
     position: absolute;
@@ -540,12 +539,13 @@ a{
     top: 100px;
     left: 370px;
     background-color: #D9D9D9; 
-    width: 950px; 
+    width: 920px; 
     height: 550px; 
     display: flex; 
     justify-content: center; 
     align-items: center;
 }
+
 #cuadroTransaccionHecha{
     color: rgb(0, 0, 0);
     position: absolute;

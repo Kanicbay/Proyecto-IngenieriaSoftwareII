@@ -53,11 +53,22 @@
                     <div id="contenidoTransferencia">
                         <div>
                             <div id="botonesTransferencia">
-                                <a [routerLink]="['/transferencias']">
-                                    <button id="btnTransferenciaI">Transferencia <br>Interna</button>
+                                <a [routerLink]="['/transferenciasA']" [queryParams]="{tipoCuenta: '1'}" >
+                                    <button [ngStyle]="{'left': 
+                                    (tipoCuentaA==true && tipoCuentaC==false && tipoCuentaV==false) ? '35%' : 
+                                    (tipoCuentaA==true && tipoCuentaC==true && tipoCuentaV==false) ? '15%' : 
+                                    ''}"
+                                    id="btnTransferenciaI" *ngIf="tipoCuentaA==true" >Transferencia <br>Ahorro <br> {{cuentas[0].numeroCuenta}}</button>
                                 </a>
-                                <a [routerLink]="['/transferencias']">
-                                    <button id="btnTransferenciaE">Transferencia <br>Externa</button>
+                                <a [routerLink]="['/transferenciasC']" [queryParams]="{tipoCuenta: '2'}">
+                                    <button [ngStyle]="{'left': 
+                                    (tipoCuentaC==true && tipoCuentaA==false && tipoCuentaV==false) ? '35%' : 
+                                    (tipoCuentaA==true && tipoCuentaC==true && tipoCuentaV==false) ? '55%' : 
+                                    ''}"
+                                    id="btnTransferenciaE" *ngIf="tipoCuentaC==true">Transferencia <br>Corriente <br> {{cuentas[1].numeroCuenta}}</button>
+                                </a>
+                                <a [routerLink]="['/transferenciasV']" [queryParams]="{tipoCuenta: '3'}">
+                                    <button [ngStyle]="{'left': (tipoCuentaV==true && tipoCuentaC==false && tipoCuentaA==false) ? '35%' : ''}" id="btnTransferenciaV" *ngIf="tipoCuentaV==true">Transferencia <br>Vinculada <br> {{cuentas[2].numeroCuenta}}</button>
                                 </a>
                             </div>
                         </div>
