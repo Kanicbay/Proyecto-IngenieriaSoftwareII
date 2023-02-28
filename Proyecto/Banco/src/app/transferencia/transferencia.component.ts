@@ -36,6 +36,8 @@ export class TransferenciaComponent implements OnInit {
   public usuarioActualizado:Usuario;
   public actualizarDatos:boolean;
   public clienteActualizado:Cliente;
+  public clienteExiste:boolean;
+  public clienteIngreso:boolean;
   timeout: any;
   constructor(
     private _transferenciaService:TransferenciaService,
@@ -61,6 +63,8 @@ export class TransferenciaComponent implements OnInit {
     this.cuentaAhorro=new Cuenta('','','','','','','', 0);
     this.cuentaVinculada=new Cuenta('','','','','','','', 0);
     this.actualizarDatos=false;
+    this.clienteExiste=false;
+    this.clienteIngreso=false;
   }
 
   ngOnInit(): void {
@@ -121,6 +125,7 @@ export class TransferenciaComponent implements OnInit {
     if(this.timeout != null){
       clearTimeout(this.timeout);
     }
+    this.clienteIngreso=true;
     this.timeout = setTimeout(() => {
       this.transferencia.numeroCuentaDestino = event.target.value;
       if (this.transferencia.numeroCuentaDestino.length >= 8 && this.transferencia.numeroCuentaDestino.length <= 10 && this.transferencia.numeroCuentaDestino != this.cuentaCorriente.numeroCuenta) {
@@ -134,18 +139,19 @@ export class TransferenciaComponent implements OnInit {
     },100);  
   }
   
-  verificarCuenta(){
-    this._transferenciaService.obtenerCuenta(this.transferencia.numeroCuentaDestino).subscribe(
+  async verificarCuenta(){
+    await this._transferenciaService.verificarCuenta(this.transferencia.numeroCuentaDestino).subscribe(
       response=>{
-        this.cuenta=response.cuenta;
-        if(this.cuenta.numeroCuenta == this.transferencia.numeroCuentaDestino){
+        console.log(response);
+        if(response.message = 'Proceso exitoso'){
+          this.clienteExiste=true;
           this.status3=true;
-        }else{
-          this.status3=false;
         }
       },
       error=>{
         console.log("Este es el error",error);
+        this.clienteExiste=false;
+        this.status3=false;
         if(error.error.auth == false){
           alert("La sesión caducó");
           this._cookieService.delete('token');
@@ -155,5 +161,24 @@ export class TransferenciaComponent implements OnInit {
     );
   }
   
+  transferirDinero(){
+    if(this.clienteExiste){
+      this._transferenciaService.transferir(this.cuentas[0].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, "Ahorros").subscribe(
+        response=>{
+          if(response.message = 'Proceso exitoso'){
+            alert("Transferencia exitosa");
+          }
+        },
+        error=>{
+          console.log("Este es el error",error);
+          if(error.error.auth == false){
+            alert("La sesión caducó");
+            this._cookieService.delete('token');
+            this._router.navigate(['/login',]);
+          }
+        }
+      );
+    }
+  }
 
 }

@@ -6,7 +6,7 @@ var bancamovilRouter = require("../controllers/bancamovil.controller");
 // Create a new Account
 router.post("/createAccount", bancamovilRouter.createAccount);
 // Verify if a client exists
-router.get("/verifyClient", bancamovilRouter.verificarCliente);
+router.post("/verifyClient", bancamovilRouter.verificarCliente);
 //Create a verification code
 router.post("/createCode", bancamovilRouter.createCodigo);
 // Verify a verification code

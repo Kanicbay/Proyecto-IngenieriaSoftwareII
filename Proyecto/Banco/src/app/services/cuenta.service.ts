@@ -41,11 +41,15 @@ export class CuentaService{
         return this._http.get(this.url+'verifyCode/'+codigo,{headers:headers});
     }
 
+    verificarCuenta(numeroCuenta: String):Observable<any>{
+        let headers=new HttpHeaders().set('Content-Type','application/json');
+        return this._http.get(this.url+'verifyClient/'+numeroCuenta,{headers:headers});
+    }
+
     obtenerDatos():Observable<any>{
         const cookieValue = this._cookieService.get('token');
         let headers = new HttpHeaders().set('Authorization', 'Bearer ' + cookieValue);
         const respuesta = this._http.post(this.url + 'findData', {}, { headers: headers });
-        console.log(respuesta);
         return respuesta;
     }
 
