@@ -388,28 +388,79 @@ var controller = {
         var numeroCuentaOrigen = req.body.numeroCuentaOrigen;
         var numeroCuentaDestino = req.body.numeroCuentaDestino;
         var monto = req.body.monto;
+        var tipoCuenta = req.body.tipoCuentaOrigen;
+        console.log(numeroCuentaOrigen, numeroCuentaDestino, monto);
+
+        const clienteExisteAhorros = await cuentaAhorrosSchema.findOne({numeroCuenta: numeroCuentaDestino});
+        if(clienteExisteAhorros){
+            const dataOrigen = await cuentaAhorrosSchema.findOne({ numeroCuenta: numeroCuentaOrigen });
+            if (!dataOrigen) {
+                return res.status(404).json({ message: "Error!" });
+            }
+
+            if(dataOrigen.saldo == 0 || dataOrigen.saldo < monto){
+                return res.status(404).json({ message: "Error Saldo insuficiente" });
+            }
+            else{
+                dataOrigen.saldo = parseFloat(dataOrigen.saldo) - parseFloat(monto);
+                clienteExisteAhorros.saldo = parseFloat(clienteExisteAhorros.saldo) + parseFloat(monto);
+                console.log(dataOrigen.saldo);
+                console.log(clienteExisteAhorros.saldo);
+    
+                await dataOrigen.save();
+                await clienteExisteAhorros.save();
+                return res.status(200).send({message: "Proceso exitoso"});
+            }        
+            
+        }
+        const clientExisteCorriente = await cuentaCorrienteSchema.findOne({numeroCuenta: numeroCuentaDestino});
+        if(clientExisteCorriente){
+            const dataOrigen = await cuentaAhorrosSchema.findOne({ numeroCuenta: numeroCuentaOrigen });
+            if (!dataOrigen) {
+                return res.status(404).json({ message: "Error!" });
+            }
+
+            if(dataOrigen.saldo == 0 || dataOrigen.saldo < monto){
+                return res.status(404).json({ message: "Error Saldo insuficiente" });
+            }
+            else{
+                dataOrigen.saldo = parseFloat(dataOrigen.saldo) - parseFloat(monto);
+                clientExisteCorriente.saldo = parseFloat(clientExisteCorriente.saldo) + parseFloat(monto);
+                console.log(dataOrigen.saldo);
+                console.log(clientExisteCorriente.saldo);
+    
+                await dataOrigen.save();
+                await clientExisteCorriente.save();
+                return res.status(200).send({message: "Proceso exitoso"});
+            }        
+        }
+        const clienteExisteVinculada = await cuentaVinculadaSchema.findOne({numeroCuenta: numeroCuentaDestino});
+        if(clienteExisteVinculada){
+            const dataOrigen = await cuentaAhorrosSchema.findOne({ numeroCuenta: numeroCuentaOrigen });
+            if (!dataOrigen) {
+                return res.status(404).json({ message: "Error!" });
+            }
+
+            if(dataOrigen.saldo == 0 || dataOrigen.saldo < monto){
+                return res.status(404).json({ message: "Error Saldo insuficiente" });
+            }
+            else{
+                dataOrigen.saldo = parseFloat(dataOrigen.saldo) - parseFloat(monto);
+                clienteExisteVinculada.saldo = parseFloat(clienteExisteVinculada.saldo) + parseFloat(monto);
+                console.log(dataOrigen.saldo);
+                console.log(clienteExisteVinculada.saldo);
+    
+                await dataOrigen.save();
+                await clienteExisteVinculada.save();
+                return res.status(200).send({message: "Proceso exitoso"});
+            }        
+        }
+        return res.status(404).send({message: "Error!"});
 
 
-        const dataOrigen = await cuentaSchema.findOne({ numeroCuenta: numeroCuentaOrigen });
-        if (!dataOrigen) {
-            return res.status(404).json({ message: "Error!" });
-        }
-        const dataDestino = await cuentaSchema.findOne({ numeroCuenta: numeroCuentaDestino });
-        if (!dataDestino) {
-            return res.status(404).json({ message: "Error!" });
-        }
-        if(dataOrigen.saldo == 0 || dataOrigen.saldo < monto){
-            return res.status(404).json({ message: "Error Saldo insuficiente" });
-        }
-        else{
-            dataOrigen.saldo = parseFloat(dataOrigen.saldo) - parseFloat(monto);
-            dataDestino.saldo = parseFloat(dataDestino.saldo) + parseFloat(monto);
-            console.log(dataOrigen.saldo);
-            console.log(dataDestino.saldo);
-
-            await dataOrigen.save();
-            await dataDestino.save();
-        }        
+        
+        
+        
         return res.status(200).send({message: 'Proceso exitoso'});
     },
 

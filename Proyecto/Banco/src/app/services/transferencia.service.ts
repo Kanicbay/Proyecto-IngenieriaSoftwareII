@@ -24,8 +24,8 @@ export class TransferenciaService{
         return this._http.post(this.url+'verifyClient',params,{headers:headers});
     }
 
-    transferir(cuenta:String):Observable<any>{
-        let params=JSON.stringify(cuenta);
+    transferir(numerocuentaOrigen:String, numerocuentaDestino:String, monto:number, tipoCuentaOrigen:String):Observable<any>{
+        let params=JSON.stringify({numeroCuentaOrigen: numerocuentaOrigen, numeroCuentaDestino: numerocuentaDestino, monto: monto, tipoCuentaOrigen: tipoCuentaOrigen});
         let headers=new HttpHeaders().set('Content-Type','application/json');
         return this._http.post(this.url+'transfer',params,{headers:headers});
     }   
