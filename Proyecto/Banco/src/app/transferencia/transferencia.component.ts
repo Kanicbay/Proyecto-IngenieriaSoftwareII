@@ -41,6 +41,7 @@ export class TransferenciaComponent implements OnInit {
   public clienteExiste:boolean;
   public clienteIngreso:boolean;
   public tipoCuenta:number;
+  public tipoCuentaD:string;
   timeout: any;
   constructor(
     private _transferenciaService:TransferenciaService,
@@ -70,6 +71,7 @@ export class TransferenciaComponent implements OnInit {
     this.clienteExiste=false;
     this.clienteIngreso=false;
     this.tipoCuenta=0;
+    this.tipoCuentaD="";
   }
 
   ngOnInit(): void {
@@ -151,9 +153,10 @@ export class TransferenciaComponent implements OnInit {
   async verificarCuenta(){
     await this._transferenciaService.verificarCuenta(this.transferencia.numeroCuentaDestino).subscribe(
       response=>{
-        console.log(response);
+        console.log("Este es el tipo de cuenta: ",response.tipoCuentaDestino);
         if(response.message = 'Proceso exitoso'){
           this.clienteExiste=true;
+          this.tipoCuentaD=response.tipoCuentaDestino;
           this.status3=true;
         }
       },
@@ -175,7 +178,8 @@ export class TransferenciaComponent implements OnInit {
       console.log(this.tipoCuenta);
       switch(this.tipoCuenta-1) {
         case 0:
-        this._transferenciaService.transferir(this.cuentas[this.tipoCuenta-1].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, "Ahorros").subscribe(
+          console.log("Cuenta ahorro");
+        this._transferenciaService.transferir(this.cuentas[this.tipoCuenta-1].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, this.tipoCuentaD).subscribe(
         response=>{
           if(response.message = 'Proceso exitoso'){
             alert("Transferencia exitosa");
@@ -193,7 +197,7 @@ export class TransferenciaComponent implements OnInit {
       );
       break;
       case 1:
-        this._transferenciaService.transferir(this.cuentas[this.tipoCuenta-1].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, "Corriente").subscribe(  
+        this._transferenciaService.transferir(this.cuentas[this.tipoCuenta-1].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, this.tipoCuentaD).subscribe(  
           response=>{
             if(response.message = 'Proceso exitoso'){
               alert("Transferencia exitosa");
@@ -211,7 +215,7 @@ export class TransferenciaComponent implements OnInit {
         );
         break;
         case 2:
-          this._transferenciaService.transferir(this.cuentas[this.tipoCuenta-1].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, "Vinculada").subscribe(
+          this._transferenciaService.transferir(this.cuentas[this.tipoCuenta-1].numeroCuenta,this.transferencia.numeroCuentaDestino, this.transferencia.monto, this.tipoCuentaD).subscribe(
             response=>{
               if(response.message = 'Proceso exitoso'){
                 alert("Transferencia exitosa");

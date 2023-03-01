@@ -14,7 +14,7 @@
             <form #cuentaForm="ngForm" (ngSubmit)="crearCuenta(cuentaForm)" id="camposCrear">
                 <p>
                     <label for="nombre" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Nombres</label><br>
-                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': nombres.touched && nombres.invalid ? '2px solid red' : ''}" name="nombre" #nombres="ngModel" [(ngModel)]="cuenta.nombres" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
+                    <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': nombres.touched && nombres.invalid ? '2px solid red' : ''}" name="nombre" #nombres="ngModel" [(ngModel)]="cuenta.nombres" required pattern="^[a-zA-ZñÑ]+(([',. -][a-zA-ZñÑ ])?[a-zA-ZñÑ])$">
                     <span *ngIf="nombres.touched && nombres.invalid">
                         Nombres incorrectos
                       </span>
@@ -22,7 +22,7 @@
                 
                 <p>
                   <label for="apellido" style="font-weight: bold; font-size: 20px; padding-left: 90px;">Apellidos</label><br>
-                  <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': apellidos.touched && apellidos.invalid ? '2px solid red' : ''}" name="apellido" #apellidos="ngModel" [(ngModel)]="cuenta.apellidos" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
+                  <input type="text" style="margin-left: 90px; margin-top: 8px; width: 500px;" [ngStyle]="{'border': apellidos.touched && apellidos.invalid ? '2px solid red' : ''}" name="apellido" #apellidos="ngModel" [(ngModel)]="cuenta.apellidos" required pattern="^[a-zA-ZñÑ]+(([',. -][a-zA-Z ])?[a-zA-ZñÑ]*)*$">
                   <span *ngIf="apellidos.touched && apellidos.invalid">
                     Apellidos incorrectos
                   </span>
