@@ -295,3 +295,33 @@ a{
     top: 365px;
     font-size: 30px;
 }
+#cardRedes{
+    font-size: 16px;
+    line-height: 1.2em;
+    text-decoration: none;
+
+}
+
+#cardContacto{
+    font-size: 16px;
+    line-height: 1.2em;
+    text-decoration: none;
+}
+
+#cardServicios{
+    font-size: 16px;
+    line-height: 1.2em;
+    text-decoration: none;
+}
+
+#derechosReservados{
+    position: absolute;
+    top: 1150px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin: 0;
+    font-size: 14px;
+}
