@@ -14,6 +14,7 @@ import { ServiciosComponent } from './servicios/servicios.component';
 import { TipoTransferenciaComponent } from './tipo-transferencia/tipo-transferencia.component';
 import { TransferenciaComponent } from './transferencia/transferencia.component';
 import { AuthGuard } from './auth.guard';
+import { LoginRegistroComponent } from './login-registro/login-registro.component';
 
 const routes: Routes = [
   {path:'inicio',component:InicioComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:'cuenta',component:CuentaComponent},
   {path:'login',component:LoginComponent},
   {path:'credenciales/:idCodigo',component:CredencialesComponent},
+  {path:'loginRegistro',component:LoginRegistroComponent},
   {path:'transferenciasA',component:TransferenciaComponent, canActivate:[AuthGuard]},
   {path:'transferenciasC',component:TransferenciaComponent, canActivate:[AuthGuard]},
   {path:'transferenciasV',component:TransferenciaComponent, canActivate:[AuthGuard]},

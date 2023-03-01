@@ -1,4 +1,4 @@
-const scrollToTopBtn = document.getElementById('irArriba');
+
 
 scrollToTopBtn.addEventListener('click', function() {
     window.scrollTo({

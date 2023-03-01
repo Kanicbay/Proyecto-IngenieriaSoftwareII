@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { DetalleCuentaComponent } from './detalle-cuenta/detalle-cuenta.component';
 import { TipoTransferenciaComponent } from './tipo-transferencia/tipo-transferencia.component';
 import { ServiciosComponent } from './servicios/servicios.component';
+import { LoginRegistroComponent } from './login-registro/login-registro.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ServiciosComponent } from './servicios/servicios.component';
     DetalleCuentaComponent,
     TipoTransferenciaComponent,
     ServiciosComponent,
+    LoginRegistroComponent,
   ],
   imports: [
     BrowserModule,

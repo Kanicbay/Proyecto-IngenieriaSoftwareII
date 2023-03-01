@@ -17,7 +17,7 @@
         <a id="btnContacto" [routerLink]="['/contacto']">Contacto</a>
             <a id="btnServicio" [routerLink]="['/servicios']">Servicio</a>
             <a id="btnNosotros" [routerLink]="['/nosotros']">Nosotros</a>
-            <a id="btnBancaVirtual" [routerLink]="['/cuenta']">Banca-Virtual</a>
+            <a id="btnBancaVirtual" [routerLink]="['/loginRegistro']">Banca-Virtual</a>
       </ul>
     </div>
   </header>
@@ -117,7 +117,7 @@
     </div>
   </div>
   <div >
-    <a href="http://localhost:4200" id="irArriba"><button class="circle-button">
+    <a [routerLink]="['/inicio']" id="irArriba"><button class="circle-button" (click)="scrollToTopBtnr()">
       <i class="arrow"><img src="assets/imagenes/btnRegreso.png" width="80%" height="70%" alt=""></i>
     </button></a>
   </div>
