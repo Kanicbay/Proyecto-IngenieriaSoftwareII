@@ -10,6 +10,7 @@ var transferenciaSchema = require('../models/transferencia');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var {v4: uuidv4} = require('uuid');
+const usuario = require('../models/usuario');
 require('dotenv').config();
 
 var controller = {
@@ -312,55 +313,55 @@ var controller = {
             }
             //Encontrar el cliente
             const numeroCliente = decodedToken.cliente;
-            const cliente = await clienteSchema.findById(numeroCliente);
-            if (!cliente) {
-                return res.status(404).json({ message: 'Error!' });
-            }
+            //Funcion para convertir la contraseña en hash
+            async function hashPassword(contrasena) {
+                try {
+                    const salt = await bcrypt.genSalt(10);
+                    const hash = await bcrypt.hash(contrasena, salt);
+                    return hash;
+                } catch (error) {
+                    console.log(error);
+                }
+                }
             //Actualizar los datos del cliente si es necesario
-            
-            var actualizarCliente = false;
-            var clienteActualizado = req.body.cliente;  //Usuario del frontend
-            switch(clienteActualizado){
-                case clienteActualizado.nombres != null:
-                    cliente.set("nombres", clienteActualizado.nombres);
-                    actualizarCliente = true;
-                    break;
-                case clienteActualizado.apellidos != null:
-                    cliente.set("apellidos", clienteActualizado.apellidos);
-                    actualizarCliente = true;
-                    break;
-                case clienteActualizado.correo != null:
-                    cliente.set("correo", clienteActualizado.correo);
-                    actualizarCliente = true;
-                    break;
-            }
-            if(actualizarCliente){
-                clienteNuevo = await cliente.save();
-                if(!clienteNuevo){
-                    return res.status(404).json({ message: 'Error!' });
+            var datosObtenidos = req.body.usuario;
+            var usuarioActualizar = await usuarioSchema.findOne({ cliente: numeroCliente });
+            if(datosObtenidos.contrasena == '' && datosObtenidos.usuario){              //Actualizar usuario
+                if(usuarioActualizar.usuario == datosObtenidos.usuario){
+                    return res.status(404).send({message: 'Debe ingresar datos distintos a los actuales'});
                 }
-            }
+                usuarioActualizar.usuario = datosObtenidos.usuario;
+            } else if(datosObtenidos.contrasena && datosObtenidos.usuario == ''){       //Actualizar contraseña
+                var isMatch = await bcrypt.compare(datosObtenidos.contrasena, usuarioActualizar.contrasena);
+                //Crear token de sesion
+                if(isMatch){
+                    return res.status(404).send({message: 'Debe ingresar datos distintos a los actuales'});                    
+                } else {
+                    datosObtenidos.contrasena = await hashPassword(datosObtenidos.contrasena);
+                    usuarioActualizar.contrasena = datosObtenidos.contrasena;
+                }
+                
+            } else if(datosObtenidos.contrasena && datosObtenidos.usuario){             //Actualizar usuario y contrasena
+                
+                if(usuarioActualizar.usuario == datosObtenidos.usuario){
+                    return res.status(404).send({message: 'Debe ingresar datos distintos a los actuales'});
+                }
 
-            //Actualizar los datos del usuario si es necesario
-            const usuario = await usuarioSchema.findOne({ cliente: numeroCliente  });
-            var actualizarUsuario = false;
-            var usuarioActualizado = req.body.usuario;  //Usuario del frontend
-            switch(usuarioActualizado){
-                case usuarioActualizado.usuario != null:
-                    cliente.set("usuario", usuarioActualizado.usuario);
-                    actualizarUsuario = true;
-                    break;
-                case usuarioActualizado.contrasena != null:
-                    cliente.set("contrasena", usuarioActualizado.contrasena);
-                    actualizarUsuario = true;
-                    break;
-            }
-            if(actualizarUsuario){
-                usuarioNuevo = await usuario.save();
-                if(!usuarioNuevo){
-                    return res.status(404).json({ message: 'Error!' });
+                var isMatch = await bcrypt.compare(datosObtenidos.contrasena, usuarioActualizar.contrasena);
+                //Crear token de sesion
+                if(isMatch){
+                    return res.status(404).send({message: 'Debe ingresar datos distintos a los actuales'});                    
+                } else {
+                    datosObtenidos.contrasena = await hashPassword(datosObtenidos.contrasena);
+                    usuarioActualizar.contrasena = datosObtenidos.contrasena;
+                    usuarioActualizar.usuario = datosObtenidos.usuario;
                 }
-            }
+                
+        } else { 
+                console.log("Contrasena y usuario no dada");
+                return res.status(410).send({message: "Los datos ingresados son erroneos"})                                                                       //No actualizar nada                
+            }    
+            await usuarioActualizar.save();
             return res.status(200).send({ message: 'Proceso exitoso'});
         } catch (error) {
             if(error.name === 'TokenExpiredError'){
@@ -369,6 +370,7 @@ var controller = {
             if(error.name === 'JsonWebTokenError'){
                 return res.status(403).send({ message: 'Error!' });
             }
+            console.log(error);
             return res.status(500).send({ message: 'Error!' });
         }
     },

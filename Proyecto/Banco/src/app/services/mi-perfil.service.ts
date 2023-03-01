@@ -20,12 +20,14 @@ export class MiPerfilService{
     //crear cuenta
     //http://localhost:3700/createAccount
 
-    actualizarDatos(usuario:Usuario, cliente: Cliente):Observable<any>{
-        let params1=JSON.stringify(usuario);
-        let params2=JSON.stringify(cliente);
+    actualizarDatos(usuario:Usuario):Observable<any>{
+        let params1=JSON.stringify({usuario: usuario});
         const cookieValue = this._cookieService.get('token');
-        let headers = new HttpHeaders().set('Authorization', 'Bearer ' + cookieValue);
-        return this._http.post(this.url+'updateData',{params1, params2},{headers:headers});
+        
+        let headers = new HttpHeaders()
+        .set('Authorization', 'Bearer ' + cookieValue)
+        .set('Content-Type', 'application/json');
+        return this._http.post(this.url+'updateData',params1,{headers:headers});
     }
 
 }

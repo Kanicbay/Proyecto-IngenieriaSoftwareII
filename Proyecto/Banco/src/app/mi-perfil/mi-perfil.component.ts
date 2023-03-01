@@ -8,6 +8,7 @@ import { CargarService } from '../services/cargar.service';
 import { Cliente } from '../models/cliente';
 import { CookieService} from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class MiPerfilComponent implements OnInit {
     private _miPerfilService:MiPerfilService,
     private _cuentaService:CuentaService,
     private _cookieService: CookieService,
-    private _router:Router
+    private _router:Router,
+    private _location:Location
 
   ){
     this.cuenta=new Cuenta('','','','','','','', 0);
@@ -54,19 +56,27 @@ export class MiPerfilComponent implements OnInit {
   }
 
   async editarDatosMiperfil(form:NgForm){
+   
     console.log("Entre a editar datos");
-    console.log(this.usuario,this.cliente);
-    await this._miPerfilService.actualizarDatos(this.usuarioActualizado,this.clienteActualizado).subscribe(
+    console.log(this.usuario)
+   
+    console.log("Estos son los datos que traigo del frontend",this.usuarioActualizado.usuario,this.usuarioActualizado.contrasena);
+    await this._miPerfilService.actualizarDatos(this.usuarioActualizado).subscribe(
       response=>{
-        if(response.usuario || response.cliente){
+        if(response.message = "Proceso exitoso"){
           alert("Datos Actualizados");
           this.actualizarDatos=false;
           this.status=true;
-      }else{
-        alert("Error al actualizar los datos");
-      }
+          this.refreshPage();
+        }
       },
       error=>{
+        if(error.error.message == 'Debe ingresar datos distintos a los actuales'){
+          alert("Error el usuario ya existe");
+        }
+        if(error.error.message == "Error los datos ingresados son iguales a los actuales"){
+          alert("Error los datos ingresados son iguales a los actuales");
+        }
         console.log("Este es el error",error);
         if(error.error.auth == false){
           alert("La sesión caducó");
@@ -85,7 +95,7 @@ export class MiPerfilComponent implements OnInit {
         this.cuentaAhorro=this.cuentas[1];
         this.cuentaVinculada=this.cuentas[2];
         this.cliente=response.cliente;
-        this.usuario=response.usuario;
+        this.usuario.usuario=response.usuario;
 
         console.log(this.cuentas, this.cliente);
       },
@@ -102,6 +112,11 @@ export class MiPerfilComponent implements OnInit {
   
   async cerrarSesion(){
     await this._cookieService.deleteAll();
+  }
+
+  refreshPage() {
+    this._location.go(this._location.path());
+    window.location.reload();
   }
 
 }

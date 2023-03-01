@@ -84,7 +84,7 @@
                     </div>
                     <div>
                         <h5 style="position: absolute; left: 75px; top: 325px;">
-                            Usuario: {{usuario}}
+                            Usuario: {{usuario.usuario}}
                         </h5>
     
                     </div>
@@ -108,7 +108,7 @@
                     </div>
                     <div style="position: absolute; left: 75px; top: 250px;">
                         <h5>
-                            Correo Electrónico: {{cliente.correo}}}
+                            Correo Electrónico: {{cliente.correo}}
                         </h5>      
                         <!--<input type="email" name="correo" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #correo="ngModel" [(ngModel)]="clienteActualizado.correo" style="position: absolute; left: 180px; top: 0px" required>                   
                         <span *ngIf="correo.touched && correo.invalid">
@@ -119,7 +119,7 @@
                         <h5>
                             Usuario:
                         </h5>
-                        <input type="text" name="user" pattern="^(?=.*\d.*\d.*\d)[a-zA-Z0-9]{8,}$" #user="ngModel" [(ngModel)]="usuario" style="position: absolute; left: 81px; top: 0px" required>
+                        <input type="text" name="user" pattern="^(?=.*\d.*\d.*\d)[a-zA-Z0-9]{8,}$" #user="ngModel" [(ngModel)]="usuarioActualizado.usuario" style="position: absolute; left: 81px; top: 0px">
                         <span *ngIf="user.touched && user.invalid">
                             Usuario requerido
                         </span>
@@ -128,7 +128,7 @@
                         <h5>
                             Contraseña:
                         </h5>
-                        <input type="password" name="password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@).{8,}$" #password="ngModel" [(ngModel)]="usuario.contrasena" style="position: absolute; left: 115px; top: 0px">
+                        <input type="password" name="password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@).{8,}$" #password="ngModel" [(ngModel)]="usuarioActualizado.contrasena" style="position: absolute; left: 115px; top: 0px">
                         <span *ngIf="password.touched && password.invalid">
                             Contraseña requerida
                         </span>
