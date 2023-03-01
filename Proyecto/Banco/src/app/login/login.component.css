@@ -401,3 +401,14 @@
     font-size: 25px;
     translate: 0px -4px;
 }
+#derechosReservados{
+    position: absolute;
+    top: 655px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin: 0;
+    font-size: 14px;
+}
