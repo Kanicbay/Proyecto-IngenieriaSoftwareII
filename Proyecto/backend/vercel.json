@@ -1,4 +1,4 @@
 {
-  "buildCommand": "nodemon src/index.js"
+  "buildCommand": "node src/index.js"
 }
   
