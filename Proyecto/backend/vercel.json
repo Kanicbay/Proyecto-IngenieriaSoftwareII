@@ -1,30 +1,17 @@
 {
-    "version": "1.0.0",
-    "name": "banco-api-software-grupo-2",
-    "main": "/src/index.js",
-    "engines": {
-        "node": ">= 18.0.0"
-    },
-    "scripts": {
-        "start": "node src/index.js",
-        "dev": "nodemon src/index.js"
-    },
-    "keywords": [
-        "api",
-        "banco"
-    ],
-    "author": "Grupo 2",
-    "license": "ISC",
-    "dependencies": {
-        "bcrypt": "^5.0.1",
-        "body-parser": "^1.19.0",
-        "connect-multiparty": "^2.2.0",
-        "dotenv": "^16.0.3",
-        "express": "^4.18.2",
-        "jsonwebtoken": "^9.0.0",
-        "mongoose": "^6.10.2",
-        "nodemailer": "^6.9.1",
-        "nodemon": "^2.0.20",
-        "uuid": "^9.0.0"
+  "version": 1,
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@now/node"
     }
+  ],
+  "routes": [
+    {
+      // Specify which paths will route to a destination using a regex
+      "src": "/(.*)",
+      // Specify the paths' destination
+      "dest": "src/index.js"
+    }
+  ]
 }
