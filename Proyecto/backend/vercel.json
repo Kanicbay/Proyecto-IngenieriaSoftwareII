@@ -1,7 +1,6 @@
 {
     "version": "1.0.0",
     "name": "banco-api-software-grupo-2",
-    "description": "API de banco",
     "main": "/src/index.js",
     "engines": {
         "node": ">= 18.0.0"
