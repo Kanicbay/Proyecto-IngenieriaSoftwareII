@@ -1,17 +1,24 @@
 {
-  "version": 1,
-  "builds": [
-    {
-      "src": "src/index.js",
-      "use": "@now/node"
+    "name": "bancavirtual",
+    "version": "1.0.0",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "nodemon src/index.js",
+      "build": "npm run clean && npm run transpile"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "bcrypt": "^5.1.0",
+      "body-parser": "^1.20.1",
+      "connect-multiparty": "^2.2.0",
+      "dotenv": "^16.0.3",
+      "express": "^4.18.2",
+      "jsonwebtoken": "^9.0.0",
+      "mongoose": "^6.10.1",
+      "nodemailer": "^6.9.1",
+      "nodemon": "^2.0.20",
+      "uuid": "^9.0.0"
     }
-  ],
-  "routes": [
-    {
-      // Specify which paths will route to a destination using a regex
-      "src": "/(.*)",
-      // Specify the paths' destination
-      "dest": "src/index.js"
-    }
-  ]
-}
+  }
+  
