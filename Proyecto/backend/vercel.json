@@ -1,4 +1,22 @@
 {
-  "buildCommand": "node src/index.js"
+  "version": 2,
+  "builds": [
+    { "src": "src/index.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/src/index.js" }
+  ],
+  "installConfig": {
+    "include": [
+      "bcrypt",
+      "body-parser",
+      "connect-multiparty",
+      "dotenv",
+      "express",
+      "jsonwebtoken",
+      "mongoose",
+      "nodemailer",
+      "uuid"
+    ]
+  }
 }
-  
